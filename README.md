@@ -43,7 +43,7 @@ Recommend research papers on speech-related security.
 - [GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis](./audio_watermarking/generative_watermarking/2024-GROOT.md)  
   *ACM International Conference on Multimedia (ACM MM), 2024*  
   Citation: Liu, W., Li, Y., Lin, D., Tian, H., & Li, H. “GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis.” *Proceedings of the 32nd ACM International Conference on Multimedia*, 3294–3302, 2024.  
-  Links: [Paper](https://doi.org/10.1145/3664647.3680596) | [Code](https://github.com/Groot-GAW/Groot)
+  Links: [Paper](https://doi.org/10.1145/3664647.3680596) | [Code](https://github.com/Groot-GAW/Groot)&[Demo](https://groot-gaw.github.io/)
 
 - [HiFi-GANw: Watermarked Speech Synthesis via Fine-Tuning of HiFi-GAN](./audio_watermarking/generative_watermarking/2024-HiFi-GANw.md)  
   *IEEE Signal Processing Letters, 2024*  
@@ -181,8 +181,114 @@ Recommend research papers on speech-related security.
   Citation: Pavlović, K., Kovačević, S., Djurović, I., & Wojciechowski, A. “Robust Speech Watermarking by a Jointly Trained Embedder and Detector Using a DNN.” *Digital Signal Processing*, 122, 103381, 2022.  
   Links: [Paper](https://doi.org/10.1016/j.dsp.2021.103381) | [Code](https://github.com/kosta-pmf/dnn-audio-watermarking)
 
-## Speech Adversarial Examples
+## Adversarial Examples
 
+### 2026
+
+- [Attacker’s Noise Can Manipulate Your Audio-based LLM in the Real World (AN-LALM)](./adversarial_examples/2026-AN-LALM.md)  
+  *European Chapter of the Association for Computational Linguistics (EACL), 2026*  
+  Citation: Sadasivan, V. S., Feizi, S., Mathews, R., & Wang, L. “Attacker’s Noise Can Manipulate Your Audio-based LLM in the Real World.” *EACL 2026*, 2026.  
+  Links: [Paper](https://aclanthology.org/2026.eacl-long.66.pdf) | Code: Not publicly available
+
+- [MUSICSHIELD: Protection for Musicians in the Era of Generative AI](./adversarial_examples/2026-MUSICSHIELD.md)  
+  *IEEE Symposium on Security and Privacy (IEEE S&P), 2026*  
+  Citation: “MUSICSHIELD: Protection for Musicians in the Era of Generative AI.” *IEEE S&P 2026*.  
+  Links: [Project](https://musicshield.org/) | Code: Not publicly available
+
+### 2025
+
+- [HarmonyCloak: Defending Music Against Generative AI](./adversarial_examples/2025-HarmonyCloak.md)  
+  *IEEE Symposium on Security and Privacy (IEEE S&P), 2025*  
+  Citation: “HarmonyCloak: Defending Music Against Generative AI.” *IEEE S&P 2025*.  
+  Links: [Project & Paper](https://mosis.eecs.utk.edu/harmonycloak.html) | Code: Not publicly available
+
+- [SafeSpeech: Robust and Universal Voice Protection Against Malicious Speech Synthesis](./adversarial_examples/2025-SafeSpeech.md)  
+  *34th USENIX Security Symposium (USENIX Security), 2025*  
+  Citation: Zhang, Z., Wang, D., Yang, Q., et al. “SafeSpeech: Robust and Universal Voice Protection Against Malicious Speech Synthesis.” *USENIX Security 2025*.  
+  Links: [Paper](https://www.usenix.org/conference/usenixsecurity25/presentation/zhang-zhisheng) | [Code](https://github.com/wxzyd123/SafeSpeech)
+
+- [Adversarial Attacks and Robust Defenses in Speaker Embedding based Zero-Shot Text-to-Speech System (SEAE)](./adversarial_examples/2025-SEAE.md)  
+  *IEEE International Conference on Multimedia and Expo (ICME), 2025*  
+  Citation: Li, Z., Shi, Y., Xu, Y., & Li, M. “Adversarial Attacks and Robust Defenses in Speaker Embedding based Zero-Shot Text-to-Speech System.” *ICME 2025*, 2025.  
+  Links: [Paper](https://doi.org/10.1109/ICME59968.2025.11210164) | Code: Not publicly available
+
+- [Universal Acoustic Adversarial Attacks for Flexible Control of Speech-LLMs (UAAA-SLLM)](./adversarial_examples/2025-UAAA-SLLM.md)  
+  *Findings of the Association for Computational Linguistics: EMNLP, 2025*  
+  Citation: Ma, R., Qian, M., Raina, V., Gales, M., & Knill, K. “Universal Acoustic Adversarial Attacks for Flexible Control of Speech-LLMs.” *Findings of EMNLP 2025*, 2025.  
+  Links: [Paper](https://aclanthology.org/2025.findings-emnlp.990.pdf) | Code: Not publicly available
+
+### 2024
+
+- [Adversarial Speech for Voice Privacy Protection from Personalized Speech Generation (AS-PSG)](./adversarial_examples/2024-AS-PSG.md)  
+  *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2024*  
+  Citation: Chen, S., Chen, L., Zhang, J., Lee, K. A., Ling, Z., & Dai, L. “Adversarial Speech for Voice Privacy Protection from Personalized Speech Generation.” *ICASSP 2024*, 2024.  
+  Links: [Paper](https://arxiv.org/abs/2401.11857) | [Audio Demo](https://voiceprivacy.github.io/Adeversarial-Speech-with-YourTTS) | Code: Not publicly available
+
+### 2023
+
+- [VSMask: Defending Against Voice Synthesis Attack via Real-Time Predictive Perturbation](./adversarial_examples/2023-VSMask.md)  
+  *ACM Conference on Security and Privacy in Wireless and Mobile Networks (WiSec), 2023*  
+  Citation: Wang, Y., Guo, H., Wang, G., Chen, B., & Yan, Q. “VSMask: Defending Against Voice Synthesis Attack via Real-Time Predictive Perturbation.” *WiSec 2023*, 2023.  
+  Links: [Paper](https://doi.org/10.1145/3558482.3590189) | Code: Not publicly available
+
+### 2021
+
+- [Defending Your Voice: Adversarial Attack on Voice Conversion (HIN)](./adversarial_examples/2021-HIN.md)  
+  *IEEE Spoken Language Technology Workshop (SLT), 2021*  
+  Citation: Huang, C.-Y., Lin, Y. Y., Lee, H.-Y., & Lee, L.-S. “Defending Your Voice: Adversarial Attack on Voice Conversion.” *SLT 2021*, 552–559, 2021.  
+  Links: [Paper](https://doi.org/10.1109/SLT48900.2021.9383529) | [Code](https://github.com/cyhuang-tw/attack-vc)
+
+
+## Jailbreak
+
+### 2026
+
+- [StyleBreak: Revealing Alignment Vulnerabilities in Large Audio-Language Models via Style-Aware Audio Jailbreak](./jailbreak/2026-StyleBreak.md)  
+  *AAAI Conference on Artificial Intelligence (AAAI), 2026*  
+  Citation: Li, H., Zhou, C., Wang, C., et al. “StyleBreak: Revealing Alignment Vulnerabilities in Large Audio-Language Models via Style-Aware Audio Jailbreak.” *AAAI 2026*, 2026.  
+  Links: [Paper](https://doi.org/10.1609/aaai.v40i44.41093) | Code: Not publicly available
+
+- [AudioJailbreak: Jailbreak Attacks Against End-to-End Large Audio-Language Models](./jailbreak/2026-AudioJailbreak.md)  
+  *IEEE Transactions on Dependable and Secure Computing, 2026*  
+  Citation: Chen, G., Song, F., Zhao, Z., et al. “AudioJailbreak: Jailbreak Attacks Against End-to-End Large Audio-Language Models.” *IEEE Transactions on Dependable and Secure Computing*, 23(3), 2026.  
+  Links: [Paper](https://arxiv.org/abs/2505.14103) | [Code & Audio Samples](https://audiojailbreak.github.io/AudioJailbreak)
+
+- [Acoustic Interference: A New Paradigm Weaponizing Acoustic Latent Semantic for Universal Jailbreak against Large Audio Language Models (AIA)](./jailbreak/2026-AIA.md)  
+  *International Conference on Machine Learning (ICML), 2026*  
+  Citation: Wang, Y., Huang, Y., Liang, Z., Wu, X., & Liu, L. “Acoustic Interference: A New Paradigm Weaponizing Acoustic Latent Semantic for Universal Jailbreak against Large Audio Language Models.” *ICML 2026*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2605.18168) | [Code & ALS Arsenal](https://flaai.github.io/AIA_page)
+
+- [Audio Jailbreak: An Open Comprehensive Benchmark for Jailbreaking Large Audio-Language Models (AJailBench)](./jailbreak/2026-AJailBench.md)  
+  *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
+  Citation: Song, Z., Jiang, Q., Cui, M., et al. “Audio Jailbreak: An Open Comprehensive Benchmark for Jailbreaking Large Audio-Language Models.” *ACL 2026*, 2026.  
+  Links: [Paper](https://aclanthology.org/2026.acl-long.1259.pdf) | [Code & Data](https://github.com/PbRQianJiang/AudioJailbreak)
+
+- [JALMBench: Benchmarking Jailbreak Vulnerabilities in Audio Language Models](./jailbreak/2025-JALMBench.md)  
+  *International Conference on Learning Representations (ICLR), 2026*  
+  Citation: Peng, Z., Liu, Y., Sun, Z., et al. “JALMBench: Benchmarking Jailbreak Vulnerabilities in Audio Language Models.” *ICLR 2026*, 2026.  
+  Links: [Paper](https://openreview.net/forum?id=ZMQaoaF5tQ) | [Code](https://github.com/sfofgalaxy/JALMBench)
+
+### 2025
+
+- [AdvWave: Stealthy Adversarial Jailbreak Attack against Large Audio-Language Models](./jailbreak/2025-AdvWave.md)  
+  *International Conference on Learning Representations (ICLR), 2025*  
+  Citation: Kang, M., Xu, C., & Li, B. “AdvWave: Stealthy Adversarial Jailbreak Attack against Large Audio-Language Models.” *ICLR 2025*, 2025.  
+  Links: [Paper](https://arxiv.org/abs/2412.08608) | [Audio Demo](https://violademo.github.io/) | Code: Not publicly available
+
+- [Who Can Withstand Chat-Audio Attacks? An Evaluation Benchmark for Large Audio-Language Models (CAA)](./jailbreak/2025-CAA.md)  
+  *Findings of the Association for Computational Linguistics: ACL, 2025*  
+  Citation: Yang, W., Li, Y., Fang, M., Wei, Y., & Chen, L. “Who Can Withstand Chat-Audio Attacks? An Evaluation Benchmark for Large Audio-Language Models.” *Findings of ACL 2025*, 2025.  
+  Links: [Paper](https://aclanthology.org/2025.findings-acl.884.pdf) | Data: Linked by the paper; no official repository identified
+
+- [Jailbreak-AudioBench: In-Depth Evaluation and Analysis of Jailbreak Threats for Large Audio Language Models](./jailbreak/2025-Jailbreak-AudioBench.md)  
+  *Conference on Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2025*  
+  Citation: Cheng, H., Xiao, E., Shao, J., et al. “Jailbreak-AudioBench: In-Depth Evaluation and Analysis of Jailbreak Threats for Large Audio Language Models.” *NeurIPS 2025 Datasets and Benchmarks Track*, 2025.  
+  Links: [Paper](https://papers.nips.cc/paper_files/paper/2025/file/0ff38d72a2e0aa6dbe42de83a17b2223-Paper-Datasets_and_Benchmarks_Track.pdf) | [Project](https://researchtopic.github.io/Jailbreak-AudioBench_Page/)
+
+- [Audio Is the Achilles’ Heel: Red Teaming Audio Large Multimodal Models (RT-LALM)](./jailbreak/2025-RT-LALM.md)  
+  *NAACL Human Language Technologies, 2025*  
+  Citation: Yang, H., Qu, L., Shareghi, E., & Haffari, G. “Audio Is the Achilles’ Heel: Red Teaming Audio Large Multimodal Models.” *NAACL 2025*, 2025.  
+  Links: [Paper](https://aclanthology.org/2025.naacl-long.468.pdf) | Code: Not publicly available
 
 
 ## Other Security
@@ -190,4 +296,3 @@ Recommend research papers on speech-related security.
 
 
 ## Voice Agent
-

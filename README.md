@@ -4,7 +4,56 @@ Recommend research papers on speech-related security.
 ## Speech Watermarking
 
 ### Generative Watermarking
+#### 2026
 
+- [Hidden in Plain Tokens: Simply Robust, Gradient-Free Watermark for Synthetic Audio](./audio_watermarking/generative_watermarking/2026-HPT.md)  
+  *International Conference on Machine Learning (ICML), 2026*  
+  Citation: Milis, G., Qin, Y., Wu, Y., & Huang, H. “Hidden in Plain Tokens: Simply Robust, Gradient-Free Watermark for Synthetic Audio.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
+  Links: [Paper](https://openreview.net/forum?id=h4bSJMaNgb) | [Code](https://github.com/g-milis/nograd-audio-wm)
+
+#### 2025
+
+- [Robust Distortion-Free Watermark for Autoregressive Audio Generation Models (ALIGNED-IS)](./audio_watermarking/generative_watermarking/2025-ALIGNED-IS.md)  
+  *Conference on Neural Information Processing Systems (NeurIPS), 2025*  
+  Citation: Wu, Y., Milis, G., Chen, R., & Huang, H. “Robust Distortion-Free Watermark for Autoregressive Audio Generation Models.” *Advances in Neural Information Processing Systems 38*, 2025.  
+  Links: [Paper](https://neurips.cc/virtual/2025/poster/117426) | [Code](https://github.com/g-milis/AlignedIS)
+
+- [A Watermark for Auto-Regressive Speech Generation Models](./audio_watermarking/generative_watermarking/2025-AR-Speech-Statistical-Watermark.md)  
+  *Annual Conference of the International Speech Communication Association (Interspeech), 2025*  
+  Citation: Wu, Y., Chen, R., Milis, G., Guo, J., & Huang, H. “A Watermark for Auto-Regressive Speech Generation Models.” *Interspeech 2025*, 3474–3478, 2025.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2025/wu25k_interspeech.html) | Code: Not publicly available
+
+- [Latent Watermarking of Audio Generative Models](./audio_watermarking/generative_watermarking/2025-Latent-Watermarking.md)  
+  *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025*  
+  Citation: San Roman, R., Fernandez, P., Deleforge, A., Adi, Y., & Serizel, R. “Latent Watermarking of Audio Generative Models.” *ICASSP 2025*, 1–5, 2025.  
+  Links: [Paper](https://doi.org/10.1109/ICASSP49660.2025.10889782) | Code: Not publicly available
+
+- [Poisoning The Diffusion: A Simple and Robust Watermarking Method for Audio Generation (PTD)](./audio_watermarking/generative_watermarking/2025-PTD.md)  
+  *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025*  
+  Citation: Tang, Y. “Poisoning The Diffusion: A Simple and Robust Watermarking Method for Audio Generation.” *ICASSP 2025*, 1–5, 2025.  
+  Links: [Paper](https://doi.org/10.1109/ICASSP49660.2025.10889187) | Code: Not publicly available
+
+- [Robust and Imperceptible Watermarking Framework for Generative Audio Models (RIWF)](./audio_watermarking/generative_watermarking/2025-RIWF.md)  
+  *IEEE Signal Processing Letters, 2025*  
+  Citation: Feng, Y., Zhang, X., Feng, F., Zhang, G., & Xu, L. “Robust and Imperceptible Watermarking Framework for Generative Audio Models.” *IEEE Signal Processing Letters*, 32, 3196–3200, 2025.  
+  Links: [Paper](https://doi.org/10.1109/LSP.2025.3596015) | [Code](https://github.com/DHUspeech/watermark-framework-for-generative-audio-models)
+
+#### 2024
+
+- [GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis](./audio_watermarking/generative_watermarking/2024-GROOT.md)  
+  *ACM International Conference on Multimedia (ACM MM), 2024*  
+  Citation: Liu, W., Li, Y., Lin, D., Tian, H., & Li, H. “GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis.” *Proceedings of the 32nd ACM International Conference on Multimedia*, 3294–3302, 2024.  
+  Links: [Paper](https://doi.org/10.1145/3664647.3680596) | [Code](https://github.com/Groot-GAW/Groot)
+
+- [HiFi-GANw: Watermarked Speech Synthesis via Fine-Tuning of HiFi-GAN](./audio_watermarking/generative_watermarking/2024-HiFi-GANw.md)  
+  *IEEE Signal Processing Letters, 2024*  
+  Citation: Cheng, X., Wang, Y., Liu, C., Hu, D., & Su, Z. “HiFi-GANw: Watermarked Speech Synthesis via Fine-Tuning of HiFi-GAN.” *IEEE Signal Processing Letters*, 31, 2440–2444, 2024.  
+  Links: [Paper](https://doi.org/10.1109/LSP.2024.3456673) | Code: Not publicly available
+
+- [TraceableSpeech: Towards Proactively Traceable Text-to-Speech with Watermarking](./audio_watermarking/generative_watermarking/2024-TraceableSpeech.md)  
+  *Annual Conference of the International Speech Communication Association (Interspeech), 2024*  
+  Citation: Zhou, J., Yi, J., Wang, T., Tao, J., Bai, Y., Zhang, C. Y., Ren, Y., & Wen, Z. “TraceableSpeech: Towards Proactively Traceable Text-to-Speech with Watermarking.” *Interspeech 2024*, 2250–2254, 2024.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2024/zhou24b_interspeech.html) | [Code](https://github.com/zjzser/TraceableSpeech)
 
 
 ### Post-hoc Watermarking

@@ -43,7 +43,7 @@ Recommend research papers on speech-related security.
 - [GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis](./audio_watermarking/generative_watermarking/2024-GROOT.md)  
   *ACM International Conference on Multimedia (ACM MM), 2024*  
   Citation: Liu, W., Li, Y., Lin, D., Tian, H., & Li, H. “GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis.” *Proceedings of the 32nd ACM International Conference on Multimedia*, 3294–3302, 2024.  
-  Links: [Paper](https://doi.org/10.1145/3664647.3680596) | [Code](https://github.com/Groot-GAW/Groot)&[Demo](https://groot-gaw.github.io/)
+  Links: [Paper](https://doi.org/10.1145/3664647.3680596) | [Code](https://github.com/Groot-GAW/Groot) | [Demo](https://groot-gaw.github.io/)
 
 - [HiFi-GANw: Watermarked Speech Synthesis via Fine-Tuning of HiFi-GAN](./audio_watermarking/generative_watermarking/2024-HiFi-GANw.md)  
   *IEEE Signal Processing Letters, 2024*  

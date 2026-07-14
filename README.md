@@ -304,29 +304,28 @@
 
 ## Other Security
 
-### 2024
-
-- [AquaLoRA: Toward White-box Protection for Customized Stable Diffusion Models via Watermark LoRA](./other_security/2024-AquaLoRA.md)  
-  *International Conference on Machine Learning (ICML), 2024*  
-  Citation: Feng, W., Zhou, W., He, J., Zhang, J., Wei, T., Li, G., Zhang, T., Zhang, W., & Yu, N. “AquaLoRA: Toward White-box Protection for Customized Stable Diffusion Models via Watermark LoRA.” *Proceedings of the 41st International Conference on Machine Learning*, 2024.  
-  Links: [Paper](https://proceedings.mlr.press/v235/feng24d.html) | [Code](https://github.com/Georgefwt/AquaLoRA)
-
 ### 2026
 
-- [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./other_security/2026-AgentMark.md)  
+- [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Other_Security/2026-AgentMark.md)  
   *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
   Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 2026.  
   Links: [Paper](https://aclanthology.org/2026.acl-long.573/) | [Code](https://github.com/Tooooa/AgentMark)
 
-- [SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model](./other_security/2026-SLIM.md)  
+- [SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model](./Other_Security/2026-SLIM.md)  
   *IEEE Transactions on Circuits and Systems for Video Technology, 2026*  
   Citation: Kong, X., Chen, P., Li, B., Yuan, J., Cai, Z., Wu, H., & Liang, L. “SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model.” *IEEE Transactions on Circuits and Systems for Video Technology*, 2026.  
   Links: [Paper](https://doi.org/10.1109/TCSVT.2026.3676184) | [Code](https://github.com/XiaoxiKong/SLIM)
 
-- [Watermarking LLM Agent Trajectories (ACTHOOK)](./other_security/2026-ACTHOOK.md)  
+- [Watermarking LLM Agent Trajectories (ACTHOOK)](./Other_Security/2026-ACTHOOK.md)  
   *International Conference on Machine Learning (ICML), 2026*  
   Citation: Meng, W., Gong, C., Zhuo, T. Y., Zhang, F., Li, K., Liu, Z., Yang, Z., Wei, C., & Chen, W. “Watermarking LLM Agent Trajectories.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
   Links: [Paper](https://openreview.net/forum?id=h5M4E33Pqs) | [Code](https://github.com/meng-wenlong/AgentWmk)
 
+### 2024
+
+- [AquaLoRA: Toward White-box Protection for Customized Stable Diffusion Models via Watermark LoRA](./Other_Security/2024-AquaLoRA.md)  
+  *International Conference on Machine Learning (ICML), 2024*  
+  Citation: Feng, W., Zhou, W., He, J., Zhang, J., Wei, T., Li, G., Zhang, T., Zhang, W., & Yu, N. “AquaLoRA: Toward White-box Protection for Customized Stable Diffusion Models via Watermark LoRA.” *Proceedings of the 41st International Conference on Machine Learning*, 2024.  
+  Links: [Paper](https://proceedings.mlr.press/v235/feng24d.html) | [Code](https://github.com/Georgefwt/AquaLoRA)
 
 ## Voice Agent

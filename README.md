@@ -1,6 +1,6 @@
 # Speech_Security_Papers
 
-这是一个面向**语音安全**的论文精读库，系统整理语音水印、对抗样本以及音频大模型越狱等相关的代表性研究。每篇条目提供精读笔记、发表信息、论文链接和可获得的官方代码/项目链接，便于按研究问题追踪方法演进并快速定位可复现工作。
+这是一个面向**语音安全**的论文精读库，主要整理语音水印论文，同时也整理语对抗样本以及音频大模型越狱等安全相关的代表性研究。每篇条目提供精读笔记、发表信息、论文链接和可获得的官方代码/项目链接，便于按研究问题追踪方法演进并快速定位可复现工作。
 
 提供者：[Weizhi Liu](https://scholar.google.com/citations?user=4y-6mXgAAAAJ&hl=zh-CN)
 
@@ -9,6 +9,7 @@
 - [语音水印](#speech-watermarking)：[生成式水印](#generative-watermarking) ｜ [后处理水印](#post-hoc-watermarking)
 - [对抗样本](#adversarial-examples)：面向语音合成与音频大模型的攻击和防护
 - [越狱](#jailbreak)：音频大语言模型越狱攻击、红队评测与基准
+- [Other Security](#other-security)：其他模态有意思的水印论文以及四大会上有意思的论文
 
 ## Speech Watermarking
 

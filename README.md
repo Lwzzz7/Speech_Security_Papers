@@ -306,6 +306,11 @@
 
 ### 2026
 
+- [PathMark: Protecting Intellectual Property of Mixture-of-Expert LLMs via Path Watermarks](./Watermarking/model_watermarking/2026-PathMark.md)  
+  *ACM SIGSAC Conference on Computer and Communications Security (CCS), 2026*  
+  Citation: Gao, Y., Wang, Q., Yuan, Y., Huang, R., Chen, L., Ji, Z., & Wang, S. “PathMark: Protecting Intellectual Property of Mixture-of-Expert LLMs via Path Watermarks.” *Proceedings of the 33rd ACM SIGSAC Conference on Computer and Communications Security*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2607.03688) | [Code](https://github.com/ifen1/PathMark_in)
+
 - [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Other_Security/2026-AgentMark.md)  
   *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
   Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 2026.  

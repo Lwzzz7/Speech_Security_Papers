@@ -23,61 +23,61 @@
 
 ### 3.1 两阶段总览：先得到 U-Net 可学习的 latent codebook，再将其写入模型权重
 
-AquaLoRA 将问题拆开，而不是直接对定制 U-Net 训练一个“能出水印图”的 LoRA。第一阶段训练秘密 encoder/decoder，学习把用户 bit 串变为适合 VAE latent 空间的 watermark pattern；第二阶段冻结该 pattern 的产生/解码机制和原 U-Net，以 prior-preserving fine-tuning（PPFT）训练 Watermark LoRA。前一阶段交付私有 codebook \((E_s,D_s)\)，后一阶段交付可 merge 的 LoRA 权重；部署时水印存在于 U-Net，而非依赖外接 VAE decoder。
+AquaLoRA 将问题拆开，而不是直接对定制 U-Net 训练一个“能出水印图”的 LoRA。第一阶段训练秘密 encoder/decoder，学习把用户 bit 串变为适合 VAE latent 空间的 watermark pattern；第二阶段冻结该 pattern 的产生/解码机制和原 U-Net，以 prior-preserving fine-tuning（PPFT）训练 Watermark LoRA。前一阶段交付私有 codebook $$(E_s,D_s)$$，后一阶段交付可 merge 的 LoRA 权重；部署时水印存在于 U-Net，而非依赖外接 VAE decoder。
 
-完整数据流为：消息 \(m\) → secret encoder \(E_s\) → watermark latent \(\Delta z_w\)；第一阶段用 VAE 验证其可见、可解码；第二阶段让加有 \(\Delta z_w\) 的扩散输入经 Watermark LoRA U-Net 去噪，得到图像后仍由同一 \(D_s\) 取回 \(m\)。因此 \(D_s\) 是私有验证器，LoRA 是面向模型分发的保护载体。
+完整数据流为：消息 $$m$$ → secret encoder $$E_s$$ → watermark latent $$\Delta z_w$$；第一阶段用 VAE 验证其可见、可解码；第二阶段让加有 $$\Delta z_w$$ 的扩散输入经 Watermark LoRA U-Net 去噪，得到图像后仍由同一 $$D_s$$ 取回 $$m$$。因此 $$D_s$$ 是私有验证器，LoRA 是面向模型分发的保护载体。
 
 ### 3.2 第一阶段：latent watermark pre-training（训练秘密 codebook）
 
-**目标与输入。** 给定干净图像 \(I_o\)，VAE encoder 得到 \(z_o\)；随机 48-bit 消息进入秘密 encoder \(E_s\)，产生与 \(z_o\) 同尺度的水印扰动。将二者在 latent 空间结合后由 VAE decoder 得到水印图 \(I_w\)，再经随机失真层得到 \(I_r\)。秘密 decoder \(D_s\) 从 \(I_r\) 预测消息。此阶段不更新扩散 U-Net，避免还未确定水印语义时就破坏生成器。
+**目标与输入。** 给定干净图像 $$I_o$$，VAE encoder 得到 $$z_o$$；随机 48-bit 消息进入秘密 encoder $$E_s$$，产生与 $$z_o$$ 同尺度的水印扰动。将二者在 latent 空间结合后由 VAE decoder 得到水印图 $$I_w$$，再经随机失真层得到 $$I_r$$。秘密 decoder $$D_s$$ 从 $$I_r$$ 预测消息。此阶段不更新扩散 U-Net，避免还未确定水印语义时就破坏生成器。
 
-**为什么需要 latent 而不是普通图像水印。** 传统像素水印进入 VAE encoder 后可能被压缩掉；相反，任意 latent 噪声虽然能进入 U-Net，却未必可在最终图像端稳定恢复。\(E_s\) 让消息主动适配 VAE/latent 通道，\(D_s\) 把“可恢复”定义为第二阶段固定要满足的接口。
+**为什么需要 latent 而不是普通图像水印。** 传统像素水印进入 VAE encoder 后可能被压缩掉；相反，任意 latent 噪声虽然能进入 U-Net，却未必可在最终图像端稳定恢复。$$E_s$$ 让消息主动适配 VAE/latent 通道，$$D_s$$ 把“可恢复”定义为第二阶段固定要满足的接口。
 
-**损失与训练逻辑。** bit 级 BCE 是主要恢复信号；LPIPS 约束水印图和原图的感知距离；SWD 约束潜在/图像统计分布；PRVL（Peak Regional Variation Loss）抑制局部突出的扰动峰；失真层让 decoder 对训练期攻击可用。它们的顺序关系是：先保证 decoder 有可学的消息，再用感知/分布项压低可见性，而不是将随机噪声直接当水印。论文使用 COCO2017 10,000 张训练图、AdamW（\(10^{-3}\)）、40 epoch、\(\lambda=5,\mu=0.5\)；失真层和损失调度的完整实现应以代码/附录为准。
+**损失与训练逻辑。** bit 级 BCE 是主要恢复信号；LPIPS 约束水印图和原图的感知距离；SWD 约束潜在/图像统计分布；PRVL（Peak Regional Variation Loss）抑制局部突出的扰动峰；失真层让 decoder 对训练期攻击可用。它们的顺序关系是：先保证 decoder 有可学的消息，再用感知/分布项压低可见性，而不是将随机噪声直接当水印。论文使用 COCO2017 10,000 张训练图、AdamW（$$10^{-3}$$）、40 epoch、$$\lambda=5,\mu=0.5$$；失真层和损失调度的完整实现应以代码/附录为准。
 
 ### 3.3 第二阶段：Watermark LoRA 与 PPFT（将 codebook 集成进 U-Net）
 
-**冻结关系。** 原 U-Net \(\epsilon_\vartheta\) 是教师且冻结；第一阶段 \(E_s,D_s\) 也冻结；仅优化 LoRA 的低秩矩阵。这样可将更新以 \(\Delta W=ASB\) 合并回定制 checkpoint，同时不必为每个用户全量训练 U-Net。
+**冻结关系。** 原 U-Net $$\epsilon_\vartheta$$ 是教师且冻结；第一阶段 $$E_s,D_s$$ 也冻结；仅优化 LoRA 的低秩矩阵。这样可将更新以 $$\Delta W=ASB$$ 合并回定制 checkpoint，同时不必为每个用户全量训练 U-Net。
 
-**消息化的 LoRA。** 普通 LoRA 为 \(AB\)。AquaLoRA 用各 bit 的嵌入组成缩放矩阵 \(S\)，使 \(ASB\) 随消息而变；不同用户 ID 对应不同的 \(S\)，而基础低秩因子可复用。这个设计解决的是多用户分发的存储/训练效率，不表示不同 ID 可在同一张图中同时被无歧义识别。
+**消息化的 LoRA。** 普通 LoRA 为 $$AB$$。AquaLoRA 用各 bit 的嵌入组成缩放矩阵 $$S$$，使 $$ASB$$ 随消息而变；不同用户 ID 对应不同的 $$S$$，而基础低秩因子可复用。这个设计解决的是多用户分发的存储/训练效率，不表示不同 ID 可在同一张图中同时被无歧义识别。
 
-**PPFT 的前向与损失。** 对 \(z_0\)、caption \(c\)、噪声 \(\epsilon\) 和 timestep \(t\)，水印侧在含 \(\Delta z_w\) 的输入上预测噪声，教师在干净输入上预测噪声。最小化二者 MSE：
-\[
+**PPFT 的前向与损失。** 对 $$z_0$$、caption $$c$$、噪声 $$\epsilon$$ 和 timestep $$t$$，水印侧在含 $$\Delta z_w$$ 的输入上预测噪声，教师在干净输入上预测噪声。最小化二者 MSE：
+$$
 \mathcal L_{PPFT}=\mathbb E\|\epsilon_\theta(\sqrt{\bar\alpha_t}(z_0+\Delta z_w)+\sqrt{1-\bar\alpha_t}\epsilon,t,c)-\epsilon_\vartheta(\sqrt{\bar\alpha_t}z_0+\sqrt{1-\bar\alpha_t}\epsilon,t,c)\|_2^2.
-\]
-实际含义是：水印 U-Net 面对被偏移的 latent 时，仍应执行与原 U-Net 面对干净内容近似的去噪，因此避免直接扩散微调导致的先验遗忘；同时由冻结 \(D_s\) 的比特恢复约束确保它没有把水印简单“抹平”。
+$$
+实际含义是：水印 U-Net 面对被偏移的 latent 时，仍应执行与原 U-Net 面对干净内容近似的去噪，因此避免直接扩散微调导致的先验遗忘；同时由冻结 $$D_s$$ 的比特恢复约束确保它没有把水印简单“抹平”。
 
 ### 3.4 粗类型适配与训练/部署边界
 
-一个通用 LoRA 可能与 anime、人物、风格化等定制 checkpoint 的分布不匹配。作者在 PPFT 框架下按粗类型继续训练 AquaLoRA；实际部署为待保护模型挑选最接近的类型版本，而不是对每个 checkpoint 从零训练。PPFT 使用 SD v1.5、COCO captions 10,000 条与 Stable-Diffusion-Prompts 10,000 条，rank 320、AdamW \(10^{-4}\)、30 epoch；采样为 dpm-solver 30 步、CFG 7.5。
+一个通用 LoRA 可能与 anime、人物、风格化等定制 checkpoint 的分布不匹配。作者在 PPFT 框架下按粗类型继续训练 AquaLoRA；实际部署为待保护模型挑选最接近的类型版本，而不是对每个 checkpoint 从零训练。PPFT 使用 SD v1.5、COCO captions 10,000 条与 Stable-Diffusion-Prompts 10,000 条，rank 320、AdamW $$10^{-4}$$、30 epoch；采样为 dpm-solver 30 步、CFG 7.5。
 
-训练阶段使用图文对与教师 U-Net；部署/推理时用户只加载 merge 后的水印 U-Net，用普通 prompt、seed、sampler 生成图。验证阶段由所有者持有 \(D_s\) 对图像解码；\(\alpha\) 控制保真—提取权衡，论文默认 \(\alpha=1.05\)。因此“替换 VAE 仍可检出”来自水印在 U-Net，而不是验证方能够访问某个特定 VAE。
+训练阶段使用图文对与教师 U-Net；部署/推理时用户只加载 merge 后的水印 U-Net，用普通 prompt、seed、sampler 生成图。验证阶段由所有者持有 $$D_s$$ 对图像解码；$$\alpha$$ 控制保真—提取权衡，论文默认 $$\alpha=1.05$$。因此“替换 VAE 仍可检出”来自水印在 U-Net，而不是验证方能够访问某个特定 VAE。
 
 ### 3.5 最小复现闭环与信息缺口
 
-最小闭环应先固定 SD1.5、48-bit、单一粗类型：训练 \(E_s,D_s\) 至干净/攻击后可解码；冻结二者和 U-Net，仅更新 rank-320 LoRA；对同 prompt/seed 比较 clean 与 watermarked 的 FID/DreamSim、bit accuracy 和固定 FPR 的 TPR；最后更换 sampler/VAE/分辨率和做再去噪。论文未完整披露 secret encoder/decoder 的层级细节、PRVL 的全部实现以及所有 type-adaptation checkpoint 的选择规则，不能把标准图像水印网络结构当作论文事实补造。
+最小闭环应先固定 SD1.5、48-bit、单一粗类型：训练 $$E_s,D_s$$ 至干净/攻击后可解码；冻结二者和 U-Net，仅更新 rank-320 LoRA；对同 prompt/seed 比较 clean 与 watermarked 的 FID/DreamSim、bit accuracy 和固定 FPR 的 TPR；最后更换 sampler/VAE/分辨率和做再去噪。论文未完整披露 secret encoder/decoder 的层级细节、PRVL 的全部实现以及所有 type-adaptation checkpoint 的选择规则，不能把标准图像水印网络结构当作论文事实补造。
 
 ### a) 两阶段流程
 
-阶段一不训练扩散模型：从真实图像 \(I_o\) 经 VAE encoder 得 \(z_o\)，秘密 encoder \(E_s\) 将 bit 串映射为 \(\Delta z_w\)，得到 \(z_w=z_o+\Delta z_w\)，VAE decoder 生成 \(I_w\)。秘密 decoder \(D_s\) 从经过失真层的图像恢复 bits。这样学到的 \(\Delta z_w\) 是一个“latent codebook”，而不是随意像素噪声。
+阶段一不训练扩散模型：从真实图像 $$I_o$$ 经 VAE encoder 得 $$z_o$$，秘密 encoder $$E_s$$ 将 bit 串映射为 $$\Delta z_w$$，得到 $$z_w=z_o+\Delta z_w$$，VAE decoder 生成 $$I_w$$。秘密 decoder $$D_s$$ 从经过失真层的图像恢复 bits。这样学到的 $$\Delta z_w$$ 是一个“latent codebook”，而不是随意像素噪声。
 
-阶段二冻结原 U-Net \(\epsilon_\vartheta\)，只训练 LoRA。训练时将 \(z_0+\Delta z_w\) 的去噪预测约束为接近同一内容的干净预测：
-\[
+阶段二冻结原 U-Net $$\epsilon_\vartheta$$，只训练 LoRA。训练时将 $$z_0+\Delta z_w$$ 的去噪预测约束为接近同一内容的干净预测：
+$$
 L_{PPFT}=\mathbb E\|\epsilon_\theta(\sqrt{\bar\alpha_t}(z_0+\Delta z_w)+\sqrt{1-\bar\alpha_t}\epsilon,t,c)-\epsilon_\vartheta(\sqrt{\bar\alpha_t}z_0+\sqrt{1-\bar\alpha_t}\epsilon,t,c)\|_2^2.
-\]
+$$
 它的作用是让“加了水印的输入”仍遵守原模型的去噪先验，而非把水印样本直接拟合成噪声真值。
 
 ### b) latent 水印预训练与损失
 
-比特 BCE 迫使 \(D_s\) 解码，LPIPS 限制感知差异，分布相关约束限制 latent/图像统计偏移；训练中加入失真层，并使用 PRVL（Peak Regional Variation Loss）抑制局部高峰扰动。各项的分工是：BCE 保容量，失真层保传播鲁棒，LPIPS/PRVL 保可见质量。论文未把秘密 encoder 的完整网络层数写成可独立复现的规范，实际应以仓库为准。
+比特 BCE 迫使 $$D_s$$ 解码，LPIPS 限制感知差异，分布相关约束限制 latent/图像统计偏移；训练中加入失真层，并使用 PRVL（Peak Regional Variation Loss）抑制局部高峰扰动。各项的分工是：BCE 保容量，失真层保传播鲁棒，LPIPS/PRVL 保可见质量。论文未把秘密 encoder 的完整网络层数写成可独立复现的规范，实际应以仓库为准。
 
 ### c) Watermark LoRA 如何携带用户 ID
 
-普通 LoRA 是 \(\Delta W=AB\)。AquaLoRA 将 bit 的嵌入组合成对角缩放矩阵 \(S\)，再以 \(ASB\) 形成权重更新；不同 bit 串对应不同 \(S\)，不必为每位用户重新训练完整 U-Net。原权重保持冻结，合并为 \(W_{wm}=W+\alpha\Delta W\)。这降低了部署成本，但高 rank LoRA 仍有额外存储和训练开销。
+普通 LoRA 是 $$\Delta W=AB$$。AquaLoRA 将 bit 的嵌入组合成对角缩放矩阵 $$S$$，再以 $$ASB$$ 形成权重更新；不同 bit 串对应不同 $$S$$，不必为每位用户重新训练完整 U-Net。原权重保持冻结，合并为 $$W_{wm}=W+\alpha\Delta W$$。这降低了部署成本，但高 rank LoRA 仍有额外存储和训练开销。
 
 ### d) 粗类型适配与训练配置
 
-为减少“一个通用水印 LoRA”与具体定制模型分布的距离，作者按粗粒度类型做额外 PPFT，再为相近 checkpoint 选用相应 AquaLoRA。阶段一：COCO2017 训练集随机 10,000 图、40 epoch、AdamW，学习率 \(10^{-3}\)，\(\lambda=5,\mu=0.5\)；阶段二：SD v1.5，COCO captions 10,000 条加 Stable-Diffusion-Prompts 10,000 条，rank 320、AdamW \(10^{-4}\)、30 epoch。嵌入 48 bit，训练采样 dpm-solver 30 步、CFG 7.5，默认 \(\alpha=1.05\)。
+为减少“一个通用水印 LoRA”与具体定制模型分布的距离，作者按粗粒度类型做额外 PPFT，再为相近 checkpoint 选用相应 AquaLoRA。阶段一：COCO2017 训练集随机 10,000 图、40 epoch、AdamW，学习率 $$10^{-3}$$，$$\lambda=5,\mu=0.5$$；阶段二：SD v1.5，COCO captions 10,000 条加 Stable-Diffusion-Prompts 10,000 条，rank 320、AdamW $$10^{-4}$$、30 epoch。嵌入 48 bit，训练采样 dpm-solver 30 步、CFG 7.5，默认 $$\alpha=1.05$$。
 
 ## 4. 与其他方法对比
 
@@ -86,17 +86,17 @@ L_{PPFT}=\mathbb E\|\epsilon_\theta(\sqrt{\bar\alpha_t}(z_0+\Delta z_w)+\sqrt{1-
 | 后处理 | DwtDctSvd、RivaGAN | 最终图像 | 重新生成/去噪后脱钩 | 信号进入 U-Net |
 | 采样期 | Tree-Ring | 初始噪声/采样 | 改 sampler 或去噪 | 不依赖指定采样轨迹 |
 | decoder 集成 | Stable Signature | VAE decoder | 替换 VAE | 写入 U-Net 权重 |
-| AquaLoRA | 本文 | U-Net LoRA | 仍可能被重训练/蒸馏 | PPFT 保先验、\(S\) 支持多用户 |
+| AquaLoRA | 本文 | U-Net LoRA | 仍可能被重训练/蒸馏 | PPFT 保先验、$$S$$ 支持多用户 |
 
 ## 5. 实验表现
 
 作者以 COCO val2017 的 5,000 张结果计算 FID，并用 DreamSim 衡量水印前后布局/语义相似性；在 Civitai 下载 25 个定制 checkpoint，每个生成 100 张图评估。鲁棒实验包含 ColorJitter、Crop&Resize、Blur、Gaussian noise、JPEG，以及用干净扩散模型再去噪的擦除操作；还测 DDIM、DPM-S/DPM-M、Euler、Heun、UniPC、步数、CFG、三类 VAE、分辨率、LoRA/ControlNet。
 
-表 2 的平均 bit accuracy：AquaLoRA 91.86%，DwtDctSvd 70.55%、RivaGAN 84.19%、Stable Signature 77.01%；在 \(\mathrm{FPR}=10^{-6}\) 下平均 TPR 为 0.906。表 3 中不同 sampler 的 bit accuracy 约 95%，说明信号不是某一个 sampler 的偶然产物；更大分辨率下下降，表明尺度泛化仍是边界。PPFT 消融中 naive diffusion 的 bit accuracy 接近随机（48.11%），而 PPFT 约 95%，是“先验保持必要”的直接证据。
+表 2 的平均 bit accuracy：AquaLoRA 91.86%，DwtDctSvd 70.55%、RivaGAN 84.19%、Stable Signature 77.01%；在 $$\mathrm{FPR}=10^{-6}$$ 下平均 TPR 为 0.906。表 3 中不同 sampler 的 bit accuracy 约 95%，说明信号不是某一个 sampler 的偶然产物；更大分辨率下下降，表明尺度泛化仍是边界。PPFT 消融中 naive diffusion 的 bit accuracy 接近随机（48.11%），而 PPFT 约 95%，是“先验保持必要”的直接证据。
 
 ## 6. 学习与应用
 
-代码公开。复现最易出错处是 VAE latent 标准、\(\alpha\) 与 LoRA merge 方式；应同时保存用户 bit 串、secret encoder/decoder 版本与对应 coarse type。部署评估不能只报 bit accuracy，必须给出无水印 FPR 和多图聚合的归属阈值。
+代码公开。复现最易出错处是 VAE latent 标准、$$\alpha$$ 与 LoRA merge 方式；应同时保存用户 bit 串、secret encoder/decoder 版本与对应 coarse type。部署评估不能只报 bit accuracy，必须给出无水印 FPR 和多图聚合的归属阈值。
 
 ## 7. 总结
 

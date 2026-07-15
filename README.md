@@ -33,17 +33,17 @@
 - [A Watermark for Auto-Regressive Speech Generation Models](./Watermarking/generative_watermarking/2025-AR-Speech-Statistical-Watermark.md)  
   *Annual Conference of the International Speech Communication Association (Interspeech), 2025*  
   Citation: Wu, Y., Chen, R., Milis, G., Guo, J., & Huang, H. “A Watermark for Auto-Regressive Speech Generation Models.” *Interspeech 2025*, 3474–3478, 2025.  
-  Links: [Paper](https://www.isca-archive.org/interspeech_2025/wu25k_interspeech.html) | Code: Not publicly available
+  Links: [Paper](https://www.isca-archive.org/interspeech_2025/wu25k_interspeech.html) | [Code](https://github.com/g-milis/AlignedIS)
 
 - [Latent Watermarking of Audio Generative Models](./Watermarking/generative_watermarking/2025-Latent-Watermarking.md)  
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025*  
   Citation: San Roman, R., Fernandez, P., Deleforge, A., Adi, Y., & Serizel, R. “Latent Watermarking of Audio Generative Models.” *ICASSP 2025*, 1–5, 2025.  
-  Links: [Paper](https://doi.org/10.1109/ICASSP49660.2025.10889782) | Code: Not publicly available
+  Links: [Paper](https://doi.org/10.1109/ICASSP49660.2025.10889782)
 
 - [Poisoning The Diffusion: A Simple and Robust Watermarking Method for Audio Generation (PTD)](./Watermarking/generative_watermarking/2025-PTD.md)  
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025*  
   Citation: Tang, Y. “Poisoning The Diffusion: A Simple and Robust Watermarking Method for Audio Generation.” *ICASSP 2025*, 1–5, 2025.  
-  Links: [Paper](https://doi.org/10.1109/ICASSP49660.2025.10889187) | Code: Not publicly available
+  Links: [Paper](https://doi.org/10.1109/ICASSP49660.2025.10889187)
 
 - [Robust and Imperceptible Watermarking Framework for Generative Audio Models (RIWF)](./Watermarking/generative_watermarking/2025-RIWF.md)  
   *IEEE Signal Processing Letters, 2025*  
@@ -55,12 +55,12 @@
 - [GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis](./Watermarking/generative_watermarking/2024-GROOT.md)  
   *ACM International Conference on Multimedia (ACM MM), 2024*  
   Citation: Liu, W., Li, Y., Lin, D., Tian, H., & Li, H. “GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis.” *Proceedings of the 32nd ACM International Conference on Multimedia*, 3294–3302, 2024.  
-  Links: [Paper](https://doi.org/10.1145/3664647.3680596) | [Code](https://github.com/Groot-GAW/Groot)&[Demo](https://groot-gaw.github.io/)
+  Links: [Paper](https://doi.org/10.1145/3664647.3680596) | [Code](https://github.com/Groot-GAW/Groot) | [Demo](https://groot-gaw.github.io/)
 
 - [HiFi-GANw: Watermarked Speech Synthesis via Fine-Tuning of HiFi-GAN](./Watermarking/generative_watermarking/2024-HiFi-GANw.md)  
   *IEEE Signal Processing Letters, 2024*  
   Citation: Cheng, X., Wang, Y., Liu, C., Hu, D., & Su, Z. “HiFi-GANw: Watermarked Speech Synthesis via Fine-Tuning of HiFi-GAN.” *IEEE Signal Processing Letters*, 31, 2440–2444, 2024.  
-  Links: [Paper](https://doi.org/10.1109/LSP.2024.3456673) | Code: Not publicly available
+  Links: [Paper](https://doi.org/10.1109/LSP.2024.3456673)
 
 - [TraceableSpeech: Towards Proactively Traceable Text-to-Speech with Watermarking](./Watermarking/generative_watermarking/2024-TraceableSpeech.md)  
   *Annual Conference of the International Speech Communication Association (Interspeech), 2024*  
@@ -80,7 +80,7 @@
 - [ASSMark: Dual Defense Against Speech Synthesis Attack via Adversarial Robust Watermarking](./Watermarking/post_hoc_watermarking/2025-ASSMark.md)  
   *IEEE Signal Processing Letters, 2025*  
   Citation: He, Y., Wang, H., Qiu, Y., & Cao, H. “ASSMark: Dual Defense Against Speech Synthesis Attack via Adversarial Robust Watermarking.” *IEEE Signal Processing Letters*, 32, 1870–1874, 2025.  
-  Links: [Paper](https://doi.org/10.1109/LSP.2025.3562817) | Code: Not publicly available
+  Links: [Paper](https://doi.org/10.1109/LSP.2025.3562817)
 
 - [AudioMarkNet: Audio Watermarking for Deepfake Speech Detection](./Watermarking/post_hoc_watermarking/2025-AudioMarkNet.md)  
   *34th USENIX Security Symposium (USENIX Security), 2025*  
@@ -100,12 +100,12 @@
 - [DiscreteWM: Speech Watermarking with Discrete Intermediate Representations](./Watermarking/post_hoc_watermarking/2025-DiscreteWM.md)  
   *AAAI Conference on Artificial Intelligence (AAAI), 2025*  
   Citation: Ji, S., Jiang, Z., Zuo, J., Fang, M., Chen, Y., Jin, T., & Zhao, Z. “Speech Watermarking with Discrete Intermediate Representations.” *Proceedings of the 39th AAAI Conference on Artificial Intelligence*, 2025.  
-  Links: [Paper](https://ojs.aaai.org/index.php/AAAI/article/view/34600) | Code: Not publicly available
+  Links: [Paper](https://ojs.aaai.org/index.php/AAAI/article/view/34600)
 
 - [SyncGuard: Robust Audio Watermarking Capable of Countering Desynchronization Attacks](./Watermarking/post_hoc_watermarking/2025-SyncGuard.md)  
   *European Conference on Artificial Intelligence (ECAI), 2025*  
   Citation: Gan, Z., Hu, X., Li, S., Qian, Z., & Zhang, X. “SyncGuard: Robust Audio Watermarking Capable of Countering Desynchronization Attacks.” *ECAI 2025*, 1237–1244, 2025.  
-  Links: [Paper](https://doi.org/10.3233/FAIA250937) | Code: Not publicly available
+  Links: [Paper](https://doi.org/10.3233/FAIA250937)
 
 - [VoiceMark: Zero-Shot Voice Cloning-Resistant Watermarking Approach Leveraging Speaker-Specific Latents](./Watermarking/post_hoc_watermarking/2025-VoiceMark.md)  
   *Annual Conference of the International Speech Communication Association (Interspeech), 2025*  
@@ -125,7 +125,7 @@
 - [XAttnMark: Learning Robust Audio Watermarking with Cross-Attention](./Watermarking/post_hoc_watermarking/2025-XAttnMark.md)  
   *International Conference on Machine Learning (ICML), 2025*  
   Citation: Liu, Y., Lu, L., Jin, J., Sun, L., & Fanelli, A. “XAttnMark: Learning Robust Audio Watermarking with Cross-Attention.” *Proceedings of the 42nd International Conference on Machine Learning*, 2025.  
-  Links: [Paper](https://arxiv.org/abs/2502.04230) | Code: Not publicly available
+  Links: [Paper](https://arxiv.org/abs/2502.04230)
 
 #### 2024
 
@@ -137,7 +137,7 @@
 - [DRAW: Dual-Decoder-Based Robust Audio Watermarking Against Desynchronization and Replay Attacks](./Watermarking/post_hoc_watermarking/2024-DRAW.md)  
   *IEEE Transactions on Information Forensics and Security, 2024*  
   Citation: Li, B., Chen, J., Xu, Y., Li, W., & Liu, Z. “DRAW: Dual-Decoder-Based Robust Audio Watermarking Against Desynchronization and Replay Attacks.” *IEEE Transactions on Information Forensics and Security*, 19, 6529–6544, 2024.  
-  Links: [Paper](https://doi.org/10.1109/TIFS.2024.3416047) | Code: Not publicly available
+  Links: [Paper](https://doi.org/10.1109/TIFS.2024.3416047)
 
 - [IDEAW: Robust Neural Audio Watermarking with Invertible Dual-Embedding](./Watermarking/post_hoc_watermarking/2024-IDEAW.md)  
   *Conference on Empirical Methods in Natural Language Processing (EMNLP), 2024*  
@@ -147,7 +147,7 @@
 - [MaskMark: Robust Neural Watermarking for Real and Synthetic Speech](./Watermarking/post_hoc_watermarking/2024-MaskMark.md)  
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2024*  
   Citation: O’Reilly, P., Jin, Z., Su, J., & Pardo, B. “MaskMark: Robust Neural Watermarking for Real and Synthetic Speech.” *ICASSP 2024*, 2024.  
-  Links: [Paper](https://oreillyp.github.io/maskmark/) | Code: Not publicly available
+  Links: [Paper](https://oreillyp.github.io/maskmark/)
 
 - [SilentCipher: Deep Audio Watermarking](./Watermarking/post_hoc_watermarking/2024-SilentCipher.md)  
   *Annual Conference of the International Speech Communication Association (Interspeech), 2024*  
@@ -157,7 +157,7 @@
 - [An Imperceptible and Robust Audio Watermarking Algorithm Based on SNGAN](./Watermarking/post_hoc_watermarking/2024-SNGAN-AudioWM.md)  
   *International Joint Conference on Neural Networks (IJCNN), 2024*  
   Citation: Zhou, W., Zhou, J., & Yang, S. “An Imperceptible and Robust Audio Watermarking Algorithm Based on SNGAN.” *IJCNN 2024*, 1–8, 2024.  
-  Links: [Paper](https://doi.org/10.1109/IJCNN60899.2024.10651036) | Code: Not publicly available
+  Links: [Paper](https://doi.org/10.1109/IJCNN60899.2024.10651036)
 
 - [Detecting Voice Cloning Attacks via Timbre Watermarking](./Watermarking/post_hoc_watermarking/2024-Timbre-Watermarking.md)  
   *Network and Distributed System Security Symposium (NDSS), 2024*  
@@ -167,8 +167,7 @@
 - [Enhancing Robustness of Speech Watermarking Using a Transformer-Based Framework Exploiting Acoustic Features](./Watermarking/post_hoc_watermarking/2024-Transformer-Acoustic-Watermarking.md)  
   *IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2024*  
   Citation: Tong, C., Natgunanathan, I., Xiang, Y., Li, J., Zong, T., Zheng, X., & Gao, L. “Enhancing Robustness of Speech Watermarking Using a Transformer-Based Framework Exploiting Acoustic Features.” *IEEE/ACM Transactions on Audio, Speech, and Language Processing*, 32, 4822–4837, 2024.  
-  Links: [Paper](https://doi.org/10.1109/TASLP.2024.3486206) | Code: Not publicly available
-
+  Links: [Paper](https://doi.org/10.1109/TASLP.2024.3486206)
 #### 2023
 
 - [AudioQR: Deep Neural Audio Watermarks for QR Code](./Watermarking/post_hoc_watermarking/2023-AudioQR.md)  
@@ -184,7 +183,7 @@
 - [DeAR: A Deep-Learning-Based Audio Re-recording Resilient Watermarking](./Watermarking/post_hoc_watermarking/2023-DeAR.md)  
   *Proceedings of the AAAI Conference on Artificial Intelligence, 2023*  
   Citation: Liu, C., Zhang, J., Fang, H., Ma, Z., Zhang, W., & Yu, N. “DeAR: A Deep-Learning-Based Audio Re-recording Resilient Watermarking.” *Proceedings of the 37th AAAI Conference on Artificial Intelligence*, 2023.  
-  Links: [Paper](https://ojs.aaai.org/index.php/AAAI/article/view/26550) | Code: Not publicly available
+  Links: [Paper](https://ojs.aaai.org/index.php/AAAI/article/view/26550)
 
 #### 2022
 
@@ -200,12 +199,12 @@
 - [PRoADS: Provably Secure and Robust Audio Diffusion Steganography with Latent Optimization and Backward Euler Inversion](./Watermarking/Steganography/2026-PRoADS.md)  
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2026*  
   Citation: Yan, Y., Li, Y., Xiao, Q., & Ren, Y. “PRoADS: Provably Secure and Robust Audio Diffusion Steganography with Latent Optimization and Backward Euler Inversion.” *Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing*, 2026.  
-  Links: [Paper](https://arxiv.org/abs/2603.10314) | [DOI](https://doi.org/10.1109/ICASSP55912.2026.11464907)
+  Links: [Paper](https://arxiv.org/abs/2603.10314)
 
 - [WavInWav: Time-domain Speech Hiding via Invertible Neural Network](./Watermarking/Steganography/2026-WavInWav.md)  
   *IEEE Transactions on Dependable and Secure Computing, 2026*  
   Citation: Fan, W., Chen, K., Wang, X., Zhang, W., & Yu, N. “WavInWav: Time-domain Speech Hiding via Invertible Neural Network.” *IEEE Transactions on Dependable and Secure Computing*, 2026.  
-  Links: [Paper](https://arxiv.org/abs/2510.02915) | [DOI](https://doi.org/10.1109/TDSC.2026.3695459)
+  Links: [Paper](https://arxiv.org/abs/2510.02915)
 
 #### 2025
 
@@ -236,19 +235,19 @@
 - [Attacker’s Noise Can Manipulate Your Audio-based LLM in the Real World (AN-LALM)](./Adversarial_Examples/2026-AN-LALM.md)  
   *European Chapter of the Association for Computational Linguistics (EACL), 2026*  
   Citation: Sadasivan, V. S., Feizi, S., Mathews, R., & Wang, L. “Attacker’s Noise Can Manipulate Your Audio-based LLM in the Real World.” *EACL 2026*, 2026.  
-  Links: [Paper](https://aclanthology.org/2026.eacl-long.66.pdf) | Code: Not publicly available
+  Links: [Paper](https://aclanthology.org/2026.eacl-long.66.pdf)
 
 - [MUSICSHIELD: Protection for Musicians in the Era of Generative AI](./Adversarial_Examples/2026-MUSICSHIELD.md)  
   *IEEE Symposium on Security and Privacy (IEEE S&P), 2026*  
   Citation: “MUSICSHIELD: Protection for Musicians in the Era of Generative AI.” *IEEE S&P 2026*.  
-  Links: [Project](https://musicshield.org/) | Code: Not publicly available
+  Links: [Project](https://musicshield.org/)
 
 ### 2025
 
 - [HarmonyCloak: Defending Music Against Generative AI](./Adversarial_Examples/2025-HarmonyCloak.md)  
   *IEEE Symposium on Security and Privacy (IEEE S&P), 2025*  
   Citation: “HarmonyCloak: Defending Music Against Generative AI.” *IEEE S&P 2025*.  
-  Links: [Project & Paper](https://mosis.eecs.utk.edu/harmonycloak.html) | Code: Not publicly available
+  Links: [Project & Paper](https://mosis.eecs.utk.edu/harmonycloak.html)
 
 - [SafeSpeech: Robust and Universal Voice Protection Against Malicious Speech Synthesis](./Adversarial_Examples/2025-SafeSpeech.md)  
   *34th USENIX Security Symposium (USENIX Security), 2025*  
@@ -258,27 +257,24 @@
 - [Adversarial Attacks and Robust Defenses in Speaker Embedding based Zero-Shot Text-to-Speech System (SEAE)](./Adversarial_Examples/2025-SEAE.md)  
   *IEEE International Conference on Multimedia and Expo (ICME), 2025*  
   Citation: Li, Z., Shi, Y., Xu, Y., & Li, M. “Adversarial Attacks and Robust Defenses in Speaker Embedding based Zero-Shot Text-to-Speech System.” *ICME 2025*, 2025.  
-  Links: [Paper](https://doi.org/10.1109/ICME59968.2025.11210164) | Code: Not publicly available
-
+  Links: [Paper](https://doi.org/10.1109/ICME59968.2025.11210164)
 - [Universal Acoustic Adversarial Attacks for Flexible Control of Speech-LLMs (UAAA-SLLM)](./Adversarial_Examples/2025-UAAA-SLLM.md)  
   *Findings of the Association for Computational Linguistics: EMNLP, 2025*  
   Citation: Ma, R., Qian, M., Raina, V., Gales, M., & Knill, K. “Universal Acoustic Adversarial Attacks for Flexible Control of Speech-LLMs.” *Findings of EMNLP 2025*, 2025.  
-  Links: [Paper](https://aclanthology.org/2025.findings-emnlp.990.pdf) | Code: Not publicly available
+  Links: [Paper](https://aclanthology.org/2025.findings-emnlp.990.pdf)
 
 ### 2024
 
 - [Adversarial Speech for Voice Privacy Protection from Personalized Speech Generation (AS-PSG)](./Adversarial_Examples/2024-AS-PSG.md)  
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2024*  
   Citation: Chen, S., Chen, L., Zhang, J., Lee, K. A., Ling, Z., & Dai, L. “Adversarial Speech for Voice Privacy Protection from Personalized Speech Generation.” *ICASSP 2024*, 2024.  
-  Links: [Paper](https://arxiv.org/abs/2401.11857) | [Audio Demo](https://voiceprivacy.github.io/Adeversarial-Speech-with-YourTTS) | Code: Not publicly available
-
+  Links: [Paper](https://arxiv.org/abs/2401.11857) | [Audio Demo](https://voiceprivacy.github.io/Adeversarial-Speech-with-YourTTS)
 ### 2023
 
 - [VSMask: Defending Against Voice Synthesis Attack via Real-Time Predictive Perturbation](./Adversarial_Examples/2023-VSMask.md)  
   *ACM Conference on Security and Privacy in Wireless and Mobile Networks (WiSec), 2023*  
   Citation: Wang, Y., Guo, H., Wang, G., Chen, B., & Yan, Q. “VSMask: Defending Against Voice Synthesis Attack via Real-Time Predictive Perturbation.” *WiSec 2023*, 2023.  
-  Links: [Paper](https://doi.org/10.1145/3558482.3590189) | Code: Not publicly available
-
+  Links: [Paper](https://doi.org/10.1145/3558482.3590189)
 ### 2021
 
 - [Defending Your Voice: Adversarial Attack on Voice Conversion (HIN)](./Adversarial_Examples/2021-HIN.md)  
@@ -294,8 +290,7 @@
 - [StyleBreak: Revealing Alignment Vulnerabilities in Large Audio-Language Models via Style-Aware Audio Jailbreak](./Jailbreak/2026-StyleBreak.md)  
   *AAAI Conference on Artificial Intelligence (AAAI), 2026*  
   Citation: Li, H., Zhou, C., Wang, C., et al. “StyleBreak: Revealing Alignment Vulnerabilities in Large Audio-Language Models via Style-Aware Audio Jailbreak.” *AAAI 2026*, 2026.  
-  Links: [Paper](https://doi.org/10.1609/aaai.v40i44.41093) | Code: Not publicly available
-
+  Links: [Paper](https://doi.org/10.1609/aaai.v40i44.41093)
 - [AudioJailbreak: Jailbreak Attacks Against End-to-End Large Audio-Language Models](./Jailbreak/2026-AudioJailbreak.md)  
   *IEEE Transactions on Dependable and Secure Computing, 2026*  
   Citation: Chen, G., Song, F., Zhao, Z., et al. “AudioJailbreak: Jailbreak Attacks Against End-to-End Large Audio-Language Models.” *IEEE Transactions on Dependable and Secure Computing*, 23(3), 2026.  
@@ -326,7 +321,7 @@
 - [Who Can Withstand Chat-Audio Attacks? An Evaluation Benchmark for Large Audio-Language Models (CAA)](./Jailbreak/2025-CAA.md)  
   *Findings of the Association for Computational Linguistics: ACL, 2025*  
   Citation: Yang, W., Li, Y., Fang, M., Wei, Y., & Chen, L. “Who Can Withstand Chat-Audio Attacks? An Evaluation Benchmark for Large Audio-Language Models.” *Findings of ACL 2025*, 2025.  
-  Links: [Paper](https://aclanthology.org/2025.findings-acl.884.pdf) | Data: Linked by the paper; no official repository identified
+  Links: [Paper](https://aclanthology.org/2025.findings-acl.884.pdf)
 
 - [Jailbreak-AudioBench: In-Depth Evaluation and Analysis of Jailbreak Threats for Large Audio Language Models](./Jailbreak/2025-Jailbreak-AudioBench.md)  
   *Conference on Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2025*  
@@ -336,8 +331,7 @@
 - [Audio Is the Achilles’ Heel: Red Teaming Audio Large Multimodal Models (RT-LALM)](./Jailbreak/2025-RT-LALM.md)  
   *NAACL Human Language Technologies, 2025*  
   Citation: Yang, H., Qu, L., Shareghi, E., & Haffari, G. “Audio Is the Achilles’ Heel: Red Teaming Audio Large Multimodal Models.” *NAACL 2025*, 2025.  
-  Links: [Paper](https://aclanthology.org/2025.naacl-long.468.pdf) | Code: Not publicly available
-
+  Links: [Paper](https://aclanthology.org/2025.naacl-long.468.pdf) 
 
 ## Other Security
 

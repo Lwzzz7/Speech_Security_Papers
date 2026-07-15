@@ -7,9 +7,10 @@
 ## 快速导航
 
 - [语音水印](#speech-watermarking)：[生成式水印](#generative-watermarking) ｜ [后处理水印](#post-hoc-watermarking)
+- [音频隐写](#generative-steganography)：主要集中于生成式隐写
 - [对抗样本](#adversarial-examples)：面向语音合成与音频大模型的攻击和防护
 - [越狱](#jailbreak)：音频大语言模型越狱攻击、红队评测与基准
-- [Other Security](#other-security)：其他模态有意思的水印论文以及四大会上有意思的论文
+- [Other Security](#other-security)：有意思的论文（主要来自四大会及各顶会顶刊）
 
 ## Speech Watermarking
 
@@ -191,6 +192,42 @@
   *Digital Signal Processing, 2022*  
   Citation: Pavlović, K., Kovačević, S., Djurović, I., & Wojciechowski, A. “Robust Speech Watermarking by a Jointly Trained Embedder and Detector Using a DNN.” *Digital Signal Processing*, 122, 103381, 2022.  
   Links: [Paper](https://doi.org/10.1016/j.dsp.2021.103381) | [Code](https://github.com/kosta-pmf/dnn-audio-watermarking)
+
+## Steganography
+
+#### 2026
+
+- [PRoADS: Provably Secure and Robust Audio Diffusion Steganography with Latent Optimization and Backward Euler Inversion](./Watermarking/Steganography/2026-PRoADS.md)  
+  *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2026*  
+  Citation: Yan, Y., Li, Y., Xiao, Q., & Ren, Y. “PRoADS: Provably Secure and Robust Audio Diffusion Steganography with Latent Optimization and Backward Euler Inversion.” *Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2603.10314) | [DOI](https://doi.org/10.1109/ICASSP55912.2026.11464907)
+
+- [WavInWav: Time-domain Speech Hiding via Invertible Neural Network](./Watermarking/Steganography/2026-WavInWav.md)  
+  *IEEE Transactions on Dependable and Secure Computing, 2026*  
+  Citation: Fan, W., Chen, K., Wang, X., Zhang, W., & Yu, N. “WavInWav: Time-domain Speech Hiding via Invertible Neural Network.” *IEEE Transactions on Dependable and Secure Computing*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2510.02915) | [DOI](https://doi.org/10.1109/TDSC.2026.3695459)
+
+#### 2025
+
+- [HIFI-Stego: A High-Fidelity Embedding Audio Steganography Based on Audio Features Decoupling](./Watermarking/Steganography/2025-HIFI-Stego.md)  
+  *IEEE Transactions on Audio, Speech and Language Processing, 2025*  
+  Citation: Zhang, S., Tian, B., Gao, Y., Liu, X., & Yang, W. “HIFI-Stego: A High-Fidelity Embedding Audio Steganography Based on Audio Features Decoupling.” *IEEE Transactions on Audio, Speech and Language Processing*, vol. 33, pp. 2032–2044, 2025.  
+  Links: [Paper](https://doi.org/10.1109/TASLPRO.2025.3570942) | [Code](https://github.com/emptybodys/HIFI-Stego)
+
+- [Provably Secure and Robust Audio Steganography Under Multi-Format Low-Bitrate Compression](./Watermarking/Steganography/2025-Provably-Secure-Robust-Audio-Steganography.md)  
+  *IEEE Transactions on Information Forensics and Security, 2025*  
+  Citation: Li, Y., Xiao, Q., Wang, Z., Ren, Y., & Wang, L. “Provably Secure and Robust Audio Steganography Under Multi-Format Low-Bitrate Compression.” *IEEE Transactions on Information Forensics and Security*, vol. 20, pp. 12596–12608, 2025.  
+  Links: [Paper](https://doi.org/10.1109/TIFS.2025.3636668)
+
+- [A Dynamically Interactable Framework with Dual-Channel Security: GAN-Based Speech Steganography for Concealed Dialogues](./Watermarking/Steganography/2025-DialogStego.md)  
+  *Knowledge-Based Systems, 2025*  
+  Citation: Ge, X., Zhang, X., Li, Y., & Sun, M. “A Dynamically Interactable Framework with Dual-Channel Security: GAN-Based Speech Steganography for Concealed Dialogues.” *Knowledge-Based Systems*, vol. 330, Article 114618, 2025.  
+  Links: [Paper](https://doi.org/10.1016/j.knosys.2025.114618)
+
+- [CoAS: Composite Audio Steganography Based on Text and Speech Synthesis](./Watermarking/Steganography/2025-CoAS.md)  
+  *IEEE Transactions on Information Forensics and Security, 2025*  
+  Citation: Li, Y., Chen, K., Wang, Y., Zhang, X., Wang, G., Zhang, W., & Yu, N. “CoAS: Composite Audio Steganography Based on Text and Speech Synthesis.” *IEEE Transactions on Information Forensics and Security*, vol. 20, pp. 5978–5991, 2025.  
+  Links: [Paper](https://doi.org/10.1109/TIFS.2025.3579581) | [Samples](https://meterial.github.io/coas.github.io)
 
 ## Adversarial Examples
 

@@ -7,7 +7,7 @@
 ## 快速导航
 
 - [语音水印](#speech-watermarking)：[生成式水印](#generative-watermarking) ｜ [后处理水印](#post-hoc-watermarking)
-- [音频隐写](#generative-steganography)：主要集中于生成式隐写
+- [音频隐写](#steganography)：主要集中于生成式隐写
 - [对抗样本](#adversarial-examples)：面向语音合成与音频大模型的攻击和防护
 - [越狱](#jailbreak)：音频大语言模型越狱攻击、红队评测与基准
 - [Other Security](#other-security)：有意思的论文（主要来自四大会及各顶会顶刊）

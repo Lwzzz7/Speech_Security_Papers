@@ -357,7 +357,7 @@
   
 ### 2025
 
-- [Watermarking Autoregressive Image Generation](./Watermarking/generative_watermarking/2025-Watermarking-Autoregressive-Image-Generation.md)  
+- [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md")   
   *Advances in Neural Information Processing Systems (NeurIPS), 2025*  
   Citation: Jovanović, N., Labiad, I., Souček, T., Vechev, M., & Fernandez, P. “Watermarking Autoregressive Image Generation.” *Advances in Neural Information Processing Systems*, vol. 38, 2025.  
   Links: [Paper](https://arxiv.org/abs/2506.16349) | [Code](https://github.com/facebookresearch/wmar)

@@ -354,6 +354,13 @@
   *International Conference on Machine Learning (ICML), 2026*  
   Citation: Meng, W., Gong, C., Zhuo, T. Y., Zhang, F., Li, K., Liu, Z., Yang, Z., Wei, C., & Chen, W. “Watermarking LLM Agent Trajectories.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
   Links: [Paper](https://openreview.net/forum?id=h5M4E33Pqs) | [Code](https://github.com/meng-wenlong/AgentWmk)
+  
+### 2025
+
+- [Watermarking Autoregressive Image Generation](./Watermarking/generative_watermarking/2025-Watermarking-Autoregressive-Image-Generation.md)  
+  *Advances in Neural Information Processing Systems (NeurIPS), 2025*  
+  Citation: Jovanović, N., Labiad, I., Souček, T., Vechev, M., & Fernandez, P. “Watermarking Autoregressive Image Generation.” *Advances in Neural Information Processing Systems*, vol. 38, 2025.  
+  Links: [Paper](https://arxiv.org/abs/2506.16349) | [Code](https://github.com/facebookresearch/wmar)
 
 ### 2024
 

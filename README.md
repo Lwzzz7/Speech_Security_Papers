@@ -314,7 +314,7 @@
 - [AdvWave: Stealthy Adversarial Jailbreak Attack against Large Audio-Language Models](./Jailbreak/2025-AdvWave.md)  
   *International Conference on Learning Representations (ICLR), 2025*  
   Citation: Kang, M., Xu, C., & Li, B. “AdvWave: Stealthy Adversarial Jailbreak Attack against Large Audio-Language Models.” *ICLR 2025*, 2025.  
-  Links: [Paper](https://arxiv.org/abs/2412.08608) | [Audio Demo](https://violademo.github.io/) | Code: Not publicly available
+  Links: [Paper](https://arxiv.org/abs/2412.08608)
 
 - [Who Can Withstand Chat-Audio Attacks? An Evaluation Benchmark for Large Audio-Language Models (CAA)](./Jailbreak/2025-CAA.md)  
   *Findings of the Association for Computational Linguistics: ACL, 2025*  

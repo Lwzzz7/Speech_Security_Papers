@@ -5,7 +5,7 @@
 ## 快速导航
 
 - [语音水印](#speech-watermarking)：[生成式水印](#generative-watermarking) ｜ [后处理水印](#post-hoc-watermarking)
-- [语音隐写](#steganography)：主要集中于生成式隐写
+- [音频隐写](#steganography)：主要集中于生成式隐写
 - [对抗样本](#adversarial-examples)：面向语音合成与音频大模型的攻击和防护
 - [越狱](#jailbreak)：音频大语言模型越狱攻击、红队评测与基准
 - [Other Security](#other-security)：有意思的论文（主要来自四大会及各顶会顶刊）
@@ -314,7 +314,7 @@
 - [AdvWave: Stealthy Adversarial Jailbreak Attack against Large Audio-Language Models](./Jailbreak/2025-AdvWave.md)  
   *International Conference on Learning Representations (ICLR), 2025*  
   Citation: Kang, M., Xu, C., & Li, B. “AdvWave: Stealthy Adversarial Jailbreak Attack against Large Audio-Language Models.” *ICLR 2025*, 2025.  
-  Links: [Paper](https://arxiv.org/abs/2412.08608)
+  Links: [Paper](https://arxiv.org/abs/2412.08608) | [Audio Demo](https://violademo.github.io/) | Code: Not publicly available
 
 - [Who Can Withstand Chat-Audio Attacks? An Evaluation Benchmark for Large Audio-Language Models (CAA)](./Jailbreak/2025-CAA.md)  
   *Findings of the Association for Computational Linguistics: ACL, 2025*  
@@ -338,17 +338,17 @@
 - [PathMark: Protecting Intellectual Property of Mixture-of-Expert LLMs via Path Watermarks](./Watermarking/model_watermarking/2026-PathMark.md)  
   *ACM SIGSAC Conference on Computer and Communications Security (CCS), 2026*  
   Citation: Gao, Y., Wang, Q., Yuan, Y., Huang, R., Chen, L., Ji, Z., & Wang, S. “PathMark: Protecting Intellectual Property of Mixture-of-Expert LLMs via Path Watermarks.” *Proceedings of the 33rd ACM SIGSAC Conference on Computer and Communications Security*, 2026.  
-  Links: [Paper](https://arxiv.org/abs/2607.03688) | [Code](https://github.com/ifen1/PathMark_in)
+  Links: [Paper](https://arxiv.org/abs/2607.03688) | [Code](https://github.com/ifen1/PathMark_in) 
+
+- [WRATH: Turning Watermark Robustness Against Itself via a Watermark-Agnostic Black-Box Invalidation Attack](./Other_Security/2026-WRATH.md)  
+  *IEEE Symposium on Security and Privacy (S&P), 2026*  
+  Citation: Jiang, N., Hu, J., Sun, B., Sim, T., & Han, J. “WRATH: Turning Watermark Robustness Against Itself via a Watermark-Agnostic Black-Box Invalidation Attack.” *2026 IEEE Symposium on Security and Privacy (S&P)*, pp. 379–397, 2026.  
+  Links: [Paper](https://doi.org/10.1109/SP63933.2026.00197)
 
 - [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Other_Security/2026-AgentMark.md)  
   *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
   Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 2026.  
   Links: [Paper](https://aclanthology.org/2026.acl-long.573/) | [Code](https://github.com/Tooooa/AgentMark)
-
-- [SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model](./Other_Security/2026-SLIM.md)  
-  *IEEE Transactions on Circuits and Systems for Video Technology, 2026*  
-  Citation: Kong, X., Chen, P., Li, B., Yuan, J., Cai, Z., Wu, H., & Liang, L. “SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model.” *IEEE Transactions on Circuits and Systems for Video Technology*, 2026.  
-  Links: [Paper](https://doi.org/10.1109/TCSVT.2026.3676184) | [Code](https://github.com/XiaoxiKong/SLIM)
 
 - [Watermarking LLM Agent Trajectories (ACTHOOK)](./Other_Security/2026-ACTHOOK.md)  
   *International Conference on Machine Learning (ICML), 2026*  
@@ -359,10 +359,16 @@
   *International Conference on Machine Learning (ICML), 2026*   
   Citation: Rebuffi, S.-A., Tran, T., Lacatusu, V., Fernandez, P., Souček, T., Jovanović, N., Sander, T., Elsahar, H., & Mourachko, A. “Learning to Watermark in the Latent Space of Generative Models.” *arXiv preprint arXiv:2601.16140*, 2026.  
   Links: [Paper](https://arxiv.org/abs/2601.16140) | [Code](https://github.com/facebookresearch/distseal)
+
+- [SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model](./Other_Security/2026-SLIM.md)  
+  *IEEE Transactions on Circuits and Systems for Video Technology, 2026*  
+  Citation: Kong, X., Chen, P., Li, B., Yuan, J., Cai, Z., Wu, H., & Liang, L. “SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model.” *IEEE Transactions on Circuits and Systems for Video Technology*, 2026.  
+  Links: [Paper](https://doi.org/10.1109/TCSVT.2026.3676184) | [Code](https://github.com/XiaoxiKong/SLIM)
+
   
 ### 2025
 
-- [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md)   
+- [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md")  
   *Advances in Neural Information Processing Systems (NeurIPS), 2025*  
   Citation: Jovanović, N., Labiad, I., Souček, T., Vechev, M., & Fernandez, P. “Watermarking Autoregressive Image Generation.” *Advances in Neural Information Processing Systems*, vol. 38, 2025.  
   Links: [Paper](https://arxiv.org/abs/2506.16349) | [Code](https://github.com/facebookresearch/wmar)

@@ -361,7 +361,7 @@
 - [Watermarking LLM Agent Trajectories (ACTHOOK)](./Other_Security/2026-ACTHOOK.md)  
   *International Conference on Machine Learning (ICML), 2026*  
   Citation: Meng, W., Gong, C., Zhuo, T. Y., Zhang, F., Li, K., Liu, Z., Yang, Z., Wei, C., & Chen, W. “Watermarking LLM Agent Trajectories.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
-  Links: [Paper](https://openreview.net/forum?id=h5M4E33Pqs) | [Code](https://github.com/meng-wenlong/AgentWmk)
+  Links: [Paper](https://arxiv.org/pdf/2602.18700) | [Code](https://github.com/meng-wenlong/AgentWmk)
 
 - [Learning to Watermark in the Latent Space of Generative Models (DistSeal)](./Other_Security/2026-DistSeal.md)  
   *International Conference on Machine Learning (ICML), 2026*   

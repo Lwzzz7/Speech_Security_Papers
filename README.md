@@ -166,6 +166,7 @@
   *IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2024*  
   Citation: Tong, C., Natgunanathan, I., Xiang, Y., Li, J., Zong, T., Zheng, X., & Gao, L. “Enhancing Robustness of Speech Watermarking Using a Transformer-Based Framework Exploiting Acoustic Features.” *IEEE/ACM Transactions on Audio, Speech, and Language Processing*, 32, 4822–4837, 2024.  
   Links: [Paper](https://doi.org/10.1109/TASLP.2024.3486206)
+
 #### 2023
 
 - [AudioQR: Deep Neural Audio Watermarks for QR Code](./Watermarking/post_hoc_watermarking/2023-AudioQR.md)  
@@ -267,12 +268,14 @@
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2024*  
   Citation: Chen, S., Chen, L., Zhang, J., Lee, K. A., Ling, Z., & Dai, L. “Adversarial Speech for Voice Privacy Protection from Personalized Speech Generation.” *ICASSP 2024*, 2024.  
   Links: [Paper](https://arxiv.org/abs/2401.11857) | [Audio Demo](https://voiceprivacy.github.io/Adeversarial-Speech-with-YourTTS)
+
 ### 2023
 
 - [VSMask: Defending Against Voice Synthesis Attack via Real-Time Predictive Perturbation](./Adversarial_Examples/2023-VSMask.md)  
   *ACM Conference on Security and Privacy in Wireless and Mobile Networks (WiSec), 2023*  
   Citation: Wang, Y., Guo, H., Wang, G., Chen, B., & Yan, Q. “VSMask: Defending Against Voice Synthesis Attack via Real-Time Predictive Perturbation.” *WiSec 2023*, 2023.  
   Links: [Paper](https://doi.org/10.1145/3558482.3590189)
+
 ### 2021
 
 - [Defending Your Voice: Adversarial Attack on Voice Conversion (HIN)](./Adversarial_Examples/2021-HIN.md)  
@@ -359,7 +362,7 @@
   *International Conference on Machine Learning (ICML), 2026*  
   Citation: Meng, W., Gong, C., Zhuo, T. Y., Zhang, F., Li, K., Liu, Z., Yang, Z., Wei, C., & Chen, W. “Watermarking LLM Agent Trajectories.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
   Links: [Paper](https://openreview.net/forum?id=h5M4E33Pqs) | [Code](https://github.com/meng-wenlong/AgentWmk)
-  
+
 - [Learning to Watermark in the Latent Space of Generative Models (DistSeal)](./Other_Security/2026-DistSeal.md)  
   *International Conference on Machine Learning (ICML), 2026*   
   Citation: Rebuffi, S.-A., Tran, T., Lacatusu, V., Fernandez, P., Souček, T., Jovanović, N., Sander, T., Elsahar, H., & Mourachko, A. “Learning to Watermark in the Latent Space of Generative Models.” *arXiv preprint arXiv:2601.16140*, 2026.  
@@ -369,14 +372,19 @@
   *IEEE Transactions on Circuits and Systems for Video Technology, 2026*  
   Citation: Kong, X., Chen, P., Li, B., Yuan, J., Cai, Z., Wu, H., & Liang, L. “SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model.” *IEEE Transactions on Circuits and Systems for Video Technology*, 2026.  
   Links: [Paper](https://doi.org/10.1109/TCSVT.2026.3676184) | [Code](https://github.com/XiaoxiKong/SLIM)
-
   
+
 ### 2025
 
 - [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md")  
   *Advances in Neural Information Processing Systems (NeurIPS), 2025*  
   Citation: Jovanović, N., Labiad, I., Souček, T., Vechev, M., & Fernandez, P. “Watermarking Autoregressive Image Generation.” *Advances in Neural Information Processing Systems*, vol. 38, 2025.  
   Links: [Paper](https://arxiv.org/abs/2506.16349) | [Code](https://github.com/facebookresearch/wmar)
+
+- [Robust Watermarking Using Generative Priors Against Image Editing: From Benchmarking to Advances (VINE)](./Other_Security/2025-VINE.md)  
+  *International Conference on Learning Representations (ICLR), 2025*  
+  Citation: Lu, S., Zhou, Z., Lu, J., Zhu, Y., & Kong, A. W.-K. “Robust Watermarking Using Generative Priors Against Image Editing: From Benchmarking to Advances.” *International Conference on Learning Representations*, 2025.  
+  Links: [Paper](https://openreview.net/forum?id=OHp20fyvs2) | [Code](https://github.com/Shilin-LU/VINE)
 
 ### 2024
 

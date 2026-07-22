@@ -345,6 +345,11 @@
   Citation: Jiang, N., Hu, J., Sun, B., Sim, T., & Han, J. “WRATH: Turning Watermark Robustness Against Itself via a Watermark-Agnostic Black-Box Invalidation Attack.” *2026 IEEE Symposium on Security and Privacy (S&P)*, pp. 379–397, 2026.  
   Links: [Paper](https://doi.org/10.1109/SP63933.2026.00197)
 
+- [A Distortion-minimization Watermarking Framework for Large Language Models: Larger Capacity, Stronger Robustness and Higher Quality](./Other_Security/2026-DMW.md)  
+  *USENIX Security Symposium, 2026*  
+  Citation: Zhai, L., Shang, X., Zhang, L., & Hu, P. “A Distortion-minimization Watermarking Framework for Large Language Models: Larger Capacity, Stronger Robustness and Higher Quality.” *USENIX Security Symposium*, 2026.  
+  Links: [Paper](https://www.usenix.org/conference/usenixsecurity26/presentation/zhai) 
+
 - [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Other_Security/2026-AgentMark.md)  
   *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
   Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 2026.  

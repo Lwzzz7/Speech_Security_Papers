@@ -384,7 +384,7 @@
 - [Robust Watermarking Using Generative Priors Against Image Editing: From Benchmarking to Advances (VINE)](./Other_Security/2025-VINE.md)  
   *International Conference on Learning Representations (ICLR), 2025*  
   Citation: Lu, S., Zhou, Z., Lu, J., Zhu, Y., & Kong, A. W.-K. “Robust Watermarking Using Generative Priors Against Image Editing: From Benchmarking to Advances.” *International Conference on Learning Representations*, 2025.  
-  Links: [Paper](https://openreview.net/forum?id=OHp20fyvs2) | [Code](https://github.com/Shilin-LU/VINE)
+  Links: [Paper](https://arxiv.org/pdf/2410.18775) | [Code](https://github.com/Shilin-LU/VINE)
 
 ### 2024
 

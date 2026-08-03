@@ -355,26 +355,30 @@
   Citation: Zhai, L., Shang, X., Zhang, L., & Hu, P. “A Distortion-minimization Watermarking Framework for Large Language Models: Larger Capacity, Stronger Robustness and Higher Quality.” *USENIX Security Symposium*, 2026.  
   Links: [Paper](https://www.usenix.org/conference/usenixsecurity26/presentation/zhai) 
 
-- [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Other_Security/2026-AgentMark.md)  
-  *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
-  Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 2026.  
-  Links: [Paper](https://aclanthology.org/2026.acl-long.573/) | [Code](https://github.com/Tooooa/AgentMark)
-
-- [Watermarking LLM Agent Trajectories (ACTHOOK)](./Other_Security/2026-ACTHOOK.md)  
-  *International Conference on Machine Learning (ICML), 2026*  
-  Citation: Meng, W., Gong, C., Zhuo, T. Y., Zhang, F., Li, K., Liu, Z., Yang, Z., Wei, C., & Chen, W. “Watermarking LLM Agent Trajectories.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
-  Links: [Paper](https://openreview.net/forum?id=h5M4E33Pqs) | [Code](https://github.com/meng-wenlong/AgentWmk)
+- [Spherical Watermark: Encryption-Free, Lossless Watermarking for Diffusion Models](./Other_Security/2026-Spherical-Watermark.md)  
+  *International Conference on Learning Representations (ICLR), 2026*  
+  Citation: Hu, X., Jin, J., Li, S., Peng, W., Zhang, X., & Qian, Z. “Spherical Watermark: Encryption-Free, Lossless Watermarking for Diffusion Models.” *Proceedings of the International Conference on Learning Representations*, 2026.  
+  Links: [Paper](https://openreview.net/) 
   
 - [Learning to Watermark in the Latent Space of Generative Models (DistSeal)](./Other_Security/2026-DistSeal.md)  
   *International Conference on Machine Learning (ICML), 2026*   
   Citation: Rebuffi, S.-A., Tran, T., Lacatusu, V., Fernandez, P., Souček, T., Jovanović, N., Sander, T., Elsahar, H., & Mourachko, A. “Learning to Watermark in the Latent Space of Generative Models.” *arXiv preprint arXiv:2601.16140*, 2026.  
   Links: [Paper](https://arxiv.org/abs/2601.16140) | [Code](https://github.com/facebookresearch/distseal)
 
+- [Watermarking LLM Agent Trajectories (ACTHOOK)](./Other_Security/2026-ACTHOOK.md)  
+  *International Conference on Machine Learning (ICML), 2026*  
+  Citation: Meng, W., Gong, C., Zhuo, T. Y., Zhang, F., Li, K., Liu, Z., Yang, Z., Wei, C., & Chen, W. “Watermarking LLM Agent Trajectories.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
+  Links: [Paper](https://openreview.net/forum?id=h5M4E33Pqs) | [Code](https://github.com/meng-wenlong/AgentWmk)
+
+- [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Other_Security/2026-AgentMark.md)  
+  *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
+  Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 2026.  
+  Links: [Paper](https://aclanthology.org/2026.acl-long.573/) | [Code](https://github.com/Tooooa/AgentMark)
+
 - [SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model](./Other_Security/2026-SLIM.md)  
   *IEEE Transactions on Circuits and Systems for Video Technology, 2026*  
   Citation: Kong, X., Chen, P., Li, B., Yuan, J., Cai, Z., Wu, H., & Liang, L. “SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model.” *IEEE Transactions on Circuits and Systems for Video Technology*, 2026.  
   Links: [Paper](https://doi.org/10.1109/TCSVT.2026.3676184) | [Code](https://github.com/XiaoxiKong/SLIM)
-
   
 ### 2025
 

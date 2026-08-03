@@ -197,8 +197,7 @@ $$
 概率流 ODE 写作：
 
 $$
-\frac{dz_t}{dt}
-=
+\frac{dz_t}{dt}=
 f_t(z_t)-\frac{1}{2}g_t^2\nabla_{z_t}\log p_t(z_t)
 $$
 

@@ -154,7 +154,7 @@ $$
 由于 $v$ 的每个元素为 $\pm 1$，归一化后每个坐标取值：
 
 $$
-z_i^{(2)}\in\left\{-\frac{1}{\sqrt{l_x}},+\frac{1}{\sqrt{l_x}}\right\}
+z_i^{(2)}\in\{-\frac{1}{\sqrt{l_x}},+\frac{1}{\sqrt{l_x}}\}
 $$
 
 接着施加正交旋转：

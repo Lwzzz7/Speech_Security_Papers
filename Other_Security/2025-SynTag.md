@@ -1,239 +1,250 @@
 # SynTag: Enhancing the Geometric Robustness of Inversion-based Generative Image Watermarking
 
-## 0. 论文基本信息
+## 0. 翻译摘要原文
 
-| 项目 | 信息 |
-|---|---|
-| 论文 | SynTag: Enhancing the Geometric Robustness of Inversion-based Generative Image Watermarking |
-| 作者 | Han Fang, Kejiang Chen, Zehua Ma, Jiajun Deng, Yicong Li, Weiming Zhang, Ee-Chien Chang |
-| 机构 | National University of Singapore; University of Science and Technology of China |
-| 会议 | IEEE/CVF International Conference on Computer Vision (ICCV), 2025 |
-| 方向 | 生成式图像水印；inversion-based generative watermarking；几何鲁棒性 |
-| 代码 | 未在论文/CVF页面或快速检索中发现公开官方代码链接 |
+生成式图像水印的鲁棒性通常通过提取抗失真的水印特征来实现。近期处于领先地位的 inversion-based 生成式水印框架在非几何失真下表现出较强鲁棒性，但在面对几何失真时仍然容易失败。为了解决这一问题，作者提出 SynTag，通过向生成图像中注入 synchronization tag 特征来增强几何鲁棒性。SynTag 特征对几何失真敏感，会随几何变换发生可预测变化，因此检测阶段可以利用这些特征重建失真轨迹，并在提取水印前对图像进行几何校正。论文聚焦 latent diffusion models，具体做法是微调 VAE decoder，使其在生成图像中嵌入不可见的 SynTag 特征，同时训练一个预测网络从失真图像中提取 SynTag 并估计几何校正参数。进一步地，作者提出 dither compensation 来提升校正精度。实验表明，SynTag 可以兼容已有 inversion-based 水印方法，在保持非几何鲁棒性和图像质量的同时，显著提高旋转、平移、缩放、shear 等几何攻击下的检测率和 bit accuracy。
 
-## 1. 论文要解决什么问题
+## 1. 方法动机
 
-这篇论文针对的是扩散图像生成模型中的 inversion-based 水印。已有方法通常把水印嵌入到扩散采样的初始噪声或潜变量中，再通过 DDIM inversion 等方式从可疑图像反推出潜变量并解码水印。这类方法对 JPEG、噪声、滤波、亮度变化等非几何失真通常比较强，但对旋转、平移、缩放、裁剪、shear 等几何失真很脆弱。
+a) 作者提出 SynTag 的直接动机，是 inversion-based generative watermarking 在几何失真下存在系统性短板。已有方法如 TreeRings、Gaussian Shading 通过修改扩散初始噪声或 latent 分布来携带水印，检测时再用 DDIM inversion 反推 latent 并解码水印。这种范式对 JPEG、噪声、滤波等非几何攻击较强，但一旦图像被旋转、缩放、平移或 shear，反推 latent 的空间对齐关系就会被破坏。
 
-核心原因是：几何变换会改变图像坐标系，导致 inversion 反推到的潜变量与原始水印潜变量不再对齐。水印本身可能仍在图像中，但提取器看到的是错位后的证据，因此 bit accuracy 和 detection TPR 会显著下降。
+b) 现有方法的痛点不是没有把水印嵌入进去，而是检测端缺少同步机制。几何攻击改变图像坐标系后，水印仍可能残留在图像里，但提取器从错误坐标位置读取证据，导致 bit accuracy 和 detection TPR 下降。传统后处理水印中常见的同步模板思想，在当前 latent diffusion inversion-based 水印中没有被充分利用。
 
-SynTag 的目标不是重新设计一个完整水印编码器，而是在已有 inversion-based 水印框架外层加入一个可学习的同步标记机制：在生成图像中注入对几何变换敏感的隐形同步特征，让检测阶段先估计几何变换并校正图像，再执行原来的 inversion-based 水印提取。
+c) 论文的核心 insight 是：与其让水印本身同时承担“携带消息”和“抵抗几何错位”两件事，不如额外注入一种对几何变换敏感的隐形同步特征。检测端先利用该同步特征估计几何变换，把图像校正回接近原始坐标系，再执行原 inversion-based 水印提取。SynTag 因此更像是一个几何同步增强模块，而不是替代原水印算法的新编码器。
 
 ## 2. 威胁模型解读
 
-论文假设水印方控制生成模型的图像生成流程，可以在部署前替换或微调 VAE decoder，使生成图像同时携带原始 inversion-based 水印和 SynTag 同步特征。攻击者拿到生成图像后，可以执行常见传播与编辑操作，包括几何攻击和非几何攻击。
+a) 参与方与系统边界：防御者是生成模型或水印系统的部署者，能够控制 latent diffusion 生成流程，并在部署前微调/替换 VAE decoder。用户或外部传播链路可能拿到生成图像并进行编辑。检测者拥有目标 watermark sequence 或候选水印集合，用于判定图像是否由受保护模型生成，或进一步追踪来源模型。
 
-几何攻击包括旋转、平移、缩放、裁剪、padding、shear；非几何攻击包括 JPEG 压缩、高斯噪声、中值滤波、dropout、cropout、亮度变化等。论文还评估了自适应攻击，如自动编码器重构和 diffusion purification。
+b) 攻击者目标：攻击者希望在尽量保持图像可用性和视觉质量的前提下破坏水印检测，尤其是让检测端无法从几何变换后的图像中恢复正确 watermark bits。论文关注的攻击目标主要是水印去除/规避检测，而不是伪造另一个来源水印。
 
-检测者已知水印密钥或目标 watermark sequence，需要判断可疑图像是否来自受保护模型；在 tracing 场景中，检测者面对多个源模型水印，需要从候选水印序列中找出最匹配的来源。论文使用固定 FPR 下的 TPR 和 bit accuracy 衡量鲁棒性。
+c) 攻击者能力：攻击者可以对生成图像执行后处理和传播编辑，包括 rotation、translation、scaling、cropping/padding、shear、JPEG compression、Gaussian noise、median filtering、dropout、cropout、brightness adjustment。论文还评估 autoencoder reconstruction 和 purification attack，属于更强的内容重构式攻击。
 
-需要注意的是，SynTag 保护的是生成式图像水印链路，而不是音频水印。它应归入 Other Security 或跨模态生成式水印部分，而不是语音水印主线。
+d) 攻击者知识：主实验更接近常规水印鲁棒性评估，不要求攻击者知道 SynTag 的训练细节、decoder 参数或检测阈值。自适应攻击部分用重构和 purification 检验更强移除能力，但论文没有展开完整白盒攻击者可访问 $D_{Syn}$、$P_{Syn}$ 或密钥时的最坏情况分析。
+
+e) 攻击约束：攻击应尽量保持图像语义和视觉质量。论文用 FID、CLIP-Score、PSNR 等指标约束质量变化。强 purification 可以破坏水印，但在高强度下 PSNR 降到约 15–19 dB，图像质量也明显下降。
+
+f) 防御者能力与安全目标：防御者可以在生成阶段部署 SynTag decoder，并在检测阶段运行 $P_{Syn}$、几何校正、dither compensation、DDIM inversion 和原水印解码器。安全目标是在固定 FPR 下提高几何攻击后的 TPR 和 bit accuracy，同时不明显牺牲非几何鲁棒性与生成图像质量。
+
+g) 现实性评估：这个 threat model 适合模型拥有者主动部署水印的场景，例如受控 Stable Diffusion 服务或生成模型发行方。它不适合不能控制生成过程的纯 post-hoc 图像水印。另一个边界是几何攻击分布主要由训练时的旋转、缩放、平移、shear 覆盖，复杂局部形变、局部重绘、强裁剪后重构等不一定被充分覆盖。
+
+h) 与后文关系：SynTag 的三个组件分别对应 threat model 中的关键问题：$D_{Syn}$ 负责在生成端主动注入同步特征，$P_{Syn}$ 负责估计攻击造成的几何变换，$C_p/C_l$ 负责吸收残余校正误差。实验中的几何攻击、组合攻击和自适应攻击分别验证这些设计是否覆盖主要威胁。
 
 ## 3. 方法设计与复现级理解
 
-### 3.1 总体思路：把“同步模板”接到 inversion-based 水印前面
+### 3.1 全局流程图式说明
 
-SynTag 的基本判断是：inversion-based 水印不是没有信息冗余，而是几何攻击后缺少可靠的坐标同步。因此论文不直接修改 GauShad、TreeRings 这类水印机制，而是在图像生成端额外注入一种几何敏感的同步特征。检测端先用同步特征预测几何校正参数，把图像尽量拉回原始坐标系，然后再执行原水印方法的 inversion 和 message extraction。
+SynTag 的执行链路可以分成训练、生成和检测三段。
 
-完整流程分为三个阶段：
+训练阶段：输入普通训练图像，先用原 Stable Diffusion VAE encoder 得到 clean latent，再分别用原 VAE decoder 和待训练 SynTag decoder 解码。SynTag decoder 的输出会经过随机几何失真和非几何噪声层，形成 distorted image。训练目标一方面要求 SynTag decoder 的输出接近原 decoder 重建图像，另一方面要求 SynTag predictor 从 distorted image 中预测出几何校正用的四个角点。
 
-1. SynTag initialization：训练一个带同步特征的 VAE decoder 和一个几何参数预测网络。
-2. Watermark injection：仍由原 inversion-based 方法生成带水印初始 latent，再通过扩散模型采样，最后用 SynTag decoder 解码成图像。
-3. Watermark extraction：先预测并校正几何变换，再通过 dither compensation 生成多个候选输入，最后执行 DDIM inversion 和水印解码。
+生成阶段：原 inversion-based 水印方法先把 message $s$ 编入扩散初始 latent $z_T^s$，扩散采样得到 $z_0^s$，再由 $D_{Syn}$ 解码成图像 $I_s$。这张图像同时携带原水印 message 和 SynTag 同步特征。
 
-### 3.2 预备知识：DDIM inversion 为什么怕几何错位
+检测阶段：输入可疑图像 $I_D$，先由 $P_{Syn}$ 预测几何校正参数，用 homography 得到校正图像 $I_C$。之后执行像素级和 latent 级 dither compensation，生成多个候选图像/latent，再分别做 VAE encoding、DDIM inversion 和原水印解码。只要某个候选 message 与目标水印相似度超过阈值，就判定水印存在。
 
-论文沿用 latent diffusion 的 DDIM 采样形式。若用 $x_t$ 表示第 $t$ 步 latent，DDIM 反向生成可写为：
+### 3.2 DDIM inversion 与几何错位问题
+
+论文沿用 latent diffusion 的 DDIM 采样与反演。生成阶段从噪声 latent 逐步去噪得到最终 latent；检测阶段则从图像编码回 latent 后，近似反推扩散过程，恢复初始 latent 中的水印结构。
+
+DDIM 反向采样可写为：
 
 $$x_{t-1}=\sqrt{\frac{\alpha_{t-1}}{\alpha_t}}x_t-\left(\sqrt{\frac{\alpha_{t-1}(1-\alpha_t)}{\alpha_t}}+\sqrt{1-\alpha_{t-1}}\right)\epsilon_\theta(x_t,t)$$
 
-为了做水印提取，检测端要近似反推生成过程：
+对应的 inversion 近似为：
 
 $$x_t=\frac{x_{t-1}-b_t\epsilon_\theta(x_t,t)}{a_t}\approx\frac{x_{t-1}-b_t\epsilon_\theta(x_{t-1},t)}{a_t}$$
 
-这里的关键不是公式本身，而是 inversion 假设输入图像在空间坐标上仍与生成图像对齐。旋转或缩放后，VAE encoder 得到的 latent 已经发生空间错位，后续 inversion 即使数值上能运行，也会把水印证据映射到错误位置。
+这个模块解决的问题是从图像侧恢复水印 latent，但它隐含假设输入图像仍与生成坐标系对齐。旋转、缩放、平移后，VAE encoder 得到的 latent 空间位置已经改变，因此 inversion 会在错误位置寻找水印证据。SynTag 后续所有设计都围绕“先恢复坐标同步，再做 inversion”展开。
 
-### 3.3 几何校正建模：预测四个角点而不是直接预测攻击类型
+### 3.3 SynTag initialization：训练同步特征注入器和几何预测器
 
-SynTag 用 homography 描述几何变换：
+这一阶段解决的问题是：如何让生成图像中出现一种不可见但可被检测端用于几何校正的信号。论文不直接训练一个传统 bit encoder，而是把原 VAE decoder 复制成可训练版本 $D_{Syn}$，并训练一个预测网络 $P_{Syn}$。
 
-$$H=\begin{bmatrix}h_{11}&h_{12}&h_{13}\\h_{21}&h_{22}&h_{23}\\h_{31}&h_{32}&h_{33}\end{bmatrix}$$
-
-图像点变换写作：
-
-$$\begin{bmatrix}u'\\v'\\1\end{bmatrix}=H\begin{bmatrix}u\\v\\1\end{bmatrix}$$
-
-其中 $h_{33}$ 归一化为 1，剩余 8 个自由度可以覆盖 affine、translation 和 perspective 相关变换。论文不是让网络分类“这是旋转还是缩放”，而是固定原图四个角点 $(1,1),(1,A),(B,1),(B,A)$，让预测网络输出变换后的四个角点 $P=\{P_1,P_2,P_3,P_4\}$。有了这四个点，就可以构造对应 homography 并对图像做反向校正。
-
-这种设计的优点是复现时不必为不同几何攻击写不同分支，统一用四点参数表示；缺点是预测误差会直接影响后续 watermark extraction，因此论文后面还加入了 dither compensation。
-
-### 3.4 第一阶段：SynTag initialization
-
-第一阶段只训练两个组件：SynTag decoder $D_{Syn}$ 和 SynTag predictor $P_{Syn}$。原始 VAE encoder $E_\Delta$ 和预训练 VAE decoder $D_\Delta$ 用来提供 clean latent 和重建参考。
-
-给定训练图像 $I_O$，先由 VAE encoder 得到 latent：
+输入训练图像 $I_O$ 后，固定 VAE encoder 先得到 latent：
 
 $$z_O=E_\Delta(I_O)$$
 
-原始 decoder 重建参考图像，SynTag decoder 输出带同步特征图像：
+原 decoder 给出重建参考，SynTag decoder 给出带同步特征的图像：
 
 $$I_R=D_\Delta(z_O),\quad I_{Syn}=D_{Syn}(z_O)$$
 
-然后对 $I_{Syn}$ 施加随机几何失真和非几何扰动，得到 $I_D$。训练时已知施加的几何变换，因此可以计算 ground-truth 四角点 $P_{gt}$。预测网络从失真图像中预测校正点：
+然后对 $I_{Syn}$ 施加随机几何变换和非几何噪声，得到 distorted image $I_D$。由于训练时知道施加的几何变换，可以计算 ground-truth 四角点 $P_{gt}$。预测网络输出：
 
 $$P_p=P_{Syn}(I_D)$$
 
-训练目标由两部分组成。第一部分约束 SynTag decoder 不破坏图像质量：
+这里预测四个角点而不是直接预测角度、缩放率或平移量，是因为 homography 可以统一表示多种几何变换。论文使用的 homography 矩阵为：
+
+$$H=\begin{bmatrix}h_{11}&h_{12}&h_{13}\\h_{21}&h_{22}&h_{23}\\h_{31}&h_{32}&h_{33}\end{bmatrix}$$
+
+点坐标变换为：
+
+$$\begin{bmatrix}u'\\v'\\1\end{bmatrix}=H\begin{bmatrix}u\\v\\1\end{bmatrix}$$
+
+$h_{33}$ 归一化后剩余 8 个自由度，刚好可以由四个角点约束。复现时需要固定原图角点，例如 $(1,1),(1,A),(B,1),(B,A)$，再让网络预测变换后的四点 $P=\{P_1,P_2,P_3,P_4\}$。
+
+训练损失有两类。第一类是图像重建/感知质量约束，防止 $D_{Syn}$ 为了注入同步特征破坏视觉质量：
 
 $$L_R(I_{Syn},I_R)=\lambda_1L_{MSE}(I_{Syn},I_R)+\lambda_2L_{VGG}(I_{Syn},I_R)+\lambda_3L_{SSIM}(I_{Syn},I_R)$$
 
-第二部分约束预测网络正确恢复几何参数：
+第二类是几何预测损失：
 
 $$L_P=L_{MSE}(P_p,P_{gt})=L_{MSE}(P_{Syn}(I_D),P_{gt})$$
 
-这一阶段训练完成后，$D_{Syn}$ 替换原始 VAE decoder。直观上，$D_{Syn}$ 学到的不是传统 bit message，而是一种对几何扰动敏感、但视觉上不可见的同步特征；$P_{Syn}$ 则学习如何从被攻击图像中读出这种同步特征并估计校正参数。
+一次训练迭代的真实数据流是：采样训练图像 -> VAE encode -> $D_\Delta$ 和 $D_{Syn}$ 分别 decode -> 对 $D_{Syn}$ 输出加几何/非几何扰动 -> $P_{Syn}$ 预测角点 -> 计算重建损失和预测损失 -> 反传更新 $D_{Syn}$ 与 $P_{Syn}$。训练完成后，$D_{Syn}$ 会替换部署中的 VAE decoder。
 
-### 3.5 第二阶段：watermark injection
+### 3.4 Watermark injection：把 SynTag 接到已有 inversion-based 方法上
 
-第二阶段接入已有 inversion-based 水印方法。给定 $l$ bit 水印序列 $s\in\{0,1\}^l$，原水印方法 $F$ 生成带水印的初始 latent：
+这一阶段的输入是待嵌入的 watermark sequence $s\in\{0,1\}^l$。原 inversion-based 方法 $F$ 先把水印写入扩散起始 latent：
 
 $$z_T^s=F(s)$$
 
-扩散模型从 $z_T^s$ 采样得到最终 latent $z_0^s$。与原方法不同的是，最后一步不用普通 VAE decoder，而是用 $D_{Syn}$ 生成图像：
+扩散模型从 $z_T^s$ 经过标准采样得到最终 latent $z_0^s$。与 GauShad 或 TreeRings 原流程的区别只在最后解码器：SynTag 使用训练好的 $D_{Syn}$ 输出图像：
 
 $$I_s=D_{Syn}(z_0^s)$$
 
-因此生成图像里同时存在两类信息：一类是原 inversion-based 水印方法负责的 message-level watermark，另一类是 $D_{Syn}$ 注入的 synchronization tag。前者用于检测和溯源，后者用于几何攻击后的校正。
+这一步的接口设计比较干净：$F$ 仍负责 message-level watermark，$D_{Syn}$ 负责 synchronization tag。也就是说，SynTag 不需要重写 GauShad 的消息编码逻辑，也不需要改变 TreeRings 的基本检测形式。论文实验中 GauShad-SynTag 使用 64-bit 水印；TreeRings-SynTag 由于 TreeRings 本身偏 1-bit 检测，因此主要报告 TPR。
 
-论文主要把 SynTag 组合到 GauShad 和 TreeRings 上，得到 GauShad-SynTag 和 TreeRings-SynTag。GauShad-SynTag 使用 64-bit 水印；TreeRings 本身是 1-bit 检测方法，因此主要报告 TPR。
+复现时要注意，$D_{Syn}$ 在 injection 阶段应固定，不再继续训练；否则生成图像的同步特征分布和检测端 $P_{Syn}$ 训练时看到的分布可能不一致。
 
-### 3.6 第三阶段：watermark extraction 与 dither compensation
+### 3.5 Watermark extraction：先校正，再反演，再解码
 
-检测端输入可能已经被攻击的图像 $I_D$。第一步由 $P_{Syn}$ 预测校正参数，得到 $P_p$，再通过 homography correction 得到校正图像：
+检测阶段输入是可能被攻击后的图像 $I_D$。第一步用 $P_{Syn}$ 预测角点 $P_p$，再由 homography correction 得到校正图像：
 
 $$I_C=T_{P_p}(I_D)$$
 
-只做一次校正仍不够，因为预测网络输出的角点可能有小误差，VAE 编码和 DDIM inversion 也会放大这种误差。论文因此设计了两级 dither compensation。
+如果 $P_{Syn}$ 预测完全准确，后续可以直接把 $I_C$ 编码回 latent 并执行 DDIM inversion。但实际预测会有残余误差，且 VAE encoder 和 DDIM inversion 对小错位比较敏感。因此论文加入两级 dither compensation。
 
-像素级补偿 $C_p$ 在 $I_C$ 附近生成多个轻微几何扰动版本，例如旋转 $\pm3^\circ$、缩放 0.9 和 1.1。每个候选图像都进入 VAE encoder 和 DDIM inversion，形成多个候选 latent。
+像素级补偿 $C_p$ 在 $I_C$ 附近做小范围几何扰动，例如旋转 $\pm3^\circ$、缩放 0.9 和 1.1，生成一组候选校正图像 $I_p=\{I_p^1,\ldots,I_p^n\}$。每个候选图像都进入 VAE encoder 和 DDIM inversion，得到候选 latent。
 
-latent 级补偿 $C_l$ 对 inversion 后的 latent 做 zero padding 和滑窗裁剪。若 latent 尺寸为 $C\times H\times W$，padding 半径为 $r$，则得到尺寸 $C\times(H+2r)\times(W+2r)$ 的 padded latent，并通过步长为 1 的滑窗产生 $(2r+1)^2$ 个 latent 变体。每个 latent 都交给原水印解码器 $F^{-1}$ 得到候选消息。
+latent 级补偿 $C_l$ 进一步处理 inversion 后的 latent。若 latent 尺寸为 $C\times H\times W$，先在空间维度 zero padding 到 $C\times(H+2r)\times(W+2r)$，再用步长 1 的滑动窗口裁出 $(2r+1)^2$ 个 latent 变体。每个 latent 变体都输入原水印提取函数 $F^{-1}$，得到候选消息集合：
 
-最终候选集合记为 $S_{ex}=\{\bar{s}_1,\bar{s}_2,\ldots\}$。只要存在候选消息与目标水印相似度超过阈值，就判定水印存在：
+$$S_{ex}=\{\bar{s}_1,\bar{s}_2,\ldots\}$$
+
+最终检测规则是，只要某个候选消息与目标水印相似度超过阈值，就认为检测成功：
 
 $$S(\bar{s}_i,s)\ge\tau$$
 
-这部分是 SynTag 鲁棒性提升的关键。$P_{Syn}$ 负责把大尺度几何变换校正回来，$C_p$ 和 $C_l$ 负责吸收小尺度残余误差。消融实验显示 latent 级补偿比像素级补偿贡献更大。
+这套提取流程的关键不是单次预测，而是“粗校正 + 局部搜索”。$P_{Syn}$ 把大范围几何错位拉回可处理范围，$C_p$ 和 $C_l$ 再吸收角点预测、VAE 编码和 inversion 引入的小偏差。
 
-### 3.7 复现配置
+### 3.6 训练、构造与推理分离
 
-论文在 Stable Diffusion v1.4 和 Stable Diffusion v2.1 上实验，生成图像分辨率为 $512\times512\times3$，latent 尺寸为 $4\times64\times64$。SynTag initialization 使用 MS COCO 训练图像。生成阶段使用 Stable-Diffusion Prompt dataset 的 prompt，采样步数为 50，guidance scale 为 7.5。
+训练阶段只需要普通图像数据和随机失真层，目标是得到 $D_{Syn}$ 与 $P_{Syn}$。这一阶段不需要真实 watermark message，也不需要运行完整 GauShad/TreeRings。
 
-训练 SynTag 时的几何扰动包括：旋转 $-45^\circ$ 到 $45^\circ$，平移 10 到 75 pixels，缩放 0.5 到 2 并配合 padding/cropping，shear mapping 5 到 10 pixels。几何扰动后还会叠加非几何扰动，包括 Gaussian noise、median filtering 和 JPEG compression。
+部署生成阶段需要运行原 inversion-based watermark encoder $F$、扩散采样器和 $D_{Syn}$。此时 $P_{Syn}$ 不参与生成。
 
-提取阶段使用 empty-condition DDIM inversion，步数为 20。像素级 dither compensation 包括旋转 $\pm3^\circ$ 和缩放 0.9/1.1；latent 级 compensation 的 padding 半径为 $r=2$。检测阈值按固定 FPR 选择，主实验设置 FPR 为 $10^{-6}$，对应阈值 $\tau=0.78125$。实现环境为 PyTorch 1.12.1 和单张 NVIDIA A40 GPU。
+检测阶段需要运行 $P_{Syn}$、homography correction、dither compensation、VAE encoder、DDIM inversion 和 $F^{-1}$。此时 $D_{Syn}$ 不参与检测，但检测效果依赖生成图像中由 $D_{Syn}$ 注入的同步特征。
 
-## 4. 实验设计与结果
+这个分离很重要：SynTag 不是每一步扩散都注入 watermark，而是在最终 VAE decode 阶段加入同步特征；message watermark 仍由原 inversion-based 方法在初始 latent 层负责。
 
-### 4.1 对比方法和指标
+### 3.7 复现配置表
 
-论文比较了 9 类基线：post-hoc 水印包括 DwtDctSvd、RivaGAN、MBRS、StegaStamp、RoSteALS；fine-tune-based 方法包括 Stable Signature 和 LaWa；inversion-based 方法包括 TreeRings 和 Gaussian Shading。SynTag 主要作为插件式增强模块，与 GauShad 和 TreeRings 组合。
+| 项目 | 论文设置 |
+|---|---|
+| 基座模型 | Stable Diffusion v1.4 和 Stable Diffusion v2.1 |
+| 图像尺寸 | $512\times512\times3$ |
+| latent 尺寸 | $4\times64\times64$ |
+| SynTag 训练数据 | MS COCO |
+| prompt 数据 | Stable-Diffusion Prompt dataset |
+| 采样设置 | 50 steps，guidance scale 7.5 |
+| 提取设置 | empty-condition DDIM inversion，20 steps |
+| 训练几何扰动 | rotation $-45^\circ$ 到 $45^\circ$，translation 10–75 pixels，scale 0.5–2，shear mapping 5–10 pixels |
+| 训练非几何扰动 | Gaussian noise，median filtering，JPEG compression |
+| pixel compensation | rotation $\pm3^\circ$，scaling 0.9/1.1 |
+| latent compensation | padding radius $r=2$ |
+| 阈值 | FPR $10^{-6}$ 下 $\tau=0.78125$ |
+| 硬件/框架 | PyTorch 1.12.1，单张 NVIDIA A40 GPU |
+| 代码 | 论文内容中未提供官方代码链接 |
 
-检测指标是固定 FPR 下的 TPR；对多 bit 水印还报告 bit accuracy；图像质量用 FID 和 CLIP-Score。主结果从随机 prompt 生成 50 张水印图像进行统计。
+### 3.8 复现风险与信息缺口
 
-### 4.2 主结果：几何鲁棒性显著增强，非几何鲁棒性基本保持
+论文给出了主流程、攻击类型、阈值和部分训练配置，但仍有几个复现风险。第一，$D_{Syn}$ 和 $P_{Syn}$ 的具体网络细节、训练 epoch、batch size、优化器超参数和损失权重没有在主文中完全展开。第二，随机失真层的组合顺序和采样概率会影响 $P_{Syn}$ 泛化。第三，dither compensation 的候选枚举数量会影响检测开销和误报控制。第四，GauShad/TreeRings 与 SynTag 组合时的工程接口没有官方代码支持，复现者需要自己处理 latent、VAE、inversion 和 watermark decoder 的一致性。
 
-在 Stable Diffusion v1.4/v2.1 上，原 GauShad 面对几何攻击时 TPR 只有 0.016/0.020，bit accuracy 只有 0.633/0.635；加入 SynTag 后，GauShad-SynTag 的几何攻击 TPR 提升到 0.980/0.988，bit accuracy 提升到 0.938/0.940。
+## 4. 与其他方法对比
 
-TreeRings 也有类似提升。原 TreeRings 的几何攻击 TPR 为 0.548/0.552，TreeRings-SynTag 提升到 0.928/0.932。非几何攻击下，GauShad-SynTag 的 TPR 为 0.967/0.970，基本保持了 GauShad 原本的非几何鲁棒性。
+| 方法类别 | 代表方法 | 核心思想 | 优点 | 缺点 | SynTag 的改进点 |
+|---|---|---|---|---|---|
+| post-hoc image watermark | DwtDctSvd, RivaGAN, MBRS, StegaStamp, RoSteALS | 在生成后图像上嵌入水印 | 可脱离生成模型使用 | 对强编辑或生成式重构未必稳定 | SynTag 面向生成链路，利用模型内部 VAE decoder 注入同步特征 |
+| fine-tune-based watermark | Stable Signature, LaWa | 微调生成模型或 decoder，让输出携带水印 | 可与模型分发结合 | 可能影响生成质量，且几何鲁棒性有限 | SynTag 专门为几何校正设计同步特征 |
+| inversion-based watermark | TreeRings, Gaussian Shading | 修改扩散初始 latent/noise，检测时反演提取 | 非几何鲁棒性强，适合生成式水印 | 几何攻击后 latent 对齐失败 | SynTag 在提取前先恢复坐标同步 |
+| SynTag | GauShad-SynTag, TreeRings-SynTag | 微调 VAE decoder 注入同步特征，并用 predictor 估计几何校正 | 显著增强几何攻击鲁棒性，兼容已有 inversion-based 方法 | 需要控制生成模型 decoder，检测开销更高 | 把“几何同步”从水印 message 中解耦出来 |
 
-图像质量方面，Stable Diffusion 原始 FID 约为 25.28，GauShad-SynTag 为 25.21，CLIP-Score 从 0.3628 附近变为 0.3615，说明 SynTag decoder 对视觉质量和文本一致性的影响较小。
+本质区别在于，SynTag 不把几何鲁棒性完全寄托在 watermark bits 本身，而是显式引入同步通道。它更像是给 inversion-based 水印加了一个 alignment layer。
 
-### 4.3 更大范围几何攻击
+## 5. 实验表现与优势
 
-论文进一步测试旋转 $-30^\circ$ 到 $30^\circ$、缩放 0.7 到 1.75、平移 20 到 75 pixels、shear 5 到 10 等连续强度范围。结果显示，随着几何攻击增强，原 inversion-based 方法迅速失效，而 SynTag 版本仍保持较高 TPR 和 bit accuracy。
+a) 主实验验证 SynTag 是否提升几何鲁棒性。论文在 Stable Diffusion v1.4/v2.1 上测试 9 类基线，指标包括固定 FPR 下的 TPR、bit accuracy、FID 和 CLIP-Score。几何攻击包括 rotation 30°、translation 50 pixels、scale 0.75 with padding、scale 1.25 with cropping、shear mapping 5 pixels；非几何攻击包括 JPEG QF=15、Gaussian noise $\sigma=0.05$、median filtering $k=11$、dropout、cropout 和 brightness adjustment。
 
-这说明 SynTag 的收益不是针对某个固定攻击参数调出来的，而是来自显式同步校正机制。不过它仍依赖训练时见过的几何分布，若部署环境出现更极端的透视变换、非刚性变形或复杂局部编辑，仍需要重新评估。
+b) 主结果显示，原 GauShad 在几何攻击下 TPR 只有 0.016/0.020，bit accuracy 为 0.633/0.635；加入 SynTag 后，GauShad-SynTag 的几何攻击 TPR 达到 0.980/0.988，bit accuracy 达到 0.938/0.940。TreeRings 的几何攻击 TPR 从 0.548/0.552 提升到 0.928/0.932。非几何攻击下，GauShad-SynTag 的 TPR 为 0.967/0.970，基本保持 GauShad 原有优势。
 
-### 4.4 自适应攻击
+c) 图像质量方面，原 Stable Diffusion 的 FID 约为 25.28，GauShad-SynTag 的 FID 约为 25.21，CLIP-Score 从约 0.3628 降到约 0.3615。这个结果说明 SynTag decoder 没有明显破坏图像分布质量和文本图像一致性。
 
-论文评估了两类自适应攻击。第一类是 autoencoder reconstruction，包括 Cheng、Bmshj、VQ-VAE、KL-VAE。GauShad-SynTag 在这些重构攻击下仍保持 0.920 到 0.980 的 TPR，bit accuracy 约为 0.966 到 0.992。
+d) 自适应攻击中，autoencoder reconstruction 下 GauShad-SynTag 仍保持 0.920–0.980 的 TPR 和约 0.966–0.992 的 bit accuracy。purification attack 更强，随着攻击强度 $f$ 从 0.1 增加到 0.7，TPR 从 0.980 降到 0.000；但高强度 purification 的 PSNR 也下降到约 15–19 dB，说明攻击代价明显。
 
-第二类是 purification attack。攻击强度 $f$ 从 0.1 增至 0.7 时，TPR 从 0.980 逐步下降到 0.000；当 $f=0.5$ 时 TPR 已降到 0.580，PSNR 约为 19.17 dB；当 $f=0.7$ 时 PSNR 约为 15.44 dB，图像质量已经明显受损。这个结果说明 SynTag 对温和重构和弱 purification 有鲁棒性，但强 purification 仍可能清除水印，代价是明显破坏图像。
+e) 消融实验验证了两个核心模块。只做被动 restoration predictor 的 $P^-$ 平均 bit accuracy 约为 0.730，而完整 $D_{Syn}+P_{Syn}$ 约为 0.938，说明主动注入同步特征是必要的。校正组件消融中，无 $P_{Syn}$ 时 TPR 仅 0.016；加入 $P_{Syn}$ 后到 0.763；加入 $P_{Syn}+C_l$ 后到 0.930；完整 $P_{Syn}+C_p+C_l$ 达到 0.990，说明 latent-level compensation 对残余错位修正贡献最大。
 
-### 4.5 dither compensation 的误报分析
+f) threat model 覆盖情况较完整：论文覆盖了常见几何攻击、非几何攻击、组合攻击、不同采样器/采样步数/guidance scale/prompt set，以及部分自适应重构攻击。缺口主要是没有充分评估白盒攻击者针对 $D_{Syn}$ 或 $P_{Syn}$ 反向优化去除同步特征的情况。
 
-dither compensation 会扩大候选集合，直觉上可能增加 false positive。论文用 1000 张水印图像和 1000 张非水印图像测试固定 watermark 下的 bit accuracy 分布。攻击包括旋转、缩放、JPEG 和高斯噪声。
+## 6. 学习与应用
 
-结果显示，非水印图像即使用 dither compensation，最高 bit accuracy 也低于 0.8；水印图像几乎都高于 0.8。因此选择 $\tau=0.8$ 左右可以区分两类样本。这个实验很关键，因为 SynTag 的提取策略本质上是“多候选尝试”，必须证明它不会靠 brute-force 候选数把误报率抬高。
+a) 论文未提供可确认的官方开源代码。若要复现，最低可行路线是先训练 SynTag initialization：固定 Stable Diffusion VAE encoder/decoder，复制 decoder 得到 $D_{Syn}$，训练 $P_{Syn}$ 预测几何变换后的四角点。只有角点预测稳定后，再接入 GauShad 或 TreeRings。
 
-### 4.6 适配不同采样设置
+b) 实现时最需要注意的是三类超参数：随机几何扰动分布、重建损失与预测损失权重、dither compensation 候选数量。扰动太弱会导致几何泛化不足；扰动太强会让 $D_{Syn}$ 难以保持不可见性；候选数量太少会漏检，太多会增加检测延迟并可能影响 FPR。
 
-论文测试了不同 sampling method、sampling steps、guidance scale 和 prompt set。DDIM、UniPC、PNDM 下 TPR 分别约为 0.990、0.960、0.970；采样步数 20、50、100 下 TPR 都在 0.980 到 0.990；guidance scale 3、7.5、11 下 TPR 为 1.000、0.990、0.980；不同 prompt set 下 TPR 也均高于 0.96。
+c) 迁移到其他任务时，SynTag 的思想比具体 homography 公式更重要。对视频可以考虑时空同步特征；对音频生成水印可以考虑时间轴同步特征，用于处理裁剪、时间伸缩、重采样或局部错位。不过音频中的 VC/TTS 重合成会改变声学细节，不能直接套用图像 homography。
 
-这说明 SynTag 不只绑定某一个采样器或 prompt 分布。不过这些实验仍是在同一类 Stable Diffusion 生成链路中完成，跨模型架构和跨 VAE 的泛化还不是论文主要结论。
+## 7. 总结
 
-### 4.7 组合攻击
+a) 一句话概括：用隐形同步特征修正几何错位。
 
-论文还测试了 10 组组合攻击，包括多个几何攻击组合，以及几何攻击叠加 JPEG、高斯噪声、中值滤波等非几何攻击。GauShad-SynTag 在这些设置下 TPR 全部不低于 0.92，bit accuracy 不低于 0.90。
+SynTag 的贡献在于把 inversion-based 生成式水印的几何脆弱性重新表述为同步问题，并给出一个可插拔的同步增强模块。它不替代 GauShad/TreeRings 的 message embedding，而是在 VAE decoder 端注入几何敏感特征，让检测端先恢复坐标再提取水印。
 
-这个结果支撑了论文的核心定位：SynTag 不是只对单一旋转或缩放有效，而是在几何校正后仍能把原 inversion-based 水印的非几何鲁棒性保留下来。
+## 8. 图表精读与证据链
 
-## 5. 消融实验解读
+Table 1 是主证据链，证明 SynTag 对几何鲁棒性的提升不是牺牲非几何鲁棒性换来的。GauShad 几何攻击下几乎失效，而 GauShad-SynTag 达到约 0.98 TPR；同时非几何攻击 TPR 仍约 0.97，FID/CLIP-Score 也接近原 Stable Diffusion。
 
-第一组消融验证主动注入 SynTag feature 是否必要。论文比较了只训练被动 restoration predictor 的方案 $P^-$，以及同时使用 $D_{Syn}$ 和 $P_{Syn}$ 的方案。面对旋转、缩放、平移、shear 等攻击，$P^-$ 平均 bit accuracy 约为 0.730，而完整 SynTag 约为 0.938。
+Figure 4 测试更连续的几何攻击强度，包括旋转、缩放、平移和 shear。它支持的 claim 是 SynTag 不是只对单一固定参数有效，而是在一段几何攻击范围内保持稳定。
 
-这说明仅靠图像内容本身预测几何校正不够稳定。SynTag 的关键是生成端主动写入同步特征，使检测端可以从这些特征中恢复几何轨迹。
+Table 2 对应自适应攻击。autoencoder reconstruction 下结果较强，purification attack 在高强度下可以破坏水印，但会带来明显图像质量下降。这个表说明 SynTag 对温和重构有一定抵抗力，但不是不可移除水印。
 
-第二组消融验证校正组件贡献。无 $P_{Syn}$ 时，GauShad 在几何攻击下 TPR 只有 0.016，bit accuracy 0.633；加入 $P_{Syn}$ 后 TPR 到 0.763，bit accuracy 到 0.819；加入像素级补偿后 TPR 到 0.795，bit accuracy 到 0.865；加入 latent 级补偿后 TPR 到 0.930，bit accuracy 到 0.915；完整 $P_{Syn}+C_p+C_l$ 达到 TPR 0.990，bit accuracy 0.935。
+Table 3 评估不同 sampling method、sampling steps、guidance scale 和 prompt set。它支持 SynTag 对生成配置变化有一定适配性，但证据仍局限在 Stable Diffusion v1.4/v2.1 的体系内。
 
-这里可以看出三点：第一，几何参数预测是主增益来源；第二，latent 级补偿比像素级补偿更重要；第三，完整方法的高 TPR 来自“预测校正 + 多候选误差吸收”的组合，而不是某个单独模块。
+Table 4 是组合攻击证据，说明几何校正后，原 inversion-based 水印的非几何鲁棒性还能继续发挥作用。
 
-## 6. 论文贡献总结
+Table 5 和 Table 6 是最重要的消融证据。Table 5 说明主动 SynTag feature injection 比被动几何恢复更有效；Table 6 说明 $P_{Syn}$ 是主增益来源，而 $C_l$ 比 $C_p$ 更能补偿残余错位。
 
-第一，论文明确指出 inversion-based generative image watermarking 的主要短板是几何同步，而不是水印容量或非几何鲁棒性本身。
+## 9. 复现难度与适合人群
 
-第二，论文提出 SynTag，把同步模板思想引入 latent diffusion 生成水印，通过微调 VAE decoder 主动注入几何敏感特征，并训练 predictor 估计 homography correction。
+复现难度：高。原因是该方法需要同时掌握 Stable Diffusion VAE、DDIM inversion、inversion-based watermark、homography correction、随机失真训练和多候选检测。缺少官方代码时，工程细节对结果影响较大。
 
-第三，SynTag 能作为插件增强 GauShad、TreeRings 等已有 inversion-based 方法，在几何攻击下显著提高 TPR 和 bit accuracy，同时基本保持非几何鲁棒性和图像质量。
+主要依赖：Stable Diffusion v1.4/v2.1、MS COCO、VAE encoder/decoder 权重、GauShad 或 TreeRings 的实现、PyTorch、较高显存 GPU，以及稳定的几何攻击评估脚本。
 
-第四，论文用 dither compensation 解决预测误差残留问题，并通过误报分析说明多候选提取没有明显破坏固定 FPR 约束。
+最小可复现版本：先不接 GauShad，单独训练 $D_{Syn}$ 和 $P_{Syn}$，测试不同几何攻击下四角点预测误差和校正后图像对齐程度。第二步再接入一个已有 inversion-based watermark，比较无校正、只加 $P_{Syn}$、完整 $P_{Syn}+C_p+C_l$ 三种版本。
 
-## 7. 局限性与风险
+适合人群：适合研究生成式水印、扩散模型安全、图像版权保护和鲁棒检测的研究者；也适合想把同步机制迁移到视频/音频水印的人阅读。不适合作为初学者第一篇扩散水印复现论文。
 
-第一，SynTag 需要修改生成链路中的 VAE decoder，因此它适合模型拥有者主动部署，不适合无法控制生成模型的 post-hoc 图像水印场景。
+## 10. 简短全面总结
 
-第二，几何校正能力依赖训练时的攻击分布。论文覆盖了常见旋转、缩放、平移、shear，但复杂局部形变、强透视变换、局部重绘、裁剪后重新构图等场景仍可能超出能力边界。
+SynTag 研究的是 latent diffusion 生成式图像水印在几何攻击下的鲁棒性问题。已有 inversion-based 方法通过修改扩散初始 latent 嵌入水印，面对 JPEG、噪声、滤波等非几何攻击较强，但旋转、缩放、平移、shear 会破坏图像与 latent 的空间对齐，使 DDIM inversion 难以正确提取水印。SynTag 的核心方法是在 VAE decoder 中注入不可见的 synchronization tag，并训练 $P_{Syn}$ 从失真图像中预测 homography 校正参数；检测时先校正图像，再用像素级和 latent 级 dither compensation 枚举残余错位候选，最后执行原水印解码。实验显示，GauShad-SynTag 在几何攻击下将 TPR 从接近失效提升到约 0.98，同时基本保持非几何鲁棒性和图像质量。主要局限是需要控制生成模型 decoder，缺少官方代码，且对白盒自适应去除同步特征的攻击分析仍不充分。
 
-第三，强 purification attack 可以在牺牲图像质量的前提下显著削弱水印。论文结果显示，当 purification 强度足够大时，水印检测会失败，只是攻击后的视觉质量也会明显下降。
+## 11. 论文写作逻辑分析
 
-第四，SynTag 引入了额外训练、替换 decoder 和多候选提取开销。尤其是 dither compensation 会增加检测阶段计算量，部署时需要在检测延迟和鲁棒性之间权衡。
+a) Intro 的问题铺垫比较清晰：作者先承认 inversion-based generative watermarking 在非几何攻击下已经很强，再指出其被几何攻击击穿的具体原因是 spatial misalignment。这样避免了泛泛说“鲁棒性不足”，而是锁定到同步缺失。
 
-第五，论文主要在 Stable Diffusion v1.4/v2.1 上实验。对于 SDXL、DiT、flow matching 或其他生成架构，能否直接复用同一 SynTag decoder 设计仍需实验验证。
+b) 核心 insight 从失败机制自然推出：如果几何攻击导致提取位置错位，那么解决方案应该是恢复坐标对齐，而不是简单加大水印强度。SynTag 因此把 synchronization tag 作为独立模块引入。
 
-## 8. 与语音安全/水印研究的关系
+c) threat model 与方法承接较紧：攻击者能做几何/非几何编辑，防御者能控制生成 decoder；所以方法选择在 VAE decoder 端注入同步特征，并在检测端先估计几何校正。这个设定解释了为什么 SynTag 不是 post-hoc 水印。
 
-虽然这篇是图像生成水印论文，但它对语音生成水印有直接启发：很多音频水印方法在重采样、裁剪、时间伸缩、VC/TTS 重合成后失败，本质上也可能是同步丢失而不只是 bit embedding 不够强。
+d) 方法叙事顺序合理：先训练同步特征，再生成带水印图像，最后检测和补偿。尤其是 dither compensation 的出现有明确动机，即 $P_{Syn}$ 不可能完全消除残余误差。
 
-SynTag 的思想可以类比到音频中：生成端注入一种对时间轴扰动敏感但感知不可见的同步特征，检测端先估计时间偏移、速度变化或局部裁剪位置，再进行水印提取。对应到语音，homography correction 不能直接复用，但“主动同步特征 + 校正网络 + 多候选补偿”的范式值得参考。
+e) 实验呼应较完整：主实验验证几何鲁棒性，非几何攻击验证是否保持原 inversion-based 优势，组合攻击验证实际编辑链路，自适应攻击验证更强移除风险，消融实验验证同步注入和补偿模块的必要性。
 
-不过音频的同步扰动更复杂，尤其是语音内容可被 ASR-TTS 或 VC 重合成后重新生成，时间轴和声学细节都会变化。因此 SynTag 更适合作为生成式水印鲁棒性设计的参考，而不是可以直接迁移的方案。
+f) 证据链中最强的是 Table 1、Table 5 和 Table 6，分别对应主性能、主动同步特征必要性和模块贡献。相对不足的是白盒自适应攻击与跨生成架构泛化，论文没有充分证明攻击者知道 SynTag 机制后无法专门去除同步特征。
 
-## 9. 精读结论
+g) 可借鉴写法是：先把已有方法的失败定位为一个具体机制问题，再提出一个与失败机制直接对应的模块，最后用主结果、泛化设置、组合攻击和消融实验逐层闭环。对于安全论文，这种“failure mechanism -> defense module -> threat-aligned evaluation”的结构很值得参考。
 
-SynTag 是一篇目标非常明确的生成式图像水印论文：它不追求提出全新的 bit embedding 机制，而是补齐 inversion-based 水印在几何攻击下的同步短板。方法上的关键是用微调后的 VAE decoder 主动注入 invisible synchronization tag，再用 predictor 和 dither compensation 在检测前恢复坐标对齐。
-
-从结果看，SynTag 对 GauShad 和 TreeRings 的增强非常明显，尤其是 GauShad-SynTag 在几何攻击下把 TPR 从接近失效提升到约 0.98，同时保持非几何鲁棒性和图像质量。论文最值得关注的不是某个具体网络结构，而是它把“水印提取前的几何同步”作为独立问题系统处理，这一点对图像、视频、音频生成水印都有借鉴意义。
-
-## 10. 可放入 Overview.md 的条目
+## Overview.md 条目
 
 - [SynTag: Enhancing the Geometric Robustness of Inversion-based Generative Image Watermarking](./Other_Security/2025-SynTag.md)  
   *IEEE/CVF International Conference on Computer Vision (ICCV), 2025*  
   Citation: Fang, H., Chen, K., Ma, Z., Deng, J., Li, Y., Zhang, W., & Chang, E.-C. “SynTag: Enhancing the Geometric Robustness of Inversion-based Generative Image Watermarking.” *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 2025.  
   Links: [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Fang_SynTag_Enhancing_the_Geometric_Robustness_of_Inversion-based_Generative_Image_Watermarking_ICCV_2025_paper.html)
-
-## 11. 后续复现建议
-
-如果后续要复现 SynTag，建议先不要从完整 GauShad-SynTag 开始，而是先单独复现 SynTag initialization：固定 Stable Diffusion VAE encoder/decoder，训练 $D_{Syn}$ 和 $P_{Syn}$，验证 $P_{Syn}$ 对旋转、缩放、平移、shear 的角点预测误差。只有几何校正稳定后，再接入 GauShad 或其他 inversion-based watermark。
-
-评估时应单独报告三组结果：无校正的原方法、只加 $P_{Syn}$ 的校正版本、完整 $P_{Syn}+C_p+C_l$ 版本。这样才能判断收益来自同步特征、校正网络还是候选补偿。若迁移到音频或视频任务，也应保留这种分解评估方式。

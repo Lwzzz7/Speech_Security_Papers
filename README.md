@@ -392,6 +392,11 @@
   Citation: Fei, J., Dai, Y., Yu, P., Kong, Z., Zhou, J., & Xia, Z. “Scalable Dual Fingerprinting for Hierarchical Attribution of Text-to-Image Models.” *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 2025.  
   Links: [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Fei_Scalable_Dual_Fingerprinting_for_Hierarchical_Attribution_of_Text-to-Image_Models_ICCV_2025_paper.html) | [Code](https://github.com/jumpycat/FI-LORA)
 
+- [SynTag: Enhancing the Geometric Robustness of Inversion-based Generative Image Watermarking](./Other_Security/2025-SynTag.md)  
+  *IEEE/CVF International Conference on Computer Vision (ICCV), 2025*  
+  Citation: Fang, H., Chen, K., Ma, Z., Deng, J., Li, Y., Zhang, W., & Chang, E.-C. “SynTag: Enhancing the Geometric Robustness of Inversion-based Generative Image Watermarking.” *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 2025.  
+  Links: [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Fang_SynTag_Enhancing_the_Geometric_Robustness_of_Inversion-based_Generative_Image_Watermarking_ICCV_2025_paper.html)
+
 - [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md")  
   *Advances in Neural Information Processing Systems (NeurIPS), 2025*  
   Citation: Jovanović, N., Labiad, I., Souček, T., Vechev, M., & Fernandez, P. “Watermarking Autoregressive Image Generation.” *Advances in Neural Information Processing Systems*, vol. 38, 2025.  

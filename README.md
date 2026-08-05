@@ -382,15 +382,20 @@
   
 ### 2025
 
-- [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md")  
-  *Advances in Neural Information Processing Systems (NeurIPS), 2025*  
-  Citation: Jovanović, N., Labiad, I., Souček, T., Vechev, M., & Fernandez, P. “Watermarking Autoregressive Image Generation.” *Advances in Neural Information Processing Systems*, vol. 38, 2025.  
-  Links: [Paper](https://arxiv.org/abs/2506.16349) | [Code](https://github.com/facebookresearch/wmar)
-
 - [Robust Watermarking Using Generative Priors Against Image Editing: From Benchmarking to Advances (VINE)](./Other_Security/2025-VINE.md)  
   *International Conference on Learning Representations (ICLR), 2025*  
   Citation: Lu, S., Zhou, Z., Lu, J., Zhu, Y., & Kong, A. W.-K. “Robust Watermarking Using Generative Priors Against Image Editing: From Benchmarking to Advances.” *International Conference on Learning Representations*, 2025.  
   Links: [Paper](https://openreview.net/forum?id=OHp20fyvs2) | [Code](https://github.com/Shilin-LU/VINE)
+
+- [Scalable Dual Fingerprinting for Hierarchical Attribution of Text-to-Image Models](./Other_Security/2025-FI-LoRA.md)  
+  *IEEE/CVF International Conference on Computer Vision (ICCV), 2025*  
+  Citation: Fei, J., Dai, Y., Yu, P., Kong, Z., Zhou, J., & Xia, Z. “Scalable Dual Fingerprinting for Hierarchical Attribution of Text-to-Image Models.” *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 2025.  
+  Links: [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Fei_Scalable_Dual_Fingerprinting_for_Hierarchical_Attribution_of_Text-to-Image_Models_ICCV_2025_paper.html) | [Code](https://github.com/jumpycat/FI-LORA)
+
+- [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md")  
+  *Advances in Neural Information Processing Systems (NeurIPS), 2025*  
+  Citation: Jovanović, N., Labiad, I., Souček, T., Vechev, M., & Fernandez, P. “Watermarking Autoregressive Image Generation.” *Advances in Neural Information Processing Systems*, vol. 38, 2025.  
+  Links: [Paper](https://arxiv.org/abs/2506.16349) | [Code](https://github.com/facebookresearch/wmar)
 
 ### 2024
 

@@ -65,12 +65,8 @@ $$
 第五是 robustness。面对攻击集合 $A$，两个指纹中较弱的那个也应超过阈值：
 
 $$
-\mathbb{E}_{A}\left[
-\min\left\{
-P(m_b^i,W_b(A(x_{ij}))),
-P(m_c^{j|i},W_c(A(x_{ij})))
-\right\}
-\right]\ge \tau
+\mathbb{E}_{A}[\min \{P(m_b^i,W_b(A(x_{ij}))), P(m_c^{j|i},W_c(A(x_{ij})))
+\}]\ge \tau
 $$
 
 这个目标设计决定了后续方法必须是双头、可插拔、可顺序授权，并且训练时要同时优化图像质量和两个指纹解码。
@@ -122,10 +118,7 @@ $$
 展开某个权重元素：
 
 $$
-\Delta W_{i,j}
-=
-\sum_{k=1}^{r}\sum_{l=1}^{r}
-B_{i,k}\cdot Z_{k,l}\cdot A_{l,j}
+\Delta W_{i,j}=\sum_{k=1}^{r}\sum_{l=1}^{r} B_{i,k}\cdot Z_{k,l}\cdot A_{l,j}
 $$
 
 这个展开式说明 $m$ 不是只控制少数参数，而是通过 $Z$ 与 $B,A$ 相乘，影响 $\Delta W$ 的每个位置。实际实现中，$Z$ 是可插拔的：换一个指纹 $m$，通过 $f(m)$ 得到不同 $Z$，即可得到不同低秩权重更新，而不必完整重训模型。
@@ -135,9 +128,7 @@ $$
 为了同时嵌入两层指纹，论文设计 2-head FI-LoRA。两个 head 共享同一个 $B$，但拥有各自的 $A_b,A_c$ 和 fingerprint encoding network $f_b,f_c$：
 
 $$
-W_0+\Delta W
-=
-W_0+Bf_b(m_b)A_b+Bf_c(m_c)A_c
+W_0+\Delta W = W_0+Bf_b(m_b)A_b+Bf_c(m_c)A_c
 $$
 
 共享 $B$ 的好处是减少参数量并让两个 head 在同一低秩子空间内协调；分离 $A_b,A_c,f_b,f_c$ 则让两个指纹可以独立控制、独立解码。开发者可把：
@@ -181,11 +172,11 @@ $$
 $$
 L_i=
 \mathbb{E}_{x\sim X,\ m_b,m_c\sim\{0,1\}^{d_m}}
-\left[
+[
 \lambda_1\|x-D(E(x);m_b,m_c)\|_2^2
 +
 \lambda_2 LPIPS(x,D(E(x);m_b,m_c))
-\right]
+]
 $$
 
 MSE 约束像素级重建，LPIPS 约束感知相似性。论文后续解释 FI-LoRA 在 FID 上表现较好，与训练中给 LPIPS 更高权重有关。这个损失保证 VAE decoder 学到“在图像里写入指纹”的同时，不把图像内容明显改坏。

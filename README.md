@@ -360,6 +360,11 @@
   Citation: Fernando, T., Fookes, C., & Sridharan, S. “DeepForgeSeal: Latent Space-Driven Semi-Fragile Watermarking for Deepfake Detection Using Adversarial Reinforcement Learning.” *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2026.  
   Links: [Paper](https://arxiv.org/abs/2511.04949)
 
+- [DRAW: Deep Robustness-Adjustable Watermarking](./Other_Security/2026-DRAW.md)  
+  *IEEE Transactions on Dependable and Secure Computing (TDSC), 2026*  
+  Citation: Fang, H., Chen, K., Qiu, Y., Zhang, J., Zhang, W., & Chang, E.-C. “DRAW: Deep Robustness-Adjustable Watermarking.” *IEEE Transactions on Dependable and Secure Computing*, 2026.  
+  Links: [DOI](https://doi.org/10.1109/TDSC.2026.3714391)
+
 - [Spherical Watermark: Encryption-Free, Lossless Watermarking for Diffusion Models](./Other_Security/2026-Spherical-Watermark.md)  
   *International Conference on Learning Representations (ICLR), 2026*  
   Citation: Hu, X., Jin, J., Li, S., Peng, W., Zhang, X., & Qian, Z. “Spherical Watermark: Encryption-Free, Lossless Watermarking for Diffusion Models.” *Proceedings of the International Conference on Learning Representations*, 2026.  

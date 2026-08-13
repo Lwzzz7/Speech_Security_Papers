@@ -363,7 +363,12 @@
 - [DRAW: Deep Robustness-Adjustable Watermarking](./Other_Security/2026-DRAW.md)  
   *IEEE Transactions on Dependable and Secure Computing (TDSC), 2026*  
   Citation: Fang, H., Chen, K., Qiu, Y., Zhang, J., Zhang, W., & Chang, E.-C. “DRAW: Deep Robustness-Adjustable Watermarking.” *IEEE Transactions on Dependable and Secure Computing*, 2026.  
-  Links: [DOI](https://doi.org/10.1109/TDSC.2026.3714391)
+  Links: [Paper](https://ieeexplore.ieee.org/document/11613195)
+
+- [An Efficient Watermarking Method for Latent Diffusion Models via Low-Rank Adaptation and Dynamic Loss Weighting](./Other_Security/2026-EW-LoRA.md)  
+  *Expert Systems With Applications, 2026*  
+  Citation: Lin, D., Li, Y., Tondi, B., Lin, K., Li, B., & Barni, M. “An Efficient Watermarking Method for Latent Diffusion Models via Low-Rank Adaptation and Dynamic Loss Weighting.” *Expert Systems With Applications*, vol. 331, Article 133172, 2026.  
+  Links: [Paper](https://doi.org/10.1016/j.eswa.2026.133172) 
 
 - [Spherical Watermark: Encryption-Free, Lossless Watermarking for Diffusion Models](./Other_Security/2026-Spherical-Watermark.md)  
   *International Conference on Learning Representations (ICLR), 2026*  
@@ -418,5 +423,3 @@
   *International Conference on Machine Learning (ICML), 2024*  
   Citation: Feng, W., Zhou, W., He, J., Zhang, J., Wei, T., Li, G., Zhang, T., Zhang, W., & Yu, N. “AquaLoRA: Toward White-box Protection for Customized Stable Diffusion Models via Watermark LoRA.” *Proceedings of the 41st International Conference on Machine Learning*, 2024.  
   Links: [Paper](https://proceedings.mlr.press/v235/feng24d.html) | [Code](https://github.com/Georgefwt/AquaLoRA)
-
-## Voice Agent

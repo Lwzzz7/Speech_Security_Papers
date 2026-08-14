@@ -73,10 +73,17 @@
 
 ### Post-hoc Watermarking
 
+#### 2026
+
+- [VocaLock: Watermark-Based Detection of Zero-Shot Voice Conversion Manipulation and Timbre Attribution](./Watermarking/post_hoc_watermarking/2026-VocaLock.md)  
+  *IEEE Transactions on Information Forensics and Security, 2026*  
+  Citation: Zhang, Y., Ye, D., Tondi, B., & Barni, M. “VocaLock: Watermark-Based Detection of Zero-Shot Voice Conversion Manipulation and Timbre Attribution.” *IEEE Transactions on Information Forensics and Security*, 2026.  
+  Links: [DOI](https://doi.org/10.1109/TIFS.2026.3723197) | Code: Not found
+
 #### 2025
 
-- [WMCodec: End-to-End Neural Speech Codec with Deep Watermarking for Authenticity Verification](./Watermarking/post_hoc_watermarking/2024-WMCodec.md)  
-  *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025*  
+- [WMCodec: End-to-End Neural Speech Codec with Deep Watermarking for Authenticity Verification](./Watermarking/post_hoc_watermarking/2025-WMCodec.md)  
+  *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025* 
   Citation: Zhou, J., Yi, J., Ren, Y., Tao, J., Wang, T., & Zhang, C. Y. “WMCodec: End-to-End Neural Speech Codec with Deep Watermarking for Authenticity Verification.” *ICASSP*, 2025.  
   Links: [Paper](https://arxiv.org/abs/2409.12121) | [Code](https://github.com/zjzser/WMCodec)
 
@@ -423,3 +430,5 @@
   *International Conference on Machine Learning (ICML), 2024*  
   Citation: Feng, W., Zhou, W., He, J., Zhang, J., Wei, T., Li, G., Zhang, T., Zhang, W., & Yu, N. “AquaLoRA: Toward White-box Protection for Customized Stable Diffusion Models via Watermark LoRA.” *Proceedings of the 41st International Conference on Machine Learning*, 2024.  
   Links: [Paper](https://proceedings.mlr.press/v235/feng24d.html) | [Code](https://github.com/Georgefwt/AquaLoRA)
+
+## 

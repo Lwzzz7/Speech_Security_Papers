@@ -51,7 +51,7 @@ VocaLock 的部署流程是：平台用 encoder $E(\cdot)$ 把用户水印嵌入
 
 多数 ZSVC 模型从 mel-spectrogram 或 SSL 表示中抽取目标音色。mel 本身来自 STFT，因此作者选择 STFT magnitude 作为水印载体，希望水印更接近音色相关谱包络，而不是易被重建过程抹掉的波形相位细节。对目标音频做 STFT：
 
-$$S_t,P_t=\operatorname{STFT}(x_t).$$
+$$S_t,P_t=\mathrm{STFT}(x_t).$$
 
 $S_t$ 是幅度谱，$P_t$ 是相位。VocaLock 只在幅度谱中嵌入水印，最后 ISTFT 时复用原相位。论文选择 $w_l=1024,h_l=256,f=1024$，理由是较高频率分辨率更能表示谐波和音色结构，同时提供更多冗余嵌入空间；窗口过短会绑定局部瞬态，容易被 VC 的内容重构破坏。
 
@@ -61,7 +61,7 @@ $$S^f_t=F_{SE}(F_{conv1}(S_t)).$$
 
 水印消息 $w_{ori}$ 先映射到 $\{-1,1\}$，经线性层投影到频谱维度，并沿时间轴复制，以获得时间不变性：
 
-$$W_t=\operatorname{Repeat}(F_{linear}(w_{ori}),T).$$
+$$W_t=\mathrm{Repeat}(F_{linear}(w_{ori}),T).$$
 
 随后通过卷积处理水印特征并与 STFT 特征拼接：
 
@@ -69,13 +69,13 @@ $$F_t=F_{conv2}(W_t)\oplus S^f_t.$$
 
 最终由卷积块输出水印幅度谱，并用原相位重建：
 
-$$x_{wm}=\operatorname{ISTFT}(F_{conv3}(F_t),P_t).$$
+$$x_{wm}=\mathrm{ISTFT}(F_{conv3}(F_t),P_t).$$
 
 ### 3.3 双解码器：同构网络，不同鲁棒性目标
 
 鲁棒解码器 $D_r$ 和半鲁棒解码器 $D_s$ 使用相同结构：输入音频先转 STFT magnitude，再经卷积块和 SENet 提取局部谱特征，随后压缩通道、时间平均池化，最后线性映射到水印长度：
 
-$$S^f_{wm}=F^{de}_{SE}(F^{de}_{conv1}(S_{wm})),\quad w_{de}=F_{linear}(\operatorname{mean}(F^{de}_{conv2}(S^f_{wm}))).$$
+$$S^f_{wm}=F^{de}_{SE}(F^{de}_{conv1}(S_{wm})),\quad w_{de}=F_{linear}(\mathrm{mean}(F^{de}_{conv2}(S^f_{wm}))).$$
 
 这里的平均池化很重要：它迫使水印从全局时间维度恢复，而不是依赖某个固定片段。对于 VC、crop、frame-level 改写等场景，过度依赖局部位置会降低泛化。
 
@@ -85,15 +85,15 @@ $$S^f_{wm}=F^{de}_{SE}(F^{de}_{conv1}(S_{wm})),\quad w_{de}=F_{linear}(\operator
 
 具体地，先从水印目标音频 $x_{wm}$ 和源音频 $x_s$ 提取 CPC 表示：
 
-$$cpc_{wm},cpc_s=\operatorname{CPC}(x_{wm},x_s).$$
+$$cpc_{wm},cpc_s=\mathrm{CPC}(x_{wm},x_s).$$
 
 再提取源音频的基频特征 $lf0_s$，送入 VC 模型生成伪造 mel：
 
-$$M^{st}_{wm}=\operatorname{VC}(cpc_{wm},cpc_s,lf0_s).$$
+$$M^{st}_{wm}=\mathrm{VC}(cpc_{wm},cpc_s,lf0_s).$$
 
 最后用 ParallelWaveGAN vocoder 得到伪造水印音频：
 
-$$x^{st}_{wm}=\operatorname{VOC}(M^{st}_{wm}).$$
+$$x^{st}_{wm}=\mathrm{VOC}(M^{st}_{wm}).$$
 
 “cross-domain”不是指嵌入和提取在不同域，而是指水印嵌入/提取在 STFT 域，训练失真由 CPC 表示域的 VC 产生。这样鲁棒解码器不能只记住某种 STFT 级扰动，而必须适配表示空间变化、音色/内容分离与重合成导致的结构性变化。
 
@@ -109,15 +109,15 @@ Stage 2 中采样比例为 clean:white-noise:low-pass = $0.4:0.3:0.3$。作者�
 
 Stage 1 的 fidelity loss 包含 waveform MSE 和 AudioSeal 风格的 TF-Loudness 感知损失：
 
-$$L_{mse}=\operatorname{MSE}(x_{wm},x_t).$$
+$$L_{mse}=\mathrm{MSE}(x_{wm},x_t).$$
 
-$$L_{TF}=\mathbb E_{b,m}\left[\operatorname{Softmax}\left(\frac{L^{(b,m)}_{noise}-L^{(b,m)}_{ref}}{\tau}\right)\cdot \operatorname{ReLU}(L^{(b,m)}_{noise}-L^{(b,m)}_{ref})\right].$$
+$$L_{TF}=\mathbb E_{b,m}\left[\mathrm{Softmax}\left(\frac{L^{(b,m)}_{noise}-L^{(b,m)}_{ref}}{\tau}\right)\cdot \mathrm{ReLU}(L^{(b,m)}_{noise}-L^{(b,m)}_{ref})\right].$$
 
 $$L_{en}(x_t,w_{ori})=L_{mse}+L_{TF}.$$
 
 鲁棒解码器既要从原水印音频中读出水印，也要从 VC 后音频中读出水印：
 
-$$L_{de}(x_t,w_{ori})=\operatorname{MSE}(D_r(x_{wm}),w_{ori})+\operatorname{MSE}(D_r(x^{st}_{wm}),w_{ori}).$$
+$$L_{de}(x_t,w_{ori})=\mathrm{MSE}(D_r(x_{wm}),w_{ori})+\mathrm{MSE}(D_r(x^{st}_{wm}),w_{ori}).$$
 
 Stage 1 总损失为：
 
@@ -127,11 +127,11 @@ $$L_{S1}(x_t,w_{ori})=\lambda_{en}L_{en}+\lambda_{de}L_{de}.$$
 
 Stage 2 冻结 encoder，鲁棒解码器同时看普通后处理和 VC：
 
-$$L_{S2}(x_t,w_{ori})=\operatorname{MSE}(D_r(\mathcal T(x_{wm})),w_{ori})+\operatorname{MSE}(D_r(x^{st}_{wm}),w_{ori}).$$
+$$L_{S2}(x_t,w_{ori})=\mathrm{MSE}(D_r(\mathcal T(x_{wm})),w_{ori})+\mathrm{MSE}(D_r(x^{st}_{wm}),w_{ori}).$$
 
 Stage 3 的半鲁棒解码器要实现“普通后处理能读、VC 后读不回原水印”。作者利用消息映射到 $\{-1,1\}$ 后再 sign 恢复的特点，构造全 1 pseudo watermark $w_p$，只作为 VC 输出的训练目标，不参与推理验证：
 
-$$L_{S3}(x_t,w_{ori},w_p)=\operatorname{MSE}(D_s(x^{st}_{wm}),w_p)+\operatorname{MSE}(D_s(\mathcal T(x_{wm})),w_{ori}).$$
+$$L_{S3}(x_t,w_{ori},w_p)=\mathrm{MSE}(D_s(x^{st}_{wm}),w_p)+\mathrm{MSE}(D_s(\mathcal T(x_{wm})),w_{ori}).$$
 
 这个设计比简单把 VC 后输出推向 0 更有效。因为最终 bit 由符号决定，数值靠近 0 仍可能保留正确符号；推向全 1 会系统性破坏原始随机水印的 bitwise 恢复，使 VC 后准确率接近 0.5。
 

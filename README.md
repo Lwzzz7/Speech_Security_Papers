@@ -362,6 +362,11 @@
   Citation: Zhai, L., Shang, X., Zhang, L., & Hu, P. “A Distortion-minimization Watermarking Framework for Large Language Models: Larger Capacity, Stronger Robustness and Higher Quality.” *USENIX Security Symposium*, 2026.  
   Links: [Paper](https://www.usenix.org/conference/usenixsecurity26/presentation/zhai) 
 
+- [ROBIN++: Unified Copyright Protection and Tamper Localization for Diffusion Models via Dual-Domain Synergistic Watermarking](./Other_Security/2026-ROBIN++.md)  
+  *IEEE Transactions on Pattern Analysis and Machine Intelligence, 2026*  
+  Citation: Huang, H., Zeng, S., Wang, Q., Du, B., & Wu, Y. “ROBIN++: Unified Copyright Protection and Tamper Localization for Diffusion Models via Dual-Domain Synergistic Watermarking.” *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2026.  
+  Links: [DOI](https://doi.org/10.1109/TPAMI.2026.3723036) | [Code](https://github.com/Hannah1102/ROBIN) 
+
 - [DeepForgeSeal: Latent Space-Driven Semi-Fragile Watermarking for Deepfake Detection Using Adversarial Reinforcement Learning](./Other_Security/2026-DeepForgeSeal.md)  
   *IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2026*  
   Citation: Fernando, T., Fookes, C., & Sridharan, S. “DeepForgeSeal: Latent Space-Driven Semi-Fragile Watermarking for Deepfake Detection Using Adversarial Reinforcement Learning.” *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2026.  

@@ -36,23 +36,25 @@ h) 与后文关系：频域中低频注入对应版权鲁棒性；CAP 高频空�
 
 ROBIN++ 分成三个阶段。
 
-第一阶段是离线优化。给定扩散模型 $\epsilon_\theta$、VAE 编解码器、训练图像/提示词集合，先优化频域版权水印 $w^*_{id}$ 和隐藏 prompt guidance $w^*_p$。$w^*_{id}$ 负责强版权认证，$w^*_p$ 负责让扩散模型吸收频域扰动、减小视觉伪影。随后训练 Content-Aware Perturbation 生成器 $G_{loc}$ 和定位检测器 $D_{loc}$，用于空间域定位水印。
+第一阶段是离线优化。给定扩散模型 $\epsilon_\theta$、VAE 编解码器、训练图像/提示词集合，先优化频域版权水印 $w^{\ast}*{id}$ 和隐藏 prompt guidance $w^{\ast}*p$。$w^{\ast}*{id}$ 负责强版权认证，$w^{\ast}*p$ 负责让扩散模型吸收频域扰动、减小视觉伪影。随后训练 Content-Aware Perturbation 生成器 $G*{loc}$ 和定位检测器 $D*{loc}$，用于空间域定位水印。
 
-第二阶段是在线生成。扩散采样从 $z_T$ 开始正常去噪；到注入 timestep $t_{inj}$ 时，在 latent 的频域 mask $\Omega$ 内嵌入 $w^*_{id}$；之后用原 prompt 和 $w^*_p$ 共同引导继续去噪。到最终 latent $z^*_0$ 后，$G_{loc}$ 根据内容生成脆弱定位扰动 $w_{loc}$，得到 $z_w=z^*_0+w_{loc}$，再经 VAE decoder 输出水印图像 $x_w$。
+第二阶段是在线生成。扩散采样从 $z_T$ 开始正常去噪；到注入 timestep $t_{inj}$ 时，在 latent 的频域 mask $\Omega$ 内嵌入 $w^{\ast}_{id}$；之后用原 prompt 和 $w^{\ast}*p$ 共同引导继续去噪。到最终 latent $z^{\ast}*0$ 后，$G*{loc}$ 根据内容生成脆弱定位扰动 $w*{loc}$，得到 $z_w=z^{\ast}*0+w*{loc}$，再经 VAE decoder 输出水印图像 $x_w$。
 
 第三阶段是验证。版权分支对可疑图像 $\hat{x}$ 做 DDIM inversion，回到注入 timestep 的 latent，再从频域 mask 中提取 $\hat{w}_{id}$ 并与参考水印比较。定位分支用 RGB + FFT 双分支 U-Net 预测篡改概率图 $\hat{P}$ 和 mask $\hat{M}$。如果检测到篡改，S2F refinement 把 latent 中被 mask 标记的污染区域替换为 intact 区域统计量，再进行频域版权提取，以降低局部篡改对全局认证的污染。
 
 ### 3.2 Task Definition：双信号、三种验证状态
 
-论文将干净生成图记为 $x\in R^{H\times W\times C}$，目标是注入两个信号：鲁棒版权水印 $w_{id}$ 和脆弱定位水印 $w_{loc}$。组合注入函数为：
+论文将干净生成图记为 $x\in\mathbb{R}^{H\times W\times C}$，目标是注入两个信号：鲁棒版权水印 $w_{id}$ 和脆弱定位水印 $w_{loc}$。组合注入函数为：
 
 $$x_w=I(x,w_{id},w_{loc}).$$
 
 传播过程被建模为复合退化：
 
-$$\hat{x}=T(x_w),\quad T=T_{benign}\circ T_{tamper}.$$
+$$\hat{x}=T(x_w),\qquad T=T_{benign}\circ T_{tamper}.$$
 
-$T_{benign}$ 对应压缩、缩放、模糊等全局变换；$T_{tamper}$ 对应 inpainting、splicing 等局部恶意篡改。验证器包含版权提取器 $D_{id}$ 和定位器 $D_{loc}$。系统判决分三类：若 $\hat{w}_{id}=w_{id}$ 且 $\hat{M}=0$，则 authentic & intact；若 $\hat{w}_{id}=w_{id}$ 且 $\hat{M}\ne0$，则 authentic & tampered；若 $\hat{w}_{id}$ 与 $w_{id}$ 距离超过阈值 0.5，则 unverified or destroyed。
+$T_{benign}$ 对应压缩、缩放、模糊等全局变换；$T_{tamper}$ 对应 inpainting、splicing 等局部恶意篡改。验证器包含版权提取器 $D_{id}$ 和定位器 $D_{loc}$。
+
+系统判决分三类：若 $\hat{w}*{id}=w*{id}$ 且 $\hat{M}=0$，则 authentic & intact；若 $\hat{w}*{id}=w*{id}$ 且 $\hat{M}\neq0$，则 authentic & tampered；若 $\hat{w}*{id}$ 与 $w*{id}$ 的距离超过阈值 $0.5$，则 unverified or destroyed。
 
 ### 3.3 Dual-Domain Injection：频域版权水印与空间定位水印分开注入
 
@@ -60,97 +62,117 @@ $T_{benign}$ 对应压缩、缩放、模糊等全局变换；$T_{tamper}$ 对应
 
 频域嵌入形式为：
 
-$$z^{\ast}_{t_{inj}}=\mathrm{FreqEmbed}(z_{t_{inj}},w^*_{id},\Omega).$$
+$$z^{\ast}*{t*{inj}}=\mathrm{FreqEmbed}\left(z_{t_{inj}},w^{\ast}_{id},\Omega\right).$$
 
 $\Omega$ 是频域 mask，默认覆盖 70% 频域，集中在中低频。中低频比纯高频更抗 JPEG、blur、noise 和部分重建攻击，但如果覆盖过大又会影响生成质量。
 
 注入后去噪使用带 prompt guidance 的噪声预测：
 
-$$\hat{\epsilon}_{\theta}(z^*_t,t,\psi(p),w^*_p)=\eta_1\epsilon_{\theta}(z^*_t,t,\psi(p))+\eta_2\epsilon_{\theta}(z^*_t,t,w^*_p)+(1-\eta_1-\eta_2)\epsilon_{\theta}(z^*_t,t,\varnothing).$$
+$$\hat{\epsilon}_{\theta}\left(z^{\ast}_t,t,\psi(p),w^{\ast}*p\right)=\eta_1\epsilon*{\theta}\left(z^{\ast}*t,t,\psi(p)\right)+\eta_2\epsilon*{\theta}\left(z^{\ast}_t,t,w^{\ast}*p\right)+\left(1-\eta_1-\eta_2\right)\epsilon*{\theta}\left(z^{\ast}_t,t,\varnothing\right).$$
 
-这里 $w^*_p$ 不是文本语义 prompt，而是离线优化得到的隐藏 guidance 信号。它的作用是让模型在后续去噪中把 $w^*_{id}$ 融入图像，而不是留下明显伪影。
+这里 $w^{\ast}*p$ 不是文本语义 prompt，而是离线优化得到的隐藏 guidance 信号。它的作用是让模型在后续去噪中把 $w^{\ast}*{id}$ 融入图像，而不是留下明显伪影。
 
 定位水印注入在最终 latent：
 
-$$z_w=z^*_0+w_{loc}=z^*_0+G_{loc}(z^*_0).$$
+$$z_w=z^{\ast}*0+w*{loc}=z^{\ast}*0+G*{loc}\left(z^{\ast}_0\right).$$
 
-这样做的理由是定位水印要求严格空间对齐。若在扩散轨迹中太早注入，随机去噪会破坏像素/latent 对应关系；放在 $z^*_0$ 后再经 VAE decoder，相当于用 decoder 将局部 latent 扰动上采样到局部像素邻域，使其对局部编辑敏感。
+这样做的理由是定位水印要求严格空间对齐。若在扩散轨迹中太早注入，随机去噪会破坏像素/latent 对应关系；放在 $z^{\ast}_0$ 后再经 VAE decoder，相当于用 decoder 将局部 latent 扰动上采样到局部像素邻域，使其对局部编辑敏感。
 
 ### 3.4 Adversarial Optimization：同时优化强水印和隐藏 guidance
 
-离线优化阶段同时求 $w^*_{id}$ 和 $w^*_p$。$w_p$ 的目标是保持图像，$w_{id}$ 的目标是在图像保持约束下尽量增强水印幅度。图像保持损失为：
+离线优化阶段同时求 $w^{\ast}_{id}$ 和 $w^{\ast}*p$。$w_p$ 的目标是保持图像，$w*{id}$ 的目标是在图像保持约束下尽量增强水印幅度。
 
-$$L_{ret}=\mathrm{MSE}(x'^*_0,x_0).$$
+图像保持损失为：
 
-其中 $x'^*_0$ 是由带水印 latent 和 guidance 预测出的最终图像：
+$$L_{ret}=\operatorname{MSE}\left(x_0^{\prime\ast},x_0\right).$$
 
-$$x'^*_0=\mathrm{Dec}\left(\frac{z^*_t-\sqrt{1-\bar{\alpha}_t}\epsilon_\theta(z^*_t,t,\psi(p),w_p)}{\sqrt{\bar{\alpha}_t}}\right).$$
+其中 $x_0^{\prime\ast}$ 是由带水印 latent 和 guidance 预测出的最终图像：
+
+$$x_0^{\prime\ast}=\mathrm{Dec}\left(\frac{z^{\ast}_t-\sqrt{1-\bar{\alpha}*t},\epsilon*{\theta}\left(z^{\ast}_t,t,\psi(p),w_p\right)}{\sqrt{\bar{\alpha}_t}}\right).$$
 
 为了避免 $w_p$ guidance 过强导致 DDIM inversion 误差增大，作者加入约束项：
 
-$$L_{cons}=\mathrm{MSE}(\epsilon_\theta(z^*_t,t,w_p)-\epsilon_\theta(z^*_t,t,\psi(\varnothing))).$$
+$$L_{cons}=\operatorname{MSE}\left(\epsilon_{\theta}\left(z^{\ast}*t,t,w_p\right),\epsilon*{\theta}\left(z^{\ast}_t,t,\psi(\varnothing)\right)\right).$$
 
 最终两个优化目标为：
 
 $$L_{w_p}=\alpha L_{ret}+\beta L_{cons}.$$
 
-$$L_{w_{id}}=\alpha L_{ret}+\beta L_{cons}-\lambda\|w_{id}\|.$$
+$$L_{w_{id}}=\alpha L_{ret}+\beta L_{cons}-\lambda\left|w_{id}\right|_2.$$
 
-注意 $w_{id}$ 的目标中有负的强度项 $-\lambda\|w_{id}\|$，所以优化会在视觉保持与 inversion 约束允许的范围内把水印做强。算法采用 alternating optimization：固定一个变量更新另一个变量，而不是一次性联合更新。
+注意 $w_{id}$ 的目标中有负的强度项 $-\lambda\left|w_{id}\right|_2$，所以优化会在视觉保持与 inversion 约束允许的范围内把水印做强。算法采用 alternating optimization：固定一个变量更新另一个变量，而不是一次性联合更新。
 
 ### 3.5 CAP Generator：内容感知的空间脆弱扰动
 
-CAP 的任务不是做鲁棒水印，而是让局部空间变化能被检测出来。$G_{loc}$ 是轻量 CNN，输入最终 latent $z^*_0$，输出 residual $w_{loc}$。论文强调 content-aware 的原因是不同图像区域纹理、边缘、平坦度不同，统一强度扰动容易在平坦区域可见，或在复杂区域检测不到；根据内容自适应调制扰动强度能同时提高隐蔽性和可检测性。
+CAP 的任务不是做鲁棒水印，而是让局部空间变化能被检测出来。$G_{loc}$ 是轻量 CNN，输入最终 latent $z^{\ast}*0$，输出 residual $w*{loc}$。
 
-为了不干扰中低频版权水印，作者对 $w_{loc}$ 施加 high-pass filtering，使其能量主要集中在高频。质量约束为：
+论文强调 content-aware 的原因是不同图像区域纹理、边缘、平坦度不同，统一强度扰动容易在平坦区域可见，或在复杂区域检测不到；根据内容自适应调制扰动强度能同时提高隐蔽性和可检测性。
 
-$$L_{qual}=\|\mathrm{Dec}(z_w)-\mathrm{Dec}(z^*_0)\|^2_2+\gamma\cdot\mathrm{LPIPS}(\mathrm{Dec}(z_w),\mathrm{Dec}(z^*_0)).$$
+为了不干扰中低频版权水印，作者对 $w_{loc}$ 施加 high-pass filtering，使其能量主要集中在高频。
+
+质量约束为：
+
+$$L_{qual}=\left|\mathrm{Dec}(z_w)-\mathrm{Dec}\left(z^{\ast}_0\right)\right|_2^2+\gamma\cdot\mathrm{LPIPS}\left(\mathrm{Dec}(z_w),\mathrm{Dec}\left(z^{\ast}_0\right)\right).$$
 
 这里第一项控制像素差异，LPIPS 控制感知差异。论文设置 $\gamma=1$，并用扰动预算 $\xi=0.5$ 防止定位水印过强。
 
 ### 3.6 Self-Supervised Splicing：不用人工篡改标注训练定位器
 
-定位器训练需要“被篡改区域”的 mask。ROBIN++ 不依赖人工标注篡改数据，而是构造 hard negative splicing。先生成带定位水印图：
+定位器训练需要“被篡改区域”的 mask。ROBIN++ 不依赖人工标注篡改数据，而是构造 hard negative splicing。
 
-$$x_w=\mathrm{Dec}(z_w),\quad x^*_0=\mathrm{Dec}(z^*_0).$$
+先生成带定位水印图：
 
-然后采样随机二值 mask $M\in\{0,1\}^{H\times W}$，把一部分区域替换为不含定位水印的对应图像：
+$$x_w=\mathrm{Dec}(z_w),\qquad x^{\ast}_0=\mathrm{Dec}\left(z^{\ast}_0\right).$$
 
-$$x_{spliced}=M\odot x^*_0+(1-M)\odot x_w.$$
+然后采样随机二值 mask：
 
-在这个定义里，$M$ 表示 fragile localization watermark 被移除/替换的篡改区域，$(1-M)$ 区域仍带定位水印。由于 $x_w$ 与 $x^*_0$ 视觉上几乎相同，splicing 边界非常隐蔽，检测器不能依赖明显颜色或语义伪影，只能学习定位水印被破坏的内在信号。这比直接用真实 inpainting 数据训练更符合“主动水印定位”的逻辑。
+$$M\in{0,1}^{H\times W}.$$
+
+把一部分区域替换为不含定位水印的对应图像：
+
+$$x_{spliced}=M\odot x^{\ast}_0+(1-M)\odot x_w.$$
+
+在这个定义里，$M$ 表示 fragile localization watermark 被移除或替换的篡改区域，$(1-M)$ 区域仍带定位水印。
+
+由于 $x_w$ 与 $x^{\ast}_0$ 视觉上几乎相同，splicing 边界非常隐蔽，检测器不能依赖明显颜色或语义伪影，只能学习定位水印被破坏的内在信号。这比直接用真实 inpainting 数据训练更符合“主动水印定位”的逻辑。
 
 ### 3.7 Dual-Branch Synergistic Detector：RGB 空间分支 + FFT 频域分支
 
 $D_{loc}$ 采用 U-Net 风格结构，encoder 有两个分支。空间分支处理 RGB 图像，用于捕获局部不连续、边界和纹理异常；频率分支处理 FFT-based spectral features，用鲁棒版权水印的频域一致性作为全局锚点。两个分支特征 concat 后送入 decoder，输出像素级篡改概率：
 
-$$\hat{P}=D_{loc}(x_{spliced}),\quad \hat{M}=1(\hat{P}>\tau_{loc}).$$
+$$\hat{P}=D_{loc}(x_{spliced}),\qquad \hat{M}=\mathbf{1}\left(\hat{P}>\tau_{loc}\right).$$
 
 F2S synergy 的实际含义是：JPEG、blur、noise 这类全局良性退化会改变整张图，但不应产生局部篡改 mask；局部 inpainting 会破坏空间/频谱局部一致性，应该被定位。频域分支提供“全局水印仍在”的先验，让定位器不把全局压缩误判成局部攻击。
 
 定位损失结合 BCE 和 Dice：
 
-$$L_{seg}(\hat{M},M)=\lambda_{bce}L_{bce}(\hat{M},M)+\lambda_{dice}L_{dice}(\hat{M},M).$$
+$$L_{seg}\left(\hat{M},M\right)=\lambda_{bce}L_{bce}\left(\hat{M},M\right)+\lambda_{dice}L_{dice}\left(\hat{M},M\right).$$
 
-$$L_{bce}(\hat{M},M)=-\frac{1}{HW}\sum_i\sum_j\left[M_{i,j}\log(\hat{M}_{i,j})+(1-M_{i,j})\log(1-\hat{M}_{i,j})\right].$$
+$$L_{bce}\left(\hat{M},M\right)=-\frac{1}{HW}\sum_i\sum_j\left[M_{i,j}\log\hat{M}*{i,j}+(1-M*{i,j})\log\left(1-\hat{M}_{i,j}\right)\right].$$
 
-$$L_{dice}(\hat{M},M)=1-\frac{2\sum_{i,j}(M_{i,j}\hat{M}_{i,j})+\epsilon}{\sum_{i,j}M_{i,j}+\sum_{i,j}\hat{M}_{i,j}+\epsilon}.$$
+$$L_{dice}\left(\hat{M},M\right)=1-\frac{2\sum_{i,j}\left(M_{i,j}\hat{M}*{i,j}\right)+\epsilon}{\sum*{i,j}M_{i,j}+\sum_{i,j}\hat{M}_{i,j}+\epsilon}.$$
 
 总训练目标为：
 
-$$L_{loc}=\lambda_{seg}L_{seg}(\hat{M},M)+\lambda_{qual}L_{qual}.$$
+$$L_{loc}=\lambda_{seg}L_{seg}\left(\hat{M},M\right)+\lambda_{qual}L_{qual}.$$
 
-论文设置 $\epsilon=1e-5$，$\lambda_{bce}=0.2$，$\lambda_{dice}=0.8$，$\lambda_{seg}=\lambda_{qual}=1$。
+论文设置：
+
+$$\epsilon=10^{-5},\qquad \lambda_{bce}=0.2,\qquad \lambda_{dice}=0.8,\qquad \lambda_{seg}=\lambda_{qual}=1.$$
 
 ### 3.8 Watermark Validation：DDIM 反演认证与 S2F 修正
 
-版权认证时，验证器对 $\hat{x}$ 做 DDIM inversion，恢复注入 timestep 的 latent $\hat{z}_{t_{inj}}$。由于 blind verification 中原 prompt 通常不可用，论文按前人做法使用 null-text embedding，guidance scale 为 1.0。随后在 $\Omega$ 内提取频谱水印 $\hat{w}_{id}$，用归一化 L1 距离判断：
+版权认证时，验证器对 $\hat{x}$ 做 DDIM inversion，恢复注入 timestep 的 latent $\hat{z}*{t*{inj}}$。由于 blind verification 中原 prompt 通常不可用，论文按前人做法使用 null-text embedding，guidance scale 为 $1.0$。
 
-$$D(w_{id},\hat{w}_{id})=\frac{1}{|\Omega|}\sum_{k\in\Omega}|w^k_{id}-\hat{w}^k_{id}|\le\tau_i.$$
+随后在 $\Omega$ 内提取频谱水印 $\hat{w}_{id}$，用归一化 L1 距离判断：
 
-如果图像有局部篡改，直接反演会让污染区域在频域中扩散，导致版权认证误判。S2F refinement 用定位 mask 引导 latent 修正。先把像素 mask 下采样为 latent mask $\hat{M}_z$，再用未篡改区域的空间平均特征 $\bar{z}_{intact}$ 替换被篡改区域：
+$$D\left(w_{id},\hat{w}*{id}\right)=\frac{1}{|\Omega|}\sum*{k\in\Omega}\left|w^k_{id}-\hat{w}^k_{id}\right|\le\tau_i.$$
 
-$$\tilde{z}^{(i,j)}_0=\hat{z}^{(i,j)}_0\ (\hat{M}^{(i,j)}_z=0),\quad \tilde{z}^{(i,j)}_0=\bar{z}_{intact}\ (\hat{M}^{(i,j)}_z=1).$$
+如果图像有局部篡改，直接反演会让污染区域在频域中扩散，导致版权认证误判。S2F refinement 用定位 mask 引导 latent 修正。
+
+先把像素 mask 下采样为 latent mask $\hat{M}*z$，再用未篡改区域的空间平均特征 $\bar{z}*{intact}$ 替换被篡改区域：
+
+$$\tilde{z}^{(i,j)}_0=\begin{cases}\hat{z}^{(i,j)}_0,&\hat{M}^{(i,j)}*z=0,[4pt]\bar{z}*{intact},&\hat{M}^{(i,j)}_z=1.\end{cases}$$
 
 作者选择 mean filling 而不是 zero filling，是为了避免人为产生高频边缘，进一步污染频域水印。这个步骤就是 Spatial-to-Frequency：空间定位结果反过来提高频域版权验证。
 

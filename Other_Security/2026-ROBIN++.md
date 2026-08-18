@@ -60,7 +60,7 @@ $T_{benign}$ 对应压缩、缩放、模糊等全局变换；$T_{tamper}$ 对应
 
 频域嵌入形式为：
 
-$$z^*_{t_{inj}}=\mathrm{FreqEmbed}(z_{t_{inj}},w^*_{id},\Omega).$$
+$$z^{\ast}_{t_{inj}}=\mathrm{FreqEmbed}(z_{t_{inj}},w^*_{id},\Omega).$$
 
 $\Omega$ 是频域 mask，默认覆盖 70% 频域，集中在中低频。中低频比纯高频更抗 JPEG、blur、noise 和部分重建攻击，但如果覆盖过大又会影响生成质量。
 

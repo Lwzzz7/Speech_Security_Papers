@@ -387,6 +387,11 @@
   Citation: Hu, X., Jin, J., Li, S., Peng, W., Zhang, X., & Qian, Z. “Spherical Watermark: Encryption-Free, Lossless Watermarking for Diffusion Models.” *Proceedings of the International Conference on Learning Representations*, 2026.  
   Links: [Paper](https://openreview.net/) 
   
+- [MOLM: Mixture of LoRA Markers](./Other_Security/2026-MOLM.md)  
+  *International Conference on Learning Representations (ICLR), 2026*  
+  Citation: Fares, S., Tastan, N., Hussein, N. H., & Nandakumar, K. “MOLM: Mixture of LoRA Markers.” *The Fourteenth International Conference on Learning Representations*, 2026.  
+  Links: [Paper](https://openreview.net/forum?id=1fYQOZovHR) | [Code](https://github.com/Samar-Fares/MOLM-Watermark)
+  
 - [Learning to Watermark in the Latent Space of Generative Models (DistSeal)](./Other_Security/2026-DistSeal.md)  
   *International Conference on Machine Learning (ICML), 2026*   
   Citation: Rebuffi, S.-A., Tran, T., Lacatusu, V., Fernandez, P., Souček, T., Jovanović, N., Sander, T., Elsahar, H., & Mourachko, A. “Learning to Watermark in the Latent Space of Generative Models.” *arXiv preprint arXiv:2601.16140*, 2026.  

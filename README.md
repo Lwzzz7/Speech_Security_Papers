@@ -78,7 +78,12 @@
 - [VocaLock: Watermark-Based Detection of Zero-Shot Voice Conversion Manipulation and Timbre Attribution](./Watermarking/post_hoc_watermarking/2026-VocaLock.md)  
   *IEEE Transactions on Information Forensics and Security, 2026*  
   Citation: Zhang, Y., Ye, D., Tondi, B., & Barni, M. “VocaLock: Watermark-Based Detection of Zero-Shot Voice Conversion Manipulation and Timbre Attribution.” *IEEE Transactions on Information Forensics and Security*, 2026.  
-  Links: [DOI](https://doi.org/10.1109/TIFS.2026.3723197) | Code: Not found
+  Links: [Paper](https://doi.org/10.1109/TIFS.2026.3723197)
+  
+- [When Unlearnable Examples Cooperate With Watermarking: A Dual Voice Data Protection Against Unauthorized Exploitation](./Watermarking/post_hoc_watermarking/2026-Volto.md)  
+  *IEEE Transactions on Dependable and Secure Computing, 2026*  
+  Citation: Ge, Y., Gu, R., Liu, Y., Zhao, L., Du, B., & Wang, Q. “When Unlearnable Examples Cooperate With Watermarking: A Dual Voice Data Protection Against Unauthorized Exploitation.” *IEEE Transactions on Dependable and Secure Computing*, vol. 23, no. 3, pp. 4652–4669, 2026.  
+  Links: [Paper](https://doi.org/10.1109/TDSC.2025.3648349)
 
 #### 2025
 
@@ -365,7 +370,7 @@
 - [ROBIN++: Unified Copyright Protection and Tamper Localization for Diffusion Models via Dual-Domain Synergistic Watermarking](./Other_Security/2026-ROBIN++.md)  
   *IEEE Transactions on Pattern Analysis and Machine Intelligence, 2026*  
   Citation: Huang, H., Zeng, S., Wang, Q., Du, B., & Wu, Y. “ROBIN++: Unified Copyright Protection and Tamper Localization for Diffusion Models via Dual-Domain Synergistic Watermarking.” *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2026.  
-  Links: [DOI](https://doi.org/10.1109/TPAMI.2026.3723036) | [Code](https://github.com/Hannah1102/ROBIN) 
+  Links: [Paper](https://doi.org/10.1109/TPAMI.2026.3723036) | [Code](https://github.com/Hannah1102/ROBIN) 
 
 - [DeepForgeSeal: Latent Space-Driven Semi-Fragile Watermarking for Deepfake Detection Using Adversarial Reinforcement Learning](./Other_Security/2026-DeepForgeSeal.md)  
   *IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2026*  

@@ -4,11 +4,70 @@
 
 ## 快速导航
 
+- [智能体水印](#agent-watermarking)
 - [语音水印](#speech-watermarking)：[生成式水印](#generative-watermarking) ｜ [后处理水印](#post-hoc-watermarking)
 - [语音隐写](#steganography)：主要集中于生成式隐写
 - [对抗样本](#adversarial-examples)：面向语音合成与音频大模型的攻击和防护
 - [越狱](#jailbreak)：音频大语言模型越狱攻击、红队评测与基准
 - [Other Security](#other-security)：有意思的论文（主要来自四大会及各顶会顶刊）
+
+## Agent Watermarking
+
+- [AuxMark: Defending Against Unauthorized Agent Distillation via Auxiliary Behavioral Watermarking](./Agent_Watermarking/2026-AuxMark.md)  
+  *arXiv preprint arXiv:2609.34597, 2026*  
+  Citation: Feng, Y., Feng, H., Shang, S., Zhang, X., Lou, J., Zhao, H., & Zhou, M. “AuxMark: Defending Against Unauthorized Agent Distillation via Auxiliary Behavioral Watermarking.” *arXiv preprint arXiv:2609.34597*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2609.34597) | [Code](https://github.com/qx041609/Auxmark) | [Models](https://huggingface.co/AuxMark/AuxMark/tree/main)
+
+- [LoRo-Mark: Provably Lossless And Robust Agent Watermarking](./Agent_Watermarking/2026-LoRo-Mark.md)  
+  *arXiv preprint arXiv:2609.34080, 2026*  
+  Citation: Zou, H., Wang, Y., Yao, J., Zhang, W., & Fang, H. “LoRo-Mark: Provably Lossless And Robust Agent Watermarking.” *arXiv preprint arXiv:2609.34080*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2609.34080)
+
+- [TrajMark: Ownership Attribution and Segment-Level Tamper Localization for Coding-Agent Trajectories](./Agent_Watermarking/2026-TrajMark.md)  
+  *arXiv preprint arXiv:2609.10416, 2026*  
+  Citation: Zeng, B., Gao, Z., Li, X., Feng, X., & Jiang, J. “TrajMark: Ownership Attribution and Segment-Level Tamper Localization for Coding-Agent Trajectories.” *arXiv preprint arXiv:2609.10416*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2609.10416)
+
+- [TRACE: A Two-Channel Robust Attribution Watermark via Complementary Embeddings for LLM-Agent Trajectories](./Agent_Watermarking/2026-TRACE.md)  
+  *arXiv preprint arXiv:2607.08400, 2026*  
+  Citation: Gao, Z., Li, X., Feng, X., Jiang, J., Song, Y., Sui, Y., Xing, Z., & Zhu, L. “TRACE: A Two-Channel Robust Attribution Watermark via Complementary Embeddings for LLM-Agent Trajectories.” *arXiv preprint arXiv:2607.08400*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2607.08400) | [Project & Demo](https://github.com/ZhengGao-30/TRACE)
+
+- [RedAct: Redacting Agent Capability Traces for Procedural Skill Protection](./Agent_Watermarking/2026-RedAct.md)  
+  *arXiv preprint arXiv:2606.10813, 2026*  
+  Citation: Xu, S., He, Z., & Fung, Y. R. “RedAct: Redacting Agent Capability Traces for Procedural Skill Protection.” *arXiv preprint arXiv:2606.10813*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2606.10813) | [Code](https://github.com/XuShuwenn/RedAct)
+
+- [MemMark: State-Evolution Attribution Watermarking for Agent Long-Term Memory Systems](./Agent_Watermarking/2026-MemMark.md)  
+  *Findings of the Association for Computational Linguistics: EMNLP, 2026*  
+  Citation: Zhang, H., Mao, X., Dong, G., Li, Z., Su, X., Chen, K., Yang, J., & Lin, Z. “MemMark: State-Evolution Attribution Watermarking for Agent Long-Term Memory Systems.” *Findings of the Association for Computational Linguistics: EMNLP*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2605.25002)
+
+- [Sequential Behavioral Watermarking for LLM Agents](./Agent_Watermarking/2026-SeqWM.md)  
+  *arXiv preprint arXiv:2605.11036, 2026*  
+  Citation: An, H., Park, S., Kim, D., & Han, Y.-S. “Sequential Behavioral Watermarking for LLM Agents.” *arXiv preprint arXiv:2605.11036*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2605.11036) | [Code](https://github.com/hsannn/seqwm)
+
+- [Watermarking LLM Agent Trajectories](./Agent_Watermarking/2026-ACTHOOK.md)  
+  *International Conference on Machine Learning (ICML), 2026*  
+  Citation: Meng, W., Gong, C., Zhuo, T. Y., Zhang, F., Li, K., Liu, Z., Yang, Z., Wei, C., & Chen, W. “Watermarking LLM Agent Trajectories.” *Proceedings of the International Conference on Machine Learning*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2602.18700) | [Code](https://github.com/meng-wenlong/AgentWmk)
+
+- [On Protecting Agentic Systems' Intellectual Property via Watermarking](./Agent_Watermarking/2026-AGENTWM.md)  
+  *arXiv preprint arXiv:2602.08401, 2026*  
+  Citation: Wang, L., Li, Z., Xie, Y., Wang, S., She, D., Wang, W., & Rahmel, J. “On Protecting Agentic Systems' Intellectual Property via Watermarking.” *arXiv preprint arXiv:2602.08401*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2602.08401)
+
+- [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Agent_Watermarking/2026-AgentMark.md)  
+  *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
+  Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the Annual Meeting of the Association for Computational Linguistics*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2601.03294) | [Code](https://github.com/Tooooa/AgentMark)
+
+- [Agent Guide: A Simple Agent Behavioral Watermarking Framework](./Agent_Watermarking/2025-Agent-Guide.md)  
+  *arXiv preprint arXiv:2504.05871, 2025*  
+  Citation: Huang, K., Zhang, Z., Yang, Z., & Zhou, L. “Agent Guide: A Simple Agent Behavioral Watermarking Framework.” *arXiv preprint arXiv:2504.05871*, 2025.  
+  Links: [Paper](https://arxiv.org/abs/2504.05871)
+
 
 ## Speech Watermarking
 
@@ -79,7 +138,7 @@
   *IEEE Transactions on Information Forensics and Security, 2026*  
   Citation: Zhang, Y., Ye, D., Tondi, B., & Barni, M. “VocaLock: Watermark-Based Detection of Zero-Shot Voice Conversion Manipulation and Timbre Attribution.” *IEEE Transactions on Information Forensics and Security*, 2026.  
   Links: [Paper](https://doi.org/10.1109/TIFS.2026.3723197)
-  
+
 - [When Unlearnable Examples Cooperate With Watermarking: A Dual Voice Data Protection Against Unauthorized Exploitation](./Watermarking/post_hoc_watermarking/2026-Volto.md)  
   *IEEE Transactions on Dependable and Secure Computing, 2026*  
   Citation: Ge, Y., Gu, R., Liu, Y., Zhao, L., Du, B., & Wang, Q. “When Unlearnable Examples Cooperate With Watermarking: A Dual Voice Data Protection Against Unauthorized Exploitation.” *IEEE Transactions on Dependable and Secure Computing*, vol. 23, no. 3, pp. 4652–4669, 2026.  
@@ -183,6 +242,7 @@
   *IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2024*  
   Citation: Tong, C., Natgunanathan, I., Xiang, Y., Li, J., Zong, T., Zheng, X., & Gao, L. “Enhancing Robustness of Speech Watermarking Using a Transformer-Based Framework Exploiting Acoustic Features.” *IEEE/ACM Transactions on Audio, Speech, and Language Processing*, 32, 4822–4837, 2024.  
   Links: [Paper](https://doi.org/10.1109/TASLP.2024.3486206)
+
 #### 2023
 
 - [AudioQR: Deep Neural Audio Watermarks for QR Code](./Watermarking/post_hoc_watermarking/2023-AudioQR.md)  
@@ -284,12 +344,14 @@
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2024*  
   Citation: Chen, S., Chen, L., Zhang, J., Lee, K. A., Ling, Z., & Dai, L. “Adversarial Speech for Voice Privacy Protection from Personalized Speech Generation.” *ICASSP 2024*, 2024.  
   Links: [Paper](https://arxiv.org/abs/2401.11857) | [Audio Demo](https://voiceprivacy.github.io/Adeversarial-Speech-with-YourTTS)
+
 ### 2023
 
 - [VSMask: Defending Against Voice Synthesis Attack via Real-Time Predictive Perturbation](./Adversarial_Examples/2023-VSMask.md)  
   *ACM Conference on Security and Privacy in Wireless and Mobile Networks (WiSec), 2023*  
   Citation: Wang, Y., Guo, H., Wang, G., Chen, B., & Yan, Q. “VSMask: Defending Against Voice Synthesis Attack via Real-Time Predictive Perturbation.” *WiSec 2023*, 2023.  
   Links: [Paper](https://doi.org/10.1145/3558482.3590189)
+
 ### 2021
 
 - [Defending Your Voice: Adversarial Attack on Voice Conversion (HIN)](./Adversarial_Examples/2021-HIN.md)  
@@ -391,12 +453,12 @@
   *International Conference on Learning Representations (ICLR), 2026*  
   Citation: Hu, X., Jin, J., Li, S., Peng, W., Zhang, X., & Qian, Z. “Spherical Watermark: Encryption-Free, Lossless Watermarking for Diffusion Models.” *Proceedings of the International Conference on Learning Representations*, 2026.  
   Links: [Paper](https://openreview.net/) 
-  
+
 - [MOLM: Mixture of LoRA Markers](./Other_Security/2026-MOLM.md)  
   *International Conference on Learning Representations (ICLR), 2026*  
   Citation: Fares, S., Tastan, N., Hussein, N. H., & Nandakumar, K. “MOLM: Mixture of LoRA Markers.” *The Fourteenth International Conference on Learning Representations*, 2026.  
   Links: [Paper](https://openreview.net/forum?id=1fYQOZovHR) | [Code](https://github.com/Samar-Fares/MOLM-Watermark)
-  
+
 - [Learning to Watermark in the Latent Space of Generative Models (DistSeal)](./Other_Security/2026-DistSeal.md)  
   *International Conference on Machine Learning (ICML), 2026*   
   Citation: Rebuffi, S.-A., Tran, T., Lacatusu, V., Fernandez, P., Souček, T., Jovanović, N., Sander, T., Elsahar, H., & Mourachko, A. “Learning to Watermark in the Latent Space of Generative Models.” *arXiv preprint arXiv:2601.16140*, 2026.  
@@ -416,7 +478,7 @@
   *IEEE Transactions on Circuits and Systems for Video Technology, 2026*  
   Citation: Kong, X., Chen, P., Li, B., Yuan, J., Cai, Z., Wu, H., & Liang, L. “SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model.” *IEEE Transactions on Circuits and Systems for Video Technology*, 2026.  
   Links: [Paper](https://doi.org/10.1109/TCSVT.2026.3676184) | [Code](https://github.com/XiaoxiKong/SLIM)
-  
+
 ### 2025
 
 - [Robust Watermarking Using Generative Priors Against Image Editing: From Benchmarking to Advances (VINE)](./Other_Security/2025-VINE.md)  

@@ -419,11 +419,4 @@ AgentMark 是面向黑盒 LLM 智能体的多比特行为水印框架，目标�
 - **代码**：[Tooooa/AgentMark](https://github.com/Tooooa/AgentMark)，MIT License
 - **研究类型**：智能体行为水印、分布保持隐写、多比特来源认证、轨迹擦除恢复
 
-可加入 `Overview.md` 的条目：
-
-```md
-- [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Other_Security/2026-AgentMark.md)  
-  *The 64th Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
-  Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, pp. 12581–12603, 2026.  
-  Links: [Paper](https://aclanthology.org/2026.acl-long.573/) | [PDF](https://aclanthology.org/2026.acl-long.573.pdf) | [DOI](https://doi.org/10.18653/v1/2026.acl-long.573) | [Code](https://github.com/Tooooa/AgentMark)
 ```

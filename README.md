@@ -4,8 +4,8 @@
 
 ## News
 
-- **2026-10-06：** 新增[智能体水印](#agent-watermarking)专题，共收录 11 篇 Agent 水印论文。
-- **2026-10-06：** 新增 INTERSPEECH 2026 水印论文，并补充至[语音水印](#speech-watermarking)目录。
+- **2026-10-07：** 新增 INTERSPEECH 2026 水印论文，并补充至[语音水印](#speech-watermarking)目录。
+- **2026-10-03：** 新增[智能体水印](#agent-watermarking)专题，共收录 11 篇 Agent 水印论文。
 
 ## 快速导航
 

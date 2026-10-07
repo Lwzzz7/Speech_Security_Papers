@@ -2,6 +2,11 @@
 
 这是一个面向**语音安全**的论文精读库，主要整理语音水印论文，同时也整理语对抗样本以及音频大模型越狱等安全相关的代表性研究。每篇条目提供精读笔记、发表信息、论文链接和可获得的官方代码/项目链接，便于按研究问题追踪方法演进并快速定位可复现工作。By [Weizhi Liu](https://scholar.google.com/citations?user=4y-6mXgAAAAJ&hl=zh-CN)
 
+## News
+
+- **2026-10-06：** 新增[智能体水印](#agent-watermarking)专题，共收录 11 篇 Agent 水印论文。
+- **2026-10-06：** 新增 INTERSPEECH 2026 水印论文，并补充至[语音水印](#speech-watermarking)目录。
+
 ## 快速导航
 
 - [智能体水印](#agent-watermarking)
@@ -80,6 +85,16 @@
   Citation: Milis, G., Qin, Y., Wu, Y., & Huang, H. “Hidden in Plain Tokens: Simply Robust, Gradient-Free Watermark for Synthetic Audio.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
   Links: [Paper](https://openreview.net/forum?id=h4bSJMaNgb) | [Code](https://github.com/g-milis/nograd-audio-wm)
 
+- [DuraMark: Duration-Embedded Watermarking in LLM-based TTS](./Watermarking/generative_watermarking/2026-DuraMark.md)  
+  *Proc. Interspeech 2026, pp. 6876–6880, 2026*  
+  Citation: Zhenwei Mou, Weili Jiang, Liping Chen, Zhen-Hua Ling, Kong Aik Lee, Kai Gao, Boyu Zhao. “DuraMark: Duration-Embedded Watermarking in LLM-based TTS.” Proc. Interspeech 2026, pp. 6876–6880, 2026. doi:10.21437/Interspeech.2026-2298.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/mou26_interspeech.html) | [Demo](https://muzw.github.io/duramark_demo/) 
+
+- [AudioNoisePrints: Model-free audio watermarking using spatial correlation in flow matching TTS](./Watermarking/generative_watermarking/2026-AudioNoisePrints.md)  
+  *Proc. Interspeech 2026, pp. 6881–6885, 2026*  
+  Citation: Timothy Tin-Long Tse, Jian Zhu, Aidan Pine, Mengzhe Geng. “AudioNoisePrints: Model-free audio watermarking using spatial correlation in flow matching TTS.” Proc. Interspeech 2026, pp. 6881–6885, 2026. doi:10.21437/Interspeech.2026-2165.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/tse26_interspeech.html)
+
 - [LAW: A Training-Free Latent Watermark for Diffusion-Generated Audio Attribution](./Watermarking/generative_watermarking/2026-LAW.md)  
   *IEEE Signal Processing Letters, 2026*  
   Citation: Zhu, R., Zou, L., Lai, S., Shen, Z., Li, Z., & Qiao, T. “LAW: A Training-Free Latent Watermark for Diffusion-Generated Audio Attribution.” *IEEE Signal Processing Letters*, 2026.  
@@ -143,6 +158,26 @@
   *IEEE Transactions on Dependable and Secure Computing, 2026*  
   Citation: Ge, Y., Gu, R., Liu, Y., Zhao, L., Du, B., & Wang, Q. “When Unlearnable Examples Cooperate With Watermarking: A Dual Voice Data Protection Against Unauthorized Exploitation.” *IEEE Transactions on Dependable and Secure Computing*, vol. 23, no. 3, pp. 4652–4669, 2026.  
   Links: [Paper](https://doi.org/10.1109/TDSC.2025.3648349)
+
+- [Latent-Mark: An Audio Watermark Robust to Neural Codec Compression](./Watermarking/post_hoc_watermarking/2026-Latent-Mark.md)  
+  *Proc. Interspeech 2026, pp. 3052–3061, 2026*  
+  Citation: Yen-Shan Chen, Shih-Yu Lai, Ying-Jung Tsou, Yi-Cheng Lin, Bing-Yu Chen, Yun-Nung Chen, Hung-yi Lee, Shang-Tse Chen. “Latent-Mark: An Audio Watermark Robust to Neural Codec Compression.” Proc. Interspeech 2026, pp. 3052–3061, 2026. doi:10.21437/Interspeech.2026-1979.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/chen26u_interspeech.html) | [Code](https://github.com/yenshan0530/Latent-Mark)  
+
+- [Countering Neural Audio Codec Distortions in Watermarking with Adaptive Restoration](./Watermarking/post_hoc_watermarking/2026-Adaptive-Restoration.md)  
+  *Proc. Interspeech 2026, pp. 6871–6875, 2026*  
+  Citation: Sungho Park, Thien An Nguyen, Souhwan Jung. “Countering Neural Audio Codec Distortions in Watermarking with Adaptive Restoration.” Proc. Interspeech 2026, pp. 6871–6875, 2026. doi:10.21437/Interspeech.2026-953.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/park26d_interspeech.html)
+
+- [Phoneme-Aware Mamba Watermark: An Active Defense System Against Purified Speech Deepfakes](./Watermarking/post_hoc_watermarking/2026-Phoneme-Aware-Mamba-Watermark.md)  
+  *Proc. Interspeech 2026, pp. 6891–6895, 2026*  
+  Citation: Yanda Shao, Mengke Zhang, Zhixin Lin, Tianyi Yang. “Phoneme-Aware Mamba Watermark: An Active Defense System Against Purified Speech Deepfakes.” Proc. Interspeech 2026, pp. 6891–6895, 2026. doi:10.21437/Interspeech.2026-2105.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/shao26_interspeech.html) | [Code](https://github.com/Silence-ai423/phoneme-aware-mamba-watermark)
+
+- [VoxWatermark: A Large-Scale Benchmark for Audio Watermark Detection under Perturbations](./Watermarking/attacks_and_benchmarks/2026-VoxWatermark.md)  
+  *Proc. Interspeech 2026, pp. 6886–6890, 2026*  
+  Citation: Farnaz Sedaghati, Yuxi Wang, Zicheng Weng, Wei Rao. “VoxWatermark: A Large-Scale Benchmark for Audio Watermark Detection under Perturbations.” Proc. Interspeech 2026, pp. 6886–6890, 2026. doi:10.21437/Interspeech.2026-1771.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/sedaghati26_interspeech.html) | [Code](https://github.com/wailywang/VoxWatermark)  
 
 #### 2025
 

@@ -66,7 +66,7 @@
 - [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Agent_Watermarking/2026-AgentMark.md)  
   *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
   Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the Annual Meeting of the Association for Computational Linguistics*, 2026.  
-  Links: [Paper](https://arxiv.org/abs/2601.03294) | [Code](https://github.com/Tooooa/AgentMark)
+  Links: [Paper](https://aclanthology.org/2026.acl-long.573/) | [Code](https://github.com/Tooooa/AgentMark)
 
 - [Agent Guide: A Simple Agent Behavioral Watermarking Framework](./Agent_Watermarking/2025-Agent-Guide.md)  
   *arXiv preprint arXiv:2504.05871, 2025*  

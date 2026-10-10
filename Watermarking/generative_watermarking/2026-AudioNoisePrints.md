@@ -1,6 +1,5 @@
 # AudioNoisePrints: Model-free audio watermarking using spatial correlation in flow matching TTS
 
-> 精读依据：arXiv:2608.22186v1 全文与ISCA会议信息，核验日期2026-10-05。生成器免训练与检测器训练是两件事；全文分别分析基础相关检测和增强神经检测。
 
 ## 0. 摘要翻译
 

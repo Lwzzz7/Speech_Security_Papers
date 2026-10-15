@@ -129,7 +129,7 @@
 
 #### 2024
 
-- [GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis](./Watermarking/generative_watermarking/2024-GROOT.md)  
+- [Groot: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis](./Watermarking/generative_watermarking/2024-GROOT.md)  
   *ACM International Conference on Multimedia (ACM MM), 2024*  
   Citation: Liu, W., Li, Y., Lin, D., Tian, H., & Li, H. “GROOT: Generating Robust Watermark for Diffusion-Model-Based Audio Synthesis.” *Proceedings of the 32nd ACM International Conference on Multimedia*, 3294–3302, 2024.  
   Links: [Paper](https://doi.org/10.1145/3664647.3680596) | [Code](https://github.com/Groot-GAW/Groot) | [Demo](https://groot-gaw.github.io/)
@@ -174,14 +174,29 @@
   Citation: Yanda Shao, Mengke Zhang, Zhixin Lin, Tianyi Yang. “Phoneme-Aware Mamba Watermark: An Active Defense System Against Purified Speech Deepfakes.” Proc. Interspeech 2026, pp. 6891–6895, 2026. doi:10.21437/Interspeech.2026-2105.  
   Links: [Paper](https://www.isca-archive.org/interspeech_2026/shao26_interspeech.html) | [Code](https://github.com/Silence-ai423/phoneme-aware-mamba-watermark)
 
-- [VoxWatermark: A Large-Scale Benchmark for Audio Watermark Detection under Perturbations](./Watermarking/attacks_and_benchmarks/2026-VoxWatermark.md)  
+- [VoxWatermark: A Large-Scale Benchmark for Audio Watermark Detection under Perturbations](./Watermarking/post_hoc_watermarking/2026-VoxWatermark.md)  
   *Proc. Interspeech 2026, pp. 6886–6890, 2026*  
   Citation: Farnaz Sedaghati, Yuxi Wang, Zicheng Weng, Wei Rao. “VoxWatermark: A Large-Scale Benchmark for Audio Watermark Detection under Perturbations.” Proc. Interspeech 2026, pp. 6886–6890, 2026. doi:10.21437/Interspeech.2026-1771.  
   Links: [Paper](https://www.isca-archive.org/interspeech_2026/sedaghati26_interspeech.html) | [Code](https://github.com/wailywang/VoxWatermark)  
 
+- [Asymmetric Phase Coding Audio Watermarking](./Watermarking/post_hoc_watermarking/2026-APC.md)  
+  *arXiv preprint arXiv:2605.07241, 2026*  
+  Citation: Yang, G., Ghasemian, A., Mehrabi, N., & Hosseinmardi, H. “Asymmetric Phase Coding Audio Watermarking.” *arXiv preprint arXiv:2605.07241*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2605.07241) | [PDF](https://arxiv.org/pdf/2605.07241) | Code: Not found
+
+- [SSTMark: Robust Training-Free Semantic-Level Speech Watermarking](./Watermarking/post_hoc_watermarking/2026-SSTMark.md)  
+  *ACM International Conference on Multimedia (ACM MM), 2026*  
+  Citation: Chu, K.-L., Chen, J.-C., & Lu, C.-S. “SSTMark: Robust Training-Free Semantic-Level Speech Watermarking.” *Proceedings of the ACM International Conference on Multimedia*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2607.17592) | [PDF](https://arxiv.org/pdf/2607.17592) | Code: Not found
+
+- [UnVC: Protecting Your Voiceprint by Generative Adversarial Speech](./Watermarking/post_hoc_watermarking/2026-UnVC.md)  
+  *IEEE Transactions on Information Forensics and Security, 2026*  
+  Citation: Sun, Z., Huang, Y., Ren, Y., Wang, Z., & Liu, W. “UnVC: Protecting Your Voiceprint by Generative Adversarial Speech.” *IEEE Transactions on Information Forensics and Security*, vol. 21, pp. 7094–7109, 2026.  
+  Links: [Paper](https://doi.org/10.1109/TIFS.2026.3714126) | [Project](https://github.com/mumuyeye/UnVC)
+
 #### 2025
 
-- [WMCodec: End-to-End Neural Speech Codec with Deep Watermarking for Authenticity Verification](./Watermarking/post_hoc_watermarking/2025-WMCodec.md)  
+- [WMCodec: End-to-End Neural Speech Codec with Deep Watermarking for Authenticity Verification](./Watermarking/post_hoc_watermarking/2024-WMCodec.md)  
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025* 
   Citation: Zhou, J., Yi, J., Ren, Y., Tao, J., Wang, T., & Zhang, C. Y. “WMCodec: End-to-End Neural Speech Codec with Deep Watermarking for Authenticity Verification.” *ICASSP*, 2025.  
   Links: [Paper](https://arxiv.org/abs/2409.12121) | [Code](https://github.com/zjzser/WMCodec)
@@ -306,34 +321,44 @@
 
 #### 2026
 
-- [PRoADS: Provably Secure and Robust Audio Diffusion Steganography with Latent Optimization and Backward Euler Inversion](./Watermarking/Steganography/2026-PRoADS.md)  
+- [PRoADS: Provably Secure and Robust Audio Diffusion Steganography with Latent Optimization and Backward Euler Inversion](./Steganography/2026-PRoADS.md)  
   *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2026*  
   Citation: Yan, Y., Li, Y., Xiao, Q., & Ren, Y. “PRoADS: Provably Secure and Robust Audio Diffusion Steganography with Latent Optimization and Backward Euler Inversion.” *Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing*, 2026.  
   Links: [Paper](https://arxiv.org/abs/2603.10314)
 
-- [WavInWav: Time-domain Speech Hiding via Invertible Neural Network](./Watermarking/Steganography/2026-WavInWav.md)  
+- [WavInWav: Time-domain Speech Hiding via Invertible Neural Network](./Steganography/2026-WavInWav.md)  
   *IEEE Transactions on Dependable and Secure Computing, 2026*  
   Citation: Fan, W., Chen, K., Wang, X., Zhang, W., & Yu, N. “WavInWav: Time-domain Speech Hiding via Invertible Neural Network.” *IEEE Transactions on Dependable and Secure Computing*, 2026.  
   Links: [Paper](https://arxiv.org/abs/2510.02915)
 
+- [Generative Image Steganography Algorithm Based on Diffusion Model and Style Transfer](./Steganography/2026-GIS-DMST.md)  
+  *IEEE Transactions on Dependable and Secure Computing, 2026*  
+  Citation: Zhang, X., Qian, X., Peng, F., Fu, D., Li, Z., Wang, F., & Fu, Z. “Generative Image Steganography Algorithm Based on Diffusion Model and Style Transfer.” *IEEE Transactions on Dependable and Secure Computing*, 2026.  
+  Links: [Paper](https://doi.org/10.1109/TDSC.2026.3737790) | [Code](https://github.com/qianxiashu/GIS)
+
+- [A Training-Free Proactive Defense Against Partial Speech Manipulation via Self-Embedding Steganography](./Steganography/2026-Self-Embedding-Steganography.md)  
+  *Proc. Interspeech 2026, pp. 2444–2449, 2026*  
+  Citation: Özer, Y., Zhang, Z., Ge, W., Wang, X., & Yamagishi, J. “A Training-Free Proactive Defense Against Partial Speech Manipulation via Self-Embedding Steganography.” *Proc. Interspeech 2026*, pp. 2444–2449, 2026. doi:10.21437/Interspeech.2026-1822.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/ozer26_interspeech.html) | [DOI](https://doi.org/10.21437/Interspeech.2026-1822)
+
 #### 2025
 
-- [HIFI-Stego: A High-Fidelity Embedding Audio Steganography Based on Audio Features Decoupling](./Watermarking/Steganography/2025-HIFI-Stego.md)  
+- [HIFI-Stego: A High-Fidelity Embedding Audio Steganography Based on Audio Features Decoupling](./Steganography/2025-HIFI-Stego.md)  
   *IEEE Transactions on Audio, Speech and Language Processing, 2025*  
   Citation: Zhang, S., Tian, B., Gao, Y., Liu, X., & Yang, W. “HIFI-Stego: A High-Fidelity Embedding Audio Steganography Based on Audio Features Decoupling.” *IEEE Transactions on Audio, Speech and Language Processing*, vol. 33, pp. 2032–2044, 2025.  
   Links: [Paper](https://doi.org/10.1109/TASLPRO.2025.3570942) | [Code](https://github.com/emptybodys/HIFI-Stego)
 
-- [Provably Secure and Robust Audio Steganography Under Multi-Format Low-Bitrate Compression](./Watermarking/Steganography/2025-Provably-Secure-Robust-Audio-Steganography.md)  
+- [Provably Secure and Robust Audio Steganography Under Multi-Format Low-Bitrate Compression](./Steganography/2025-PSRAS.md)  
   *IEEE Transactions on Information Forensics and Security, 2025*  
   Citation: Li, Y., Xiao, Q., Wang, Z., Ren, Y., & Wang, L. “Provably Secure and Robust Audio Steganography Under Multi-Format Low-Bitrate Compression.” *IEEE Transactions on Information Forensics and Security*, vol. 20, pp. 12596–12608, 2025.  
   Links: [Paper](https://doi.org/10.1109/TIFS.2025.3636668)
 
-- [A Dynamically Interactable Framework with Dual-Channel Security: GAN-Based Speech Steganography for Concealed Dialogues](./Watermarking/Steganography/2025-DialogStego.md)  
+- [A Dynamically Interactable Framework with Dual-Channel Security: GAN-Based Speech Steganography for Concealed Dialogues](./Steganography/2025-DialogStego.md)  
   *Knowledge-Based Systems, 2025*  
   Citation: Ge, X., Zhang, X., Li, Y., & Sun, M. “A Dynamically Interactable Framework with Dual-Channel Security: GAN-Based Speech Steganography for Concealed Dialogues.” *Knowledge-Based Systems*, vol. 330, Article 114618, 2025.  
   Links: [Paper](https://doi.org/10.1016/j.knosys.2025.114618)
 
-- [CoAS: Composite Audio Steganography Based on Text and Speech Synthesis](./Watermarking/Steganography/2025-CoAS.md)  
+- [CoAS: Composite Audio Steganography Based on Text and Speech Synthesis](./Steganography/2025-CoAS.md)  
   *IEEE Transactions on Information Forensics and Security, 2025*  
   Citation: Li, Y., Chen, K., Wang, Y., Zhang, X., Wang, G., Zhang, W., & Yu, N. “CoAS: Composite Audio Steganography Based on Text and Speech Synthesis.” *IEEE Transactions on Information Forensics and Security*, vol. 20, pp. 5978–5991, 2025.  
   Links: [Paper](https://doi.org/10.1109/TIFS.2025.3579581) | [Samples](https://meterial.github.io/coas.github.io)
@@ -352,12 +377,32 @@
   Citation: “MUSICSHIELD: Protection for Musicians in the Era of Generative AI.” *IEEE S&P 2026*.  
   Links: [Project](https://musicshield.org/)
 
+- [Exploiting Neural Audio Codec Latents for Adversarial Audio Attacks](./Adversarial_Examples/2026-DAC-GAN.md)  
+  *Proc. Interspeech 2026, pp. 185–189, 2026*  
+  Citation: Bhattacharya, S., Krishnamurthy, B., & Rattani, A. “Exploiting Neural Audio Codec Latents for Adversarial Audio Attacks.” *Proc. Interspeech 2026*, pp. 185–189, 2026. doi:10.21437/Interspeech.2026-3055.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/bhattacharya26b_interspeech.html) | [DOI](https://doi.org/10.21437/Interspeech.2026-3055) | [Code](https://github.com/VCBSL/DAC-GAN)
+
+- [NaVo: Natural Voice Protection against Voice Cloning Attacks via Generative Universal Adversarial Audio](./Adversarial_Examples/2026-NaVo.md)  
+  *Proc. Interspeech 2026, pp. 5270–5275, 2026*  
+  Citation: Park, S., Kim, S., Park, S., Kim, D., Nguyen, T. A., Doan, T.-P., Jung, S., & Choi, D. “NaVo: Natural Voice Protection against Voice Cloning Attacks via Generative Universal Adversarial Audio.” *Proc. Interspeech 2026*, pp. 5270–5275, 2026. doi:10.21437/Interspeech.2026-2944.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/park26g_interspeech.html) | [DOI](https://doi.org/10.21437/Interspeech.2026-2944) | [Samples](https://anonymous.4open.science/w/NaVo/)
+
+- [Spectral Masking and Interpolation Attack (SMIA): A Black-box Adversarial Attack against Voice Authentication and Anti-Spoofing Systems](./Adversarial_Examples/2026-SMIA.md)  
+  *Proc. Interspeech 2026, pp. 2189–2193, 2026*  
+  Citation: Kamel, K., Dutta, H. S., Sood, K., & Aryal, S. “Spectral Masking and Interpolation Attack (SMIA): A Black-box Adversarial Attack against Voice Authentication and Anti-Spoofing Systems.” *Proc. Interspeech 2026*, pp. 2189–2193, 2026. doi:10.21437/Interspeech.2026-2736.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/kamel26_interspeech.html) | [DOI](https://doi.org/10.21437/Interspeech.2026-2736) | [arXiv](https://arxiv.org/abs/2509.07677)
+
 ### 2025
 
 - [HarmonyCloak: Defending Music Against Generative AI](./Adversarial_Examples/2025-HarmonyCloak.md)  
   *IEEE Symposium on Security and Privacy (IEEE S&P), 2025*  
   Citation: “HarmonyCloak: Defending Music Against Generative AI.” *IEEE S&P 2025*.  
   Links: [Project & Paper](https://mosis.eecs.utk.edu/harmonycloak.html)
+
+- [E2E-VGuard: Adversarial Prevention for Production LLM-based End-To-End Speech Synthesis](./Adversarial_Examples/2025-E2E-VGuard.md)  
+  *Advances in Neural Information Processing Systems 38 (NeurIPS), 2025*  
+  Citation: Zhang, Z., Wang, D., Mi, Y., Wu, Z., Gao, J., Cao, Y., Ye, K., Xue, M., & Hao, J. “E2E-VGuard: Adversarial Prevention for Production LLM-based End-To-End Speech Synthesis.” *Advances in Neural Information Processing Systems 38*, 2025.  
+  Links: [Paper](https://proceedings.neurips.cc/paper_files/paper/2025/hash/281e9aa15d152fb9c1dbd99e49579c5c-Abstract-Conference.html) | [Project/Code](https://wxzyd123.github.io/e2e-vguard/) | [DOI](https://doi.org/10.52202/085713-0935)
 
 - [SafeSpeech: Robust and Universal Voice Protection Against Malicious Speech Synthesis](./Adversarial_Examples/2025-SafeSpeech.md)  
   *34th USENIX Security Symposium (USENIX Security), 2025*  
@@ -423,6 +468,11 @@
   Citation: Peng, Z., Liu, Y., Sun, Z., et al. “JALMBench: Benchmarking Jailbreak Vulnerabilities in Audio Language Models.” *ICLR 2026*, 2026.  
   Links: [Paper](https://openreview.net/forum?id=ZMQaoaF5tQ) | [Code](https://github.com/sfofgalaxy/JALMBench)
 
+- [On Optimizing Multimodal Jailbreaks for Spoken Language Models](./Jailbreak/2026-JAMA.md)  
+  *Proc. Interspeech 2026, pp. 6021–6026, 2026*  
+  Citation: Krishnan, A., Stańczak, K., & Klakow, D. “On Optimizing Multimodal Jailbreaks for Spoken Language Models.” *Proc. Interspeech 2026*, pp. 6021–6026, 2026. doi:10.21437/Interspeech.2026-309.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/krishnan26_interspeech.html) | [DOI](https://doi.org/10.21437/Interspeech.2026-309) | [Code](https://repos.lsv.uni-saarland.de/akrishnan/multimodal-jailbreak-slm)
+
 ### 2025
 
 - [AdvWave: Stealthy Adversarial Jailbreak Attack against Large Audio-Language Models](./Jailbreak/2025-AdvWave.md)  
@@ -449,10 +499,20 @@
 
 ### 2026
 
-- [PathMark: Protecting Intellectual Property of Mixture-of-Expert LLMs via Path Watermarks](./Watermarking/model_watermarking/2026-PathMark.md)  
+- [PathMark: Protecting Intellectual Property of Mixture-of-Expert LLMs via Path Watermarks](./Other_Security/2026-PathMark.md)  
   *ACM SIGSAC Conference on Computer and Communications Security (CCS), 2026*  
   Citation: Gao, Y., Wang, Q., Yuan, Y., Huang, R., Chen, L., Ji, Z., & Wang, S. “PathMark: Protecting Intellectual Property of Mixture-of-Expert LLMs via Path Watermarks.” *Proceedings of the 33rd ACM SIGSAC Conference on Computer and Communications Security*, 2026.  
   Links: [Paper](https://arxiv.org/abs/2607.03688) | [Code](https://github.com/ifen1/PathMark_in) 
+
+- [Learning to Evade: Adaptive Attacks on Audio Watermarking](./Other_Security/2026-AWM.md)  
+  *Proc. Interspeech 2026, pp. 3032–3041, 2026*  
+  Citation: Ding, W., Guo, H., Duan, R., Wang, G., Wang, Y., Chen, M., & Yan, Q. “Learning to Evade: Adaptive Attacks on Audio Watermarking.” *Proc. Interspeech 2026*, pp. 3032–3041, 2026. doi:10.21437/Interspeech.2026-814.  
+  Links: [Paper](https://www.isca-archive.org/interspeech_2026/ding26b_interspeech.html) | [DOI](https://doi.org/10.21437/Interspeech.2026-814) | [Project](https://adaptiveaudiowmattack.github.io/)
+
+- [Efficient, Robust, and Anti-Collusion Fingerprinting of Image Diffusion Models](./Other_Security/2026-RFP.md)  
+  *IEEE Transactions on Pattern Analysis and Machine Intelligence, 2026*  
+  Citation: Fei, J., Dai, Y., Xia, Z., Cao, X., Zhou, J., Piva, A., & Tondi, B. “Efficient, Robust, and Anti-Collusion Fingerprinting of Image Diffusion Models.” *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2026.  
+  Links: [Paper](https://arxiv.org/abs/2606.12977) | [DOI](https://doi.org/10.1109/TPAMI.2026.3703439) | Code: Not found
 
 - [WRATH: Turning Watermark Robustness Against Itself via a Watermark-Agnostic Black-Box Invalidation Attack](./Other_Security/2026-WRATH.md)  
   *IEEE Symposium on Security and Privacy (S&P), 2026*  
@@ -499,22 +559,17 @@
   Citation: Rebuffi, S.-A., Tran, T., Lacatusu, V., Fernandez, P., Souček, T., Jovanović, N., Sander, T., Elsahar, H., & Mourachko, A. “Learning to Watermark in the Latent Space of Generative Models.” *arXiv preprint arXiv:2601.16140*, 2026.  
   Links: [Paper](https://arxiv.org/abs/2601.16140) | [Code](https://github.com/facebookresearch/distseal)
 
-- [Watermarking LLM Agent Trajectories (ACTHOOK)](./Other_Security/2026-ACTHOOK.md)  
-  *International Conference on Machine Learning (ICML), 2026*  
-  Citation: Meng, W., Gong, C., Zhuo, T. Y., Zhang, F., Li, K., Liu, Z., Yang, Z., Wei, C., & Chen, W. “Watermarking LLM Agent Trajectories.” *Proceedings of the 43rd International Conference on Machine Learning*, 2026.  
-  Links: [Paper](https://openreview.net/forum?id=h5M4E33Pqs) | [Code](https://github.com/meng-wenlong/AgentWmk)
-
-- [AgentMark: Utility-Preserving Behavioral Watermarking for Agents](./Other_Security/2026-AgentMark.md)  
-  *Annual Meeting of the Association for Computational Linguistics (ACL), 2026*  
-  Citation: Huang, K., Tan, J., Wei, Y., Li, W., Zhang, Z., Tian, H., Yang, Z., & Zhou, L. “AgentMark: Utility-Preserving Behavioral Watermarking for Agents.” *Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 2026.  
-  Links: [Paper](https://aclanthology.org/2026.acl-long.573/) | [Code](https://github.com/Tooooa/AgentMark)
-
 - [SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model](./Other_Security/2026-SLIM.md)  
   *IEEE Transactions on Circuits and Systems for Video Technology, 2026*  
   Citation: Kong, X., Chen, P., Li, B., Yuan, J., Cai, Z., Wu, H., & Liang, L. “SLIM: Stable Latent Integration for Robust Watermark in Diffusion Model.” *IEEE Transactions on Circuits and Systems for Video Technology*, 2026.  
   Links: [Paper](https://doi.org/10.1109/TCSVT.2026.3676184) | [Code](https://github.com/XiaoxiKong/SLIM)
 
 ### 2025
+
+- [Hidden in the Noise: Two-Stage Robust Watermarking for Images](./Other_Security/2025-WIND.md)  
+  *International Conference on Learning Representations (ICLR), 2025*  
+  Citation: Arabi, K., Feuer, B., Witter, R. T., Hegde, C., & Cohen, N. “Hidden in the Noise: Two-Stage Robust Watermarking for Images.” *International Conference on Learning Representations*, 2025.  
+  Links: [Paper](https://proceedings.iclr.cc/paper_files/paper/2025/hash/999fcab97007ebef0cda9949550b4a9e-Abstract-Conference.html) | [OpenReview](https://openreview.net/forum?id=3BSgwbC7Q6) | [Code](https://github.com/Kasraarabi/Hidden-in-the-Noise)
 
 - [Robust Watermarking Using Generative Priors Against Image Editing: From Benchmarking to Advances (VINE)](./Other_Security/2025-VINE.md)  
   *International Conference on Learning Representations (ICLR), 2025*  
@@ -531,7 +586,7 @@
   Citation: Fang, H., Chen, K., Ma, Z., Deng, J., Li, Y., Zhang, W., & Chang, E.-C. “SynTag: Enhancing the Geometric Robustness of Inversion-based Generative Image Watermarking.” *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 2025.  
   Links: [Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Fang_SynTag_Enhancing_the_Geometric_Robustness_of_Inversion-based_Generative_Image_Watermarking_ICCV_2025_paper.html)
 
-- [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md")  
+- [Watermarking Autoregressive Image Generation](./Other_Security/2025-WMAR.md)  
   *Advances in Neural Information Processing Systems (NeurIPS), 2025*  
   Citation: Jovanović, N., Labiad, I., Souček, T., Vechev, M., & Fernandez, P. “Watermarking Autoregressive Image Generation.” *Advances in Neural Information Processing Systems*, vol. 38, 2025.  
   Links: [Paper](https://arxiv.org/abs/2506.16349) | [Code](https://github.com/facebookresearch/wmar)
@@ -542,5 +597,3 @@
   *International Conference on Machine Learning (ICML), 2024*  
   Citation: Feng, W., Zhou, W., He, J., Zhang, J., Wei, T., Li, G., Zhang, T., Zhang, W., & Yu, N. “AquaLoRA: Toward White-box Protection for Customized Stable Diffusion Models via Watermark LoRA.” *Proceedings of the 41st International Conference on Machine Learning*, 2024.  
   Links: [Paper](https://proceedings.mlr.press/v235/feng24d.html) | [Code](https://github.com/Georgefwt/AquaLoRA)
-
-## 
